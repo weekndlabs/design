@@ -8,6 +8,9 @@ const { title } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title} · WeekndLabs Design</title>
     <meta name="description" content="Design tokens for WeekndLabs products. One grammar, three faces." />
+    {/* weekndlabs.com proxies this site at /design, so the same HTML answers on
+        two hosts. Name the one that actually serves it. */}
+    <link rel="canonical" href={new URL(Astro.url.pathname, 'https://design.weekndlabs.com').href} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
