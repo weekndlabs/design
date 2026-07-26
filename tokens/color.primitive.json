@@ -1,0 +1,58 @@
+{
+  "color": {
+    "amber": {
+      "400": { "value": "#FCD670", "type": "color" },
+      "500": { "value": "#F5B841", "type": "color" },
+      "700": { "value": "#9C6100", "type": "color" },
+      "800": { "value": "#7A4E00", "type": "color" },
+      "900": { "value": "#5F3D00", "type": "color" }
+    },
+    "phosphor": {
+      "base": { "value": "#FFB000", "type": "color" },
+      "dim":  { "value": "#A87400", "type": "color" }
+    },
+    "navy": {
+      "900": { "value": "#12141F", "type": "color" },
+      "800": { "value": "#1A1D2B", "type": "color" },
+      "700": { "value": "#1E2333", "type": "color" },
+      "600": { "value": "#2A3048", "type": "color" },
+      "500": { "value": "#21273A", "type": "color" },
+      "400": { "value": "#3A4166", "type": "color" }
+    },
+    "paper": {
+      "50":  { "value": "#FAF8F3", "type": "color" },
+      "100": { "value": "#F0ECE2", "type": "color" },
+      "150": { "value": "#F4F0E7", "type": "color" },
+      "200": { "value": "#E3E4E0", "type": "color" },
+      "300": { "value": "#DBDCD6", "type": "color" },
+      "400": { "value": "#D3D5CD", "type": "color" }
+    },
+    "slate": {
+      "ink":         { "value": "#1C1E28", "type": "color" },
+      "ink-soft":    { "value": "#5A5F70", "type": "color" },
+      "rule":        { "value": "#D8D1C0", "type": "color" },
+      "rule-soft":   { "value": "#E4DECF", "type": "color" },
+      "rule-strong": { "value": "#C4BCA6", "type": "color" }
+    },
+    "graphite": {
+      "ink":         { "value": "#16161A", "type": "color" },
+      "ink-soft":    { "value": "#56585A", "type": "color" },
+      "rule":        { "value": "#C6C8C1", "type": "color" },
+      "rule-soft":   { "value": "#D6D8D1", "type": "color" },
+      "rule-strong": { "value": "#A9ABA3", "type": "color" }
+    },
+    "night-ink": {
+      "base": { "value": "#ECEEF5", "type": "color" },
+      "soft": { "value": "#8A90A6", "type": "color" }
+    },
+    "crt":  { "value": "#0B0B0C", "type": "color" },
+    "sage": {
+      "dark":  { "value": "#6BCC8F", "type": "color" },
+      "light": { "value": "#2A6B41", "type": "color" }
+    },
+    "clay": {
+      "dark":  { "value": "#E0776F", "type": "color" },
+      "light": { "value": "#9B3E37", "type": "color" }
+    }
+  }
+}

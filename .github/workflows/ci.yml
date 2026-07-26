@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build tokens
+        run: npm run build
+
+      # dist/ is committed so consumers can install by git URL. That only works
+      # if it matches the token source, and nothing else checks that.
+      - name: Check dist matches the token source
+        # --porcelain rather than `git diff`, so a newly generated file that is
+        # not yet tracked counts as stale too.
+        run: |
+          if [ -n "$(git status --porcelain dist/)" ]; then
+            git status --porcelain dist/
+            echo "::error::dist/ is stale. Run 'npm run build' and commit the result."
+            exit 1
+          fi
+
+      - name: Test
+        run: npm test
+
+      - name: Build docs
+        run: npm run docs:build

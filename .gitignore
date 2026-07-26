@@ -1,6 +1,6 @@
 node_modules
-dist/.cache
 .astro
 .DS_Store
 .vercel
-docs/*
+docs/dist
+docs/superpowers

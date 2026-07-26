@@ -1,0 +1,74 @@
+---
+import { THEMES, themes } from '../../../dist/tokens.js';
+import { contrastRatio } from '../../../lib/contrast.js';
+---
+<div class="triptych">
+  {THEMES.map((theme) => (
+    <section data-theme={theme} class="panel">
+      <p class="eyebrow mono">{theme}</p>
+      <h3>Omni</h3>
+      <p class="lede">Noise-canceling context for AI agents.</p>
+      <p class="tags mono"><span>[Rust]</span><span>[MCP]</span></p>
+      <pre class="inset mono">$ omni --pre-hook
+<span class="dim">saved 4.2k tokens</span></pre>
+      <p class="ratio mono">
+        ink {contrastRatio(themes[theme].ink, themes[theme].surface).toFixed(2)}:1
+      </p>
+    </section>
+  ))}
+</div>
+
+<style>
+  .triptych {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--wl-space-4);
+  }
+  .panel {
+    background: rgb(var(--wl-surface));
+    color: rgb(var(--wl-ink));
+    border: 1px solid rgb(var(--wl-rule));
+    border-radius: var(--wl-radius-lg);
+    padding: var(--wl-space-5);
+  }
+  .eyebrow {
+    font-size: var(--wl-text-eyebrow);
+    letter-spacing: var(--wl-tracking-eyebrow);
+    text-transform: uppercase;
+    color: rgb(var(--wl-ink-soft));
+  }
+  h3 { margin-top: var(--wl-space-3); }
+  .lede {
+    color: rgb(var(--wl-ink-soft));
+    font-size: var(--wl-text-fine);
+    margin-top: var(--wl-space-2);
+  }
+  .tags {
+    margin-top: var(--wl-space-3);
+    display: flex;
+    gap: var(--wl-space-2);
+    font-size: var(--wl-text-eyebrow);
+    color: rgb(var(--wl-accent));
+  }
+  /* The inset is identical in all three themes on purpose: a terminal is a
+     terminal regardless of the page around it. */
+  .inset {
+    margin-top: var(--wl-space-4);
+    background: rgb(var(--wl-inset));
+    color: rgb(var(--wl-inset-ink));
+    border-radius: var(--wl-radius-base);
+    padding: var(--wl-space-3);
+    font-size: var(--wl-text-eyebrow);
+    line-height: 1.7;
+    overflow-x: auto;
+  }
+  .inset .dim { color: rgb(var(--wl-inset-ink-dim)); }
+  .ratio {
+    margin-top: var(--wl-space-4);
+    font-size: var(--wl-text-eyebrow);
+    color: rgb(var(--wl-ink-soft));
+  }
+  @media (max-width: 860px) {
+    .triptych { grid-template-columns: minmax(0, 1fr); }
+  }
+</style>

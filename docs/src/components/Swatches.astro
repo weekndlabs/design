@@ -1,0 +1,80 @@
+---
+import { THEMES, ROLES, themes } from '../../../dist/tokens.js';
+import { contrastRatio } from '../../../lib/contrast.js';
+
+const BORDERS = new Set(['rule', 'rule-soft', 'rule-strong']);
+const SURFACES = new Set(['surface', 'surface-panel', 'surface-sunk', 'inset']);
+
+const backdrop = (theme, role) =>
+  role.startsWith('inset-') ? themes[theme].inset : themes[theme].surface;
+
+const measure = (theme, role) => {
+  if (BORDERS.has(role)) return 'border, exempt';
+  if (SURFACES.has(role)) return 'surface, exempt';
+  return `${contrastRatio(themes[theme][role], backdrop(theme, role)).toFixed(2)}:1`;
+};
+---
+{THEMES.map((theme) => (
+  <section class="table">
+    <h2 id={`theme-${theme}`} class="mono">{theme}</h2>
+    <div class="scroll">
+      <table>
+        <caption class="sr-only">Semantic roles and measured contrast for the {theme} theme</caption>
+        <thead>
+          <tr><th>Role</th><th>Value</th><th>Hex</th><th>On</th><th>Ratio</th></tr>
+        </thead>
+        <tbody>
+          {ROLES.map((role) => (
+            <tr>
+              <th scope="row" class="mono">{role}</th>
+              <td>
+                <span class="chip" style={`background: ${themes[theme][role]}`} aria-hidden="true"></span>
+              </td>
+              <td class="mono">{themes[theme][role]}</td>
+              <td class="mono">{role.startsWith('inset-') ? 'inset' : 'surface'}</td>
+              <td class="mono">{measure(theme, role)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+))}
+
+<style>
+  .table { margin-top: var(--wl-space-7); }
+  h2 { font-size: var(--wl-text-section); margin-bottom: var(--wl-space-4); }
+  /* Scroll the table, never the page. */
+  .scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: var(--wl-text-fine); }
+  th, td {
+    text-align: left;
+    padding: var(--wl-space-2) var(--wl-space-3);
+    border-bottom: 1px solid rgb(var(--wl-rule));
+    white-space: nowrap;
+  }
+  thead th {
+    font-size: var(--wl-text-eyebrow);
+    letter-spacing: var(--wl-tracking-eyebrow);
+    text-transform: uppercase;
+    color: rgb(var(--wl-ink-soft));
+    font-weight: 400;
+  }
+  tbody th { font-weight: 400; }
+  .chip {
+    display: inline-block;
+    width: 28px;
+    height: 18px;
+    border-radius: var(--wl-radius-sm);
+    border: 1px solid rgb(var(--wl-rule-strong));
+    vertical-align: middle;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+</style>

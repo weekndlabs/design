@@ -1,0 +1,35 @@
+---
+import Page from '../layouts/Page.astro';
+import Triptych from '../components/Triptych.astro';
+import Swatches from '../components/Swatches.astro';
+import Scale from '../components/Scale.astro';
+---
+<Page title="Tokens">
+  <main id="main" class="wrap">
+    <p class="eyebrow mono">WeekndLabs Design</p>
+    <h1>One grammar, three faces.</h1>
+    <p class="lede">
+      Omni, Bubo and weekndlabs.com share a spacing scale, a type scale and a set
+      of semantic roles. Each fills those roles with its own values. Below is the
+      same card rendered in all three themes at once.
+    </p>
+    <div class="triptych-slot"><Triptych /></div>
+    <Swatches />
+    <Scale />
+  </main>
+
+  <style>
+    main { padding-block: var(--wl-space-8); }
+    h1 {
+      font-size: var(--wl-text-display);
+      letter-spacing: var(--wl-tracking-display);
+      margin-block: var(--wl-space-4);
+    }
+    .lede {
+      color: rgb(var(--wl-ink-soft));
+      font-size: var(--wl-text-lede);
+      max-width: var(--wl-measure-text);
+    }
+    .triptych-slot { margin-top: var(--wl-space-7); }
+  </style>
+</Page>
