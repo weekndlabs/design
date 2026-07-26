@@ -1,0 +1,27 @@
+{
+  "space": {
+    "0": { "value": "2px", "type": "spacing" },
+    "1": { "value": "4px", "type": "spacing" },
+    "2": { "value": "8px", "type": "spacing" },
+    "3": { "value": "12px", "type": "spacing" },
+    "4": { "value": "16px", "type": "spacing" },
+    "5": { "value": "24px", "type": "spacing" },
+    "6": { "value": "32px", "type": "spacing" },
+    "7": { "value": "48px", "type": "spacing" },
+    "8": { "value": "64px", "type": "spacing" },
+    "9": { "value": "96px", "type": "spacing" }
+  },
+  "radius": {
+    "sm":   { "value": "2px", "type": "borderRadius" },
+    "base": { "value": "3px", "type": "borderRadius" },
+    "md":   { "value": "4px", "type": "borderRadius" },
+    "lg":   { "value": "5px", "type": "borderRadius" },
+    "full": { "value": "9999px", "type": "borderRadius" }
+  },
+  "measure": {
+    "page":    { "value": "1180px", "type": "sizing" },
+    "doc":     { "value": "900px", "type": "sizing" },
+    "article": { "value": "748px", "type": "sizing" },
+    "text":    { "value": "660px", "type": "sizing" }
+  }
+}
