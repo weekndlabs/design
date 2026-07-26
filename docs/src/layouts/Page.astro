@@ -1,0 +1,84 @@
+---
+const { title } = Astro.props;
+---
+<!doctype html>
+<html lang="en" data-theme="night-dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} · WeekndLabs Design</title>
+    <meta name="description" content="Design tokens for WeekndLabs products. One grammar, three faces." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
+    <style is:global>
+      @import '../../../dist/tokens.css';
+
+      *, *::before, *::after { box-sizing: border-box; margin: 0; }
+
+      body {
+        background: rgb(var(--wl-surface));
+        color: rgb(var(--wl-ink));
+        font-family: var(--wl-font-night-body);
+        font-size: 16px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      h1, h2, h3 {
+        font-family: var(--wl-font-night-display);
+        letter-spacing: var(--wl-tracking-section);
+        line-height: 1.15;
+      }
+
+      code, .mono { font-family: var(--wl-font-night-mono); }
+
+      .wrap {
+        max-width: var(--wl-measure-page);
+        margin: 0 auto;
+        padding: 0 var(--wl-space-5);
+      }
+
+      .eyebrow {
+        font-size: var(--wl-text-eyebrow);
+        letter-spacing: var(--wl-tracking-eyebrow);
+        text-transform: uppercase;
+        color: rgb(var(--wl-ink-soft));
+      }
+
+      a { color: rgb(var(--wl-accent)); }
+
+      a:focus-visible, button:focus-visible {
+        outline: 2px solid rgb(var(--wl-accent));
+        outline-offset: 3px;
+      }
+
+      /* Give the skip link somewhere to land without shifting the layout. */
+      .skip {
+        position: absolute;
+        left: var(--wl-space-5);
+        top: calc(var(--wl-space-5) * -4);
+        background: rgb(var(--wl-surface-panel));
+        border: 1px solid rgb(var(--wl-rule));
+        border-radius: var(--wl-radius-md);
+        padding: var(--wl-space-2) var(--wl-space-4);
+        z-index: 1;
+      }
+      .skip:focus { top: var(--wl-space-4); }
+
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: .01ms !important;
+          transition-duration: .01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <slot />
+  </body>
+</html>
