@@ -1,0 +1,73 @@
+---
+/**
+ * The unthemed half of the system. Read straight from the token source so this
+ * table cannot drift from what the build emits.
+ */
+import space from '../../../tokens/space.json';
+import type_ from '../../../tokens/type.json';
+
+// Tokens nest to whatever depth they like — space.5 is two levels,
+// font.night.display is three — so walk down to whatever holds a `value`.
+const flatten = (node, path = []) =>
+  node.value !== undefined
+    ? [{ variable: `--wl-${path.join('-')}`, value: node.value }]
+    : Object.entries(node).flatMap(([key, child]) => flatten(child, [...path, key]));
+
+const flat = flatten({ ...space, ...type_ });
+---
+<section class="table">
+  <h2 class="mono">scale</h2>
+  <p class="note">
+    Shared by all three themes. Space, radius and measure are pixels; the type
+    scale is the one from Omni, which was the most developed of the three.
+  </p>
+  <div class="scroll">
+    <table>
+      <caption class="sr-only">Unthemed tokens shared across every theme</caption>
+      <thead><tr><th>Variable</th><th>Value</th></tr></thead>
+      <tbody>
+        {flat.map((row) => (
+          <tr>
+            <th scope="row" class="mono">{row.variable}</th>
+            <td class="mono">{row.value}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<style>
+  .table { margin-top: var(--wl-space-7); }
+  h2 { font-size: var(--wl-text-section); margin-bottom: var(--wl-space-3); }
+  .note {
+    color: rgb(var(--wl-ink-soft));
+    font-size: var(--wl-text-fine);
+    max-width: var(--wl-measure-text);
+    margin-bottom: var(--wl-space-4);
+  }
+  .scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: var(--wl-text-fine); }
+  th, td {
+    text-align: left;
+    padding: var(--wl-space-2) var(--wl-space-3);
+    border-bottom: 1px solid rgb(var(--wl-rule));
+    white-space: nowrap;
+  }
+  thead th {
+    font-size: var(--wl-text-eyebrow);
+    letter-spacing: var(--wl-tracking-eyebrow);
+    text-transform: uppercase;
+    color: rgb(var(--wl-ink-soft));
+    font-weight: 400;
+  }
+  tbody th { font-weight: 400; }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+</style>

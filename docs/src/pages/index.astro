@@ -1,6 +1,8 @@
 ---
 import Page from '../layouts/Page.astro';
 import Triptych from '../components/Triptych.astro';
+import Swatches from '../components/Swatches.astro';
+import Scale from '../components/Scale.astro';
 ---
 <Page title="Tokens">
   <main id="main" class="wrap">
@@ -12,6 +14,8 @@ import Triptych from '../components/Triptych.astro';
       same card rendered in all three themes at once.
     </p>
     <div class="triptych-slot"><Triptych /></div>
+    <Swatches />
+    <Scale />
   </main>
 
   <style>
