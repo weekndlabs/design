@@ -1,0 +1,183 @@
+---
+/**
+ * The weekndlabs.com navbar and footer, rebuilt on this system's own tokens.
+ *
+ * The markup is written twice on purpose. weekndlabs.com is React and this site
+ * is Astro, which is exactly why the package shares tokens rather than
+ * components. Colour, type and spacing come from the same source, so the two
+ * stay in step even though the markup does not.
+ *
+ * Every link is absolute. The page answers on two hosts — design.weekndlabs.com
+ * and weekndlabs.com/design — and a relative href would point somewhere
+ * different depending on which one served it.
+ */
+const HOME = 'https://weekndlabs.com';
+---
+<header class="bar">
+  <div class="bar-inner">
+    <a class="brand" href={HOME}>
+      <img src={`${HOME}/logo.png`} alt="" width="32" height="32" />
+      <span>WeekndLabs</span>
+    </a>
+
+    <nav class="links" aria-label="Main">
+      <a href={`${HOME}/#products`}>Products</a>
+      {/* This is the current page, so it is text rather than a link. That also
+          avoids guessing whether "here" means /design or the subdomain. */}
+      <span class="current" aria-current="page">Design</span>
+      <a href={`${HOME}/philosophy`}>Philosophy</a>
+    </nav>
+
+    <div class="actions">
+      <button type="button" id="theme-toggle" aria-label="Switch theme">
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+        </svg>
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+      </button>
+      <a class="btn filled" href="https://github.com/sponsors/fajarhide">Sponsor</a>
+      <a class="btn outlined" href="https://github.com/weekndlabs">Star on GitHub</a>
+    </div>
+  </div>
+</header>
+
+<slot />
+
+<footer class="foot">
+  <div class="foot-inner">
+    <p class="mono">&copy; 2026 WeekndLabs.</p>
+    <p class="mono middle">Built from Indonesia 🇮🇩 shipped to the world.</p>
+    <div class="foot-links mono">
+      <a class="sponsor" href="https://github.com/sponsors/fajarhide">Sponsor</a>
+      <a href="https://github.com/weekndlabs/design">GitHub</a>
+      <a href={`${HOME}/philosophy`}>Philosophy</a>
+      <a href={`${HOME}/privacy-policy`}>Privacy</a>
+      <a href={`${HOME}/terms-of-service`}>Terms</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .bar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgb(var(--wl-surface));
+    border-bottom: 1px solid rgb(var(--wl-rule));
+  }
+  .bar-inner {
+    max-width: 80rem;
+    margin: 0 auto;
+    height: 64px;
+    padding: 0 var(--wl-space-5);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--wl-font-night-display);
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: rgb(var(--wl-ink));
+    text-decoration: none;
+  }
+  .brand:hover { color: rgb(var(--wl-accent)); }
+  .brand img { border-radius: var(--wl-radius-md); }
+
+  .links { display: none; gap: var(--wl-space-6); align-items: center; }
+  .links a, .links .current {
+    font-family: var(--wl-font-night-mono);
+    font-size: var(--wl-text-fine);
+    text-decoration: none;
+  }
+  .links a { color: rgb(var(--wl-ink-soft)); }
+  .links a:hover { color: rgb(var(--wl-ink)); }
+  .links .current { color: rgb(var(--wl-accent)); }
+
+  .actions { display: flex; align-items: center; gap: var(--wl-space-3); }
+
+  #theme-toggle {
+    height: 36px;
+    width: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: 1px solid rgb(var(--wl-rule));
+    border-radius: var(--wl-radius-sm);
+    color: rgb(var(--wl-ink-soft));
+    cursor: pointer;
+  }
+  #theme-toggle:hover { border-color: rgb(var(--wl-accent)); color: rgb(var(--wl-accent)); }
+  /* One icon per theme. Which one shows is decided by data-theme rather than by
+     script, so the button is never briefly wrong or briefly empty. */
+  .icon-sun, .icon-moon { display: none; }
+  :global(html[data-theme='night-dark']) .icon-sun { display: block; }
+  :global(html[data-theme='night-light']) .icon-moon { display: block; }
+
+  .btn {
+    display: none;
+    align-items: center;
+    font-family: var(--wl-font-night-mono);
+    font-size: var(--wl-text-fine);
+    text-transform: uppercase;
+    padding: 10px var(--wl-space-5);
+    border: 1px solid;
+    border-radius: var(--wl-radius-sm);
+    text-decoration: none;
+  }
+  .btn.filled {
+    background: rgb(var(--wl-accent));
+    border-color: rgb(var(--wl-accent));
+    color: rgb(var(--wl-surface));
+  }
+  .btn.filled:hover {
+    background: rgb(var(--wl-accent-strong));
+    border-color: rgb(var(--wl-accent-strong));
+  }
+  .btn.outlined {
+    background: transparent;
+    border-color: rgb(var(--wl-rule));
+    color: rgb(var(--wl-ink));
+  }
+  .btn.outlined:hover { border-color: rgb(var(--wl-accent)); color: rgb(var(--wl-accent)); }
+
+  .foot {
+    border-top: 1px solid rgb(var(--wl-rule));
+    background: rgb(var(--wl-surface));
+    margin-top: var(--wl-space-9);
+    padding: var(--wl-space-7) 0;
+  }
+  .foot-inner {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 var(--wl-space-5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--wl-space-5);
+    text-align: center;
+  }
+  .foot p, .foot a { font-size: var(--wl-text-fine); color: rgb(var(--wl-ink-soft)); }
+  .foot-links { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--wl-space-5); }
+  .foot-links a { text-decoration: none; }
+  .foot-links a:hover { color: rgb(var(--wl-ink)); }
+  .foot-links a.sponsor { color: rgb(var(--wl-accent)); }
+
+  @media (min-width: 768px) {
+    .links { display: flex; }
+    .btn.outlined { display: inline-flex; }
+    .foot-inner { flex-direction: row; justify-content: space-between; align-items: flex-start; text-align: left; }
+    .foot-inner .middle { flex-grow: 1; text-align: center; }
+  }
+  @media (min-width: 640px) {
+    .btn.filled { display: inline-flex; }
+  }
+</style>

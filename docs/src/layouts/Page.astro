@@ -1,9 +1,23 @@
 ---
+import SiteChrome from '../components/SiteChrome.astro';
+
 const { title } = Astro.props;
+
+// Runs before first paint so the page never shows one theme and then flips.
+//
+// weekndlabs.com stores the visitor's choice under `theme` as 'light' or
+// 'dark'. Served at weekndlabs.com/design this page is same-origin with it, so
+// that choice is readable here and the two never disagree. On
+// design.weekndlabs.com the origin differs and there is nothing to read, which
+// is why the OS preference is the fallback rather than a hardcoded default.
+const themeScript = `(function(){var t=null;try{t=localStorage.getItem('theme')}catch(e){}
+var dark=t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;
+document.documentElement.dataset.theme=dark?'night-dark':'night-light'})()`;
 ---
 <!doctype html>
-<html lang="en" data-theme="night-dark">
+<html lang="en">
   <head>
+    <script is:inline set:html={themeScript} />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title} · WeekndLabs Design</title>
@@ -22,14 +36,25 @@ const { title } = Astro.props;
 
       *, *::before, *::after { box-sizing: border-box; margin: 0; }
 
+      /* Scrollbars and form controls follow the theme rather than staying dark
+         on a light page. */
+      html[data-theme='night-dark'] { color-scheme: dark; }
+      html[data-theme='night-light'] { color-scheme: light; }
+
       body {
         background: rgb(var(--wl-surface));
         color: rgb(var(--wl-ink));
         font-family: var(--wl-font-night-body);
         font-size: 16px;
         line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
         -webkit-font-smoothing: antialiased;
       }
+      /* The footer sits at the bottom on a short page instead of floating
+         halfway up. */
+      body > main { flex-grow: 1; }
 
       h1, h2, h3 {
         font-family: var(--wl-font-night-display);
@@ -82,6 +107,22 @@ const { title } = Astro.props;
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
-    <slot />
+    <SiteChrome>
+      <slot />
+    </SiteChrome>
+    <script is:inline>
+      document.getElementById('theme-toggle')?.addEventListener('click', function () {
+        var root = document.documentElement;
+        var next = root.dataset.theme === 'night-dark' ? 'night-light' : 'night-dark';
+        root.dataset.theme = next;
+        // Stored as 'light'/'dark' rather than the theme name, so a visitor who
+        // toggles here and walks back to weekndlabs.com keeps the same choice.
+        try {
+          localStorage.setItem('theme', next === 'night-dark' ? 'dark' : 'light');
+        } catch (e) {
+          // Safari private mode throws. The theme still applies to this page.
+        }
+      });
+    </script>
   </body>
 </html>
