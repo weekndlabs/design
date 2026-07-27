@@ -4,6 +4,10 @@ Design tokens for Omni, Bubo and weekndlabs.com. Colour, type and spacing live
 in one place, and a test refuses any change that drops a text colour below its
 WCAG threshold.
 
+Every theme, every role and every measured contrast ratio is on
+[design.weekndlabs.com](https://design.weekndlabs.com), rendered from this same
+source. This page is also the guide there.
+
 ## Install
 
 ```bash
@@ -119,6 +123,10 @@ Then `bg-surface`, `text-ink`, `border-accent/30` and `p-5` all resolve to
 tokens. The alpha modifier works because the preset emits
 `rgb(var(--wl-accent) / <alpha-value>)`.
 
+The preset carries the type scale too, so `font-display`, `text-display`,
+`tracking-eyebrow`, `font-weight-display` and `leading-mono` resolve without
+adding anything to your config.
+
 ## Use it in JavaScript
 
 ```js
@@ -131,7 +139,7 @@ themes['receipt'].accent; // '#7A4E00'
 
 | Theme | Product | Notes |
 |---|---|---|
-| `night-dark` | Bubo, weekndlabs.com | The default, also emitted under `:root` |
+| `night-dark` | Bubo, weekndlabs.com | The fallback, also emitted under `:where(:root)` |
 | `night-light` | Bubo, weekndlabs.com | Light mode of the same theme |
 | `receipt` | Omni | Paper stock, amber ink, light only |
 
@@ -167,6 +175,10 @@ git add dist/   # dist is committed, so this is part of the change
 Edit `tokens/*.json` only. Everything in `dist/` is generated and gets
 overwritten.
 
+Adding a `weight` token adds a font file, because the faces shipped are derived
+from `font.*` and `weight.*` rather than listed anywhere. A family whose role
+has no weight fails the build instead of shipping a gap.
+
 ## The contrast rule
 
 Every text role has a floor it has to clear against the surface it sits on:
@@ -196,4 +208,7 @@ npm run docs:build
 
 ## Licence
 
-MIT
+`MIT AND OFL-1.1`. The code and the tokens are MIT. The font files are not ours
+to relicense: all six families are under the SIL Open Font License 1.1, and
+each licence ships in `dist/fonts/` beside the file it covers. Keep them
+together if you redistribute the package further.
