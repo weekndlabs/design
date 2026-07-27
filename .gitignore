@@ -4,3 +4,7 @@ node_modules
 .vercel
 docs/dist
 docs/superpowers
+
+# Holds a registry token once anyone adds one for CI. Publishing needs a token
+# that bypasses 2FA, which is exactly the kind worth never committing.
+.npmrc
