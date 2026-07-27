@@ -64,7 +64,13 @@ document.documentElement.dataset.theme=dark?'night-dark':'night-light'})()`;
 
       code, .mono { font-family: var(--wl-font-night-mono); }
 
+      /* `width: 100%` is load-bearing. main is a flex item of the body column,
+         and an auto horizontal margin cancels the stretch that would otherwise
+         size it — leaving it to shrink-to-fit the min-content width of the
+         nowrap token tables, so the whole page scrolled sideways on a phone
+         instead of the tables scrolling inside themselves. */
       .wrap {
+        width: 100%;
         max-width: var(--wl-measure-page);
         margin: 0 auto;
         padding: 0 var(--wl-space-5);

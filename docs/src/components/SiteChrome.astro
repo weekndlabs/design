@@ -40,6 +40,31 @@ const HOME = 'https://weekndlabs.com';
       </button>
       <a class="btn filled" href="https://github.com/sponsors/fajarhide">Sponsor</a>
       <a class="btn outlined" href="https://github.com/weekndlabs">Star on GitHub</a>
+
+      {/* <details> rather than a script: it opens, closes and announces itself
+          without any JavaScript, and every link in the panel leaves this page,
+          so there is nothing left to close afterwards. */}
+      <details class="menu">
+        <summary aria-label="Menu">
+          <svg class="icon-menu" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M3 6h18M3 12h18M3 18h18" />
+          </svg>
+          <svg class="icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M18 6 6 18M6 6l12 12" />
+          </svg>
+        </summary>
+        {/* Absolute, not in flow: an in-flow panel would push the page down
+            while open, same reason weekndlabs.com places its panel this way. */}
+        <div class="panel">
+          <a href={`${HOME}/#products`}>Products</a>
+          <span class="current" aria-current="page">Design<span class="mark" aria-hidden="true"></span></span>
+          <a href={`${HOME}/philosophy`}>Philosophy</a>
+          <div class="panel-actions">
+            <a class="btn filled" href="https://github.com/sponsors/fajarhide">Sponsor</a>
+            <a class="btn outlined" href="https://github.com/weekndlabs">Star on GitHub</a>
+          </div>
+        </div>
+      </details>
     </div>
   </div>
 </header>
@@ -76,6 +101,7 @@ const HOME = 'https://weekndlabs.com';
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: var(--wl-space-4);
   }
 
   .brand {
@@ -84,7 +110,7 @@ const HOME = 'https://weekndlabs.com';
     gap: 10px;
     font-family: var(--wl-font-night-display);
     font-weight: 700;
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     color: rgb(var(--wl-ink));
     text-decoration: none;
   }
@@ -97,9 +123,10 @@ const HOME = 'https://weekndlabs.com';
     font-size: var(--wl-text-fine);
     text-decoration: none;
   }
+  .links a, .links .current { border-bottom: 1px solid transparent; }
   .links a { color: rgb(var(--wl-ink-soft)); }
-  .links a:hover { color: rgb(var(--wl-ink)); }
-  .links .current { color: rgb(var(--wl-accent)); }
+  .links a:hover { color: rgb(var(--wl-ink)); border-bottom-color: rgb(var(--wl-rule)); }
+  .links .current { color: rgb(var(--wl-accent)); border-bottom-color: rgb(var(--wl-accent)); }
 
   .actions { display: flex; align-items: center; gap: var(--wl-space-3); }
 
@@ -125,6 +152,9 @@ const HOME = 'https://weekndlabs.com';
   .btn {
     display: none;
     align-items: center;
+    justify-content: center;
+    /* A thumb-sized tap target, the same 44px floor weekndlabs.com sets. */
+    min-height: 44px;
     font-family: var(--wl-font-night-mono);
     font-size: var(--wl-text-fine);
     text-transform: uppercase;
@@ -171,13 +201,79 @@ const HOME = 'https://weekndlabs.com';
   .foot-links a:hover { color: rgb(var(--wl-ink)); }
   .foot-links a.sponsor { color: rgb(var(--wl-accent)); }
 
+  .menu summary {
+    height: 36px;
+    width: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(var(--wl-rule));
+    border-radius: var(--wl-radius-sm);
+    color: rgb(var(--wl-ink-soft));
+    cursor: pointer;
+    /* Kill the disclosure triangle in both engines. */
+    list-style: none;
+  }
+  .menu summary::-webkit-details-marker { display: none; }
+  .menu summary:hover { border-color: rgb(var(--wl-accent)); color: rgb(var(--wl-accent)); }
+  .menu summary:focus-visible { outline: 2px solid rgb(var(--wl-accent)); outline-offset: 3px; }
+  .icon-close { display: none; }
+  .menu[open] .icon-menu { display: none; }
+  .menu[open] .icon-close { display: block; }
+
+  .panel {
+    /* The bar is sticky, so it is the containing block for this. */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgb(var(--wl-surface-panel));
+    border-bottom: 1px solid rgb(var(--wl-rule));
+    padding: var(--wl-space-1) var(--wl-space-5) var(--wl-space-4);
+    display: flex;
+    flex-direction: column;
+  }
+  .panel a, .panel .current {
+    font-family: var(--wl-font-night-mono);
+    font-size: var(--wl-text-fine);
+    text-decoration: none;
+    padding: 14px 0;
+    border-bottom: 1px solid rgb(var(--wl-rule-soft));
+  }
+  .panel a { color: rgb(var(--wl-ink)); }
+  .panel a:active { color: rgb(var(--wl-accent)); }
+  .panel .current { color: rgb(var(--wl-accent)); }
+  /* The buttons below bring their own top rule, so the last link drops its
+     bottom one instead of drawing a second line beside it. */
+  .panel > a:last-of-type { border-bottom: none; }
+  .panel .mark {
+    display: block;
+    height: 1px;
+    width: 32px;
+    margin-top: var(--wl-space-2);
+    background: rgb(var(--wl-accent));
+  }
+  .panel-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--wl-space-3);
+    margin-top: var(--wl-space-4);
+    padding-top: var(--wl-space-4);
+    border-top: 1px solid rgb(var(--wl-rule));
+  }
+  .panel-actions .btn { display: inline-flex; width: 100%; }
+
+  @media (min-width: 640px) {
+    .brand { font-size: 1.25rem; }
+  }
   @media (min-width: 768px) {
     .links { display: flex; }
     .btn.outlined { display: inline-flex; }
+    .menu { display: none; }
     .foot-inner { flex-direction: row; justify-content: space-between; align-items: flex-start; text-align: left; }
     .foot-inner .middle { flex-grow: 1; text-align: center; }
   }
-  @media (min-width: 640px) {
+  @media (min-width: 1024px) {
     .btn.filled { display: inline-flex; }
   }
 </style>
