@@ -6,11 +6,21 @@ WCAG threshold.
 
 ## Install
 
-`dist/` is committed, so there is no publish step.
+```bash
+npm i @weekndlabs/design
+```
+
+`dist/` is committed as well, so a git URL works for anything on `main` that is
+not released yet:
 
 ```bash
 npm i github:weekndlabs/design
 ```
+
+Tokens change how a page looks, so a bump is worth reading before it ships. At
+`0.x` anything that moves a value is a minor: `0.1.0` to `0.2.0` widened
+`measure-page` from 1180px to 1280px, which shifts the layout of anything that
+follows it.
 
 ## Use it in Astro
 

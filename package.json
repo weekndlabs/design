@@ -1,6 +1,6 @@
 {
   "name": "@weekndlabs/design",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Design tokens for WeekndLabs products",
   "type": "module",
   "license": "MIT AND OFL-1.1",
@@ -17,8 +17,12 @@
     "./tailwind": "./dist/tailwind.js",
     ".": "./dist/tokens.js"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "node build/index.js",
+    "prepublishOnly": "npm run build && npm test",
     "test": "node --test lib/*.test.js",
     "docs:dev": "astro dev --root docs",
     "docs:build": "astro build --root docs"
