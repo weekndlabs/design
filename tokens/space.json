@@ -19,7 +19,7 @@
     "full": { "value": "9999px", "type": "borderRadius" }
   },
   "measure": {
-    "page":    { "value": "1180px", "type": "sizing" },
+    "page":    { "value": "1280px", "type": "sizing" },
     "doc":     { "value": "900px", "type": "sizing" },
     "article": { "value": "748px", "type": "sizing" },
     "text":    { "value": "660px", "type": "sizing" }
