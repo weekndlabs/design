@@ -6,16 +6,15 @@ import Page from '../layouts/Page.astro';
  * already show.
  */
 import { Content } from '../../../README.md';
+
+// Absolute for the same reason every link in SiteChrome.astro is: two hosts,
+// and the proxied one serves this page as /design/guide with no trailing slash,
+// so relative hrefs resolve somewhere else there.
+const DOCS = 'https://design.weekndlabs.com';
 ---
 <Page title="Guide">
   <main id="main" class="wrap prose">
-    {/* Relative, not absolute. This page answers on design.weekndlabs.com and
-        on weekndlabs.com/design, and `/` would leave the docs entirely on the
-        second one.
-
-        `../` rather than `./`: the page is served as the directory /guide/, so
-        `./` is this page again. */}
-    <p class="back mono"><a href="../">&larr; Tokens</a></p>
+    <p class="back mono"><a href={`${DOCS}/`}>&larr; Tokens</a></p>
     <Content />
   </main>
 
