@@ -26,6 +26,13 @@ document.documentElement.dataset.theme=dark?'night-dark':'night-light'})()`;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title} · WeekndLabs Design</title>
+    {/* Pointed at weekndlabs.com rather than copied in, the same way
+        SiteChrome.astro already loads the brand mark. Copying would mean this
+        repo carries a second copy of an icon that has been changed before, and
+        the two marks drifting apart is the thing to avoid. */}
+    <link rel="icon" href="https://weekndlabs.com/favicon.ico" type="image/x-icon" sizes="48x48" />
+    <link rel="icon" href="https://weekndlabs.com/icon.png" type="image/png" sizes="512x512" />
+    <link rel="apple-touch-icon" href="https://weekndlabs.com/apple-icon.png" type="image/png" sizes="180x180" />
     <meta name="description" content="Design tokens for WeekndLabs products. One grammar, three faces." />
     {/* weekndlabs.com proxies this site at /design, so the same HTML answers on
         two hosts. Name the one that actually serves it. */}
