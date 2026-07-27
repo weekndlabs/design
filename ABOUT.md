@@ -78,13 +78,25 @@ Bubo has a live version of the same bug, found while drafting this: `--sage` and
 measure 1.86:1 and 2.81:1. It belongs in Bubo's own issue, and it is why
 `positive` and `negative` are themed here rather than shared.
 
-## Why the docs site has no light/dark toggle
+## Why the docs site shows all three themes at once
 
-Nearly every design system site has one. A toggle shows one theme at a time,
-which makes the other two invisible and turns the argument into a claim you have
-to take on faith.
+Nearly every design system site has a toggle that picks which theme you are
+looking at. Showing one at a time makes the other two invisible and turns the
+argument into a claim you have to take on faith.
 
-The site puts all three on screen at once instead, rendering the same card in
+The site puts all three on screen instead, rendering the same card in
 `night-dark`, `night-light` and `receipt` side by side, with the measured
 contrast printed under each one. Reading the three panels against each other is
 the only way to check that they really are the same card.
+
+There is a toggle in the navbar, and it does a different job. It changes the
+chrome around the triptych, never what the triptych shows. Themes are scoped by
+`[data-theme]` on any element, so each panel carries its own and the root
+attribute the toggle flips cannot reach inside them.
+
+The chrome needs to move because the page answers on two hosts. Served at
+`weekndlabs.com/design` it is same-origin with the main site and reads the
+theme the visitor already chose there, so nobody who picked light lands on a
+dark page halfway through the sentence. On `design.weekndlabs.com` there is
+nothing to read and the OS preference decides. Either way the three panels stay
+exactly where they were.
