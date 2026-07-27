@@ -43,6 +43,33 @@ and `--wl-weight-body` is 400, and asking Bricolage for 400 gets you a weight
 it does not ship. Pair `--wl-weight-mono` and `--wl-leading-mono` with
 `--wl-font-night-mono`, and the display pair with the display face.
 
+## Fonts
+
+The package carries the faces its tokens name, so a consumer does not have to
+find them and does not hit a font host:
+
+```css
+@import '@weekndlabs/design/fonts.css';
+```
+
+Six files, latin subset, one weight each, matching the weight tokens: Bricolage
+Grotesque 700, Inter 400 and JetBrains Mono 400 for `night`, IBM Plex Sans
+Condensed 700, IBM Plex Sans 400 and IBM Plex Mono 400 for `receipt`. About
+124KB in total, and a face is only downloaded if the page uses it.
+
+Adding a weight means adding the token first. The face list is derived from
+`font.*` and `weight.*` at build time, so a weight nothing declares has no file
+and a family with no weight fails the build rather than shipping a gap.
+
+If your bundler rewrites asset urls, import the stylesheet as a module rather
+than with a CSS `@import`. A plain `@import` leaves `url('./fonts/…')` alone and
+the woff2 files 404 against wherever the bundled stylesheet ended up.
+
+Every family is under the SIL Open Font License 1.1. Each licence ships in
+`dist/fonts/` beside the file it covers, which is what the OFL asks for.
+Redistributing them further means keeping those files together. The code stays
+MIT; the package declares `MIT AND OFL-1.1`.
+
 ## Use it in Tailwind
 
 ```js
