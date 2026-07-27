@@ -94,6 +94,16 @@ export default {
         "receipt-display": "var(--wl-font-receipt-display)",
         "receipt-body": "var(--wl-font-receipt-body)",
         "receipt-mono": "var(--wl-font-receipt-mono)"
+      },
+      "fontWeight": {
+        "display": "var(--wl-weight-display)",
+        "body": "var(--wl-weight-body)",
+        "mono": "var(--wl-weight-mono)"
+      },
+      "lineHeight": {
+        "display": "var(--wl-leading-display)",
+        "body": "var(--wl-leading-body)",
+        "mono": "var(--wl-leading-mono)"
       }
     }
   }

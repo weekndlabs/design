@@ -107,4 +107,10 @@
   --wl-tracking-display: -0.03em;
   --wl-tracking-section: -0.015em;
   --wl-tracking-eyebrow: 0.14em;
+  --wl-weight-display: 700;
+  --wl-weight-body: 400;
+  --wl-weight-mono: 400;
+  --wl-leading-display: 1.15;
+  --wl-leading-body: 1.6;
+  --wl-leading-mono: 1.7;
 }

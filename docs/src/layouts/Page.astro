@@ -46,7 +46,8 @@ document.documentElement.dataset.theme=dark?'night-dark':'night-light'})()`;
         color: rgb(var(--wl-ink));
         font-family: var(--wl-font-night-body);
         font-size: 16px;
-        line-height: 1.6;
+        font-weight: var(--wl-weight-body);
+        line-height: var(--wl-leading-body);
         min-height: 100vh;
         display: flex;
         flex-direction: column;
@@ -56,10 +57,14 @@ document.documentElement.dataset.theme=dark?'night-dark':'night-light'})()`;
          halfway up. */
       body > main { flex-grow: 1; }
 
+      /* Weight is set rather than left to the UA default: Bricolage ships 600,
+         700 and 800, so a browser deciding "bold" for itself is a browser
+         picking a weight the font may not have. */
       h1, h2, h3 {
         font-family: var(--wl-font-night-display);
+        font-weight: var(--wl-weight-display);
         letter-spacing: var(--wl-tracking-section);
-        line-height: 1.15;
+        line-height: var(--wl-leading-display);
       }
 
       code, .mono { font-family: var(--wl-font-night-mono); }

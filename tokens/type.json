@@ -23,5 +23,15 @@
     "display": { "value": "-0.03em", "type": "letterSpacing" },
     "section": { "value": "-0.015em", "type": "letterSpacing" },
     "eyebrow": { "value": "0.14em", "type": "letterSpacing" }
+  },
+  "weight": {
+    "display": { "value": "700", "type": "fontWeight" },
+    "body":    { "value": "400", "type": "fontWeight" },
+    "mono":    { "value": "400", "type": "fontWeight" }
+  },
+  "leading": {
+    "display": { "value": "1.15", "type": "lineHeight" },
+    "body":    { "value": "1.6", "type": "lineHeight" },
+    "mono":    { "value": "1.7", "type": "lineHeight" }
   }
 }

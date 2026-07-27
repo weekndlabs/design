@@ -37,6 +37,12 @@ body {
 Everything unthemed is ready to use as-is: `var(--wl-space-5)`,
 `var(--wl-radius-lg)`, `var(--wl-text-display)`, `var(--wl-font-night-mono)`.
 
+Weight and line-height are named per face rather than as one shared scale,
+because the faces do not carry the same weights. `--wl-weight-display` is 700
+and `--wl-weight-body` is 400, and asking Bricolage for 400 gets you a weight
+it does not ship. Pair `--wl-weight-mono` and `--wl-leading-mono` with
+`--wl-font-night-mono`, and the display pair with the display face.
+
 ## Use it in Tailwind
 
 ```js
