@@ -1,6 +1,6 @@
 {
   "name": "@weekndlabs/design",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Design tokens for WeekndLabs products",
   "type": "module",
   "license": "MIT AND OFL-1.1",
