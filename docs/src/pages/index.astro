@@ -12,8 +12,12 @@ import Scale from '../components/Scale.astro';
  * `./guide/` was tried and is wrong. Next serves the proxied page as /design
  * with no trailing slash, so the browser resolves against / and lands on
  * weekndlabs.com/guide, outside the docs entirely.
+ *
+ * No trailing slash on the path either: weekndlabs.com/design/guide/ answers
+ * 308 to the version without it, so linking with one costs every visitor a
+ * redirect.
  */
-const DOCS = 'https://design.weekndlabs.com';
+const DOCS = 'https://weekndlabs.com/design';
 ---
 <Page title="Tokens">
   <main id="main" class="wrap">
@@ -24,7 +28,7 @@ const DOCS = 'https://design.weekndlabs.com';
       of semantic roles. Each fills those roles with its own values. Below is the
       same card rendered in all three themes at once.
     </p>
-    <p class="guide-link mono"><a href={`${DOCS}/guide/`}>Install and usage &rarr;</a></p>
+    <p class="guide-link mono"><a href={`${DOCS}/guide`}>Install and usage &rarr;</a></p>
     <div class="triptych-slot"><Triptych /></div>
     <Swatches />
     <Scale />

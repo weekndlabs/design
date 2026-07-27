@@ -10,11 +10,11 @@ import { Content } from '../../../README.md';
 // Absolute for the same reason every link in SiteChrome.astro is: two hosts,
 // and the proxied one serves this page as /design/guide with no trailing slash,
 // so relative hrefs resolve somewhere else there.
-const DOCS = 'https://design.weekndlabs.com';
+const DOCS = 'https://weekndlabs.com/design';
 ---
 <Page title="Guide">
   <main id="main" class="wrap prose">
-    <p class="back mono"><a href={`${DOCS}/`}>&larr; Tokens</a></p>
+    <p class="back mono"><a href={DOCS}>&larr; Tokens</a></p>
     <Content />
   </main>
 
