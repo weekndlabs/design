@@ -58,9 +58,11 @@ const measure = (theme, role) => {
     letter-spacing: var(--wl-tracking-eyebrow);
     text-transform: uppercase;
     color: rgb(var(--wl-ink-soft));
-    font-weight: 400;
+    font-weight: var(--wl-weight-body);
   }
-  tbody th { font-weight: 400; }
+  /* Row headers are token names, so they are set in mono and take mono's
+     weight. Both undo the UA's bold on a th. */
+  tbody th { font-weight: var(--wl-weight-mono); }
   .chip {
     display: inline-block;
     width: 28px;

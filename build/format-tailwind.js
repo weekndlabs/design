@@ -24,6 +24,8 @@ export const formatTailwind = ({ dictionary }) => {
     fontSize: group('text'),
     letterSpacing: group('tracking'),
     fontFamily: group('font'),
+    fontWeight: group('weight'),
+    lineHeight: group('leading'),
   };
 
   return [

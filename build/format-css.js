@@ -1,7 +1,12 @@
 import { toTriplet } from '../lib/contrast.js';
 import { THEMES, ROLES } from '../lib/tokens.js';
 
-const SCALE = ['space', 'radius', 'measure', 'text', 'tracking', 'font'];
+/**
+ * Everything that is not a colour is unthemed and goes out as-is. Naming the
+ * groups instead would mean a new group silently vanishing from the CSS until
+ * someone remembered to add it here.
+ */
+const isScale = (token) => token.path[0] !== 'color';
 
 /**
  * One block per theme, values as RGB triplets.
@@ -20,7 +25,7 @@ export const formatCss = ({ dictionary }) => {
     return `${selector} {\n${lines.join('\n')}\n}`;
   };
   const scale = dictionary.allTokens
-    .filter((t) => SCALE.includes(t.path[0]))
+    .filter(isScale)
     .map((t) => `  --wl-${t.path.join('-')}: ${t.value};`)
     .join('\n');
 
