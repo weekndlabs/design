@@ -34,6 +34,24 @@ Then set the theme on `<html>`:
 <html data-theme="receipt">
 ```
 
+The three values are `night-dark`, `night-light` and `receipt`, and they are the
+only strings that select a theme. There is no `dark` alias on purpose: `dark`
+would have to mean `night-dark` forever, and it stops being true the first time
+another theme wants to be the dark one.
+
+If you store the visitor's choice as `dark` or `light`, translate on the way in
+rather than renaming what you store. Other sites in the family read that value.
+
+```js
+document.documentElement.dataset.theme =
+  localStorage.theme === 'dark' ? 'night-dark' : 'night-light';
+```
+
+Set nothing and you get `night-dark`, from a `:where(:root)` block that carries
+no specificity. It is a fallback so an unconfigured page still renders, and it
+loses to your own `:root` whichever order the stylesheets load in. A site whose
+default is light keeps its default.
+
 Colours are RGB channel triplets, so wrap them in `rgb()`:
 
 ```css
