@@ -3,6 +3,7 @@ import { SOURCE } from '../lib/tokens.js';
 import { formatCss } from './format-css.js';
 import { formatTailwind } from './format-tailwind.js';
 import { formatTs } from './format-ts.js';
+import { buildFonts } from './fonts.js';
 
 const sd = new StyleDictionary({
   source: SOURCE,
@@ -32,4 +33,5 @@ const sd = new StyleDictionary({
 });
 
 await sd.buildAllPlatforms();
+await buildFonts();
 console.log('built dist/');
