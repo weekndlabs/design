@@ -3,6 +3,17 @@ import Page from '../layouts/Page.astro';
 import Triptych from '../components/Triptych.astro';
 import Swatches from '../components/Swatches.astro';
 import Scale from '../components/Scale.astro';
+
+/**
+ * Absolute, for the reason SiteChrome.astro already gives: the page answers on
+ * design.weekndlabs.com and on weekndlabs.com/design, and a relative href means
+ * something different depending on which one served it.
+ *
+ * `./guide/` was tried and is wrong. Next serves the proxied page as /design
+ * with no trailing slash, so the browser resolves against / and lands on
+ * weekndlabs.com/guide, outside the docs entirely.
+ */
+const DOCS = 'https://design.weekndlabs.com';
 ---
 <Page title="Tokens">
   <main id="main" class="wrap">
@@ -13,9 +24,7 @@ import Scale from '../components/Scale.astro';
       of semantic roles. Each fills those roles with its own values. Below is the
       same card rendered in all three themes at once.
     </p>
-    {/* Relative on purpose: this page answers on two hosts and an absolute
-        path would leave the docs on weekndlabs.com/design. */}
-    <p class="guide-link mono"><a href="./guide/">Install and usage &rarr;</a></p>
+    <p class="guide-link mono"><a href={`${DOCS}/guide/`}>Install and usage &rarr;</a></p>
     <div class="triptych-slot"><Triptych /></div>
     <Swatches />
     <Scale />
