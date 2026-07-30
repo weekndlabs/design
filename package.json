@@ -12,9 +12,11 @@
   ],
   "exports": {
     "./tokens.css": "./dist/tokens.css",
+    "./shadcn.css": "./dist/shadcn.css",
     "./fonts.css": "./dist/fonts.css",
     "./fonts/*": "./dist/fonts/*",
     "./tailwind": "./dist/tailwind.js",
+    "./typography-check": "./lib/typography.js",
     ".": "./dist/tokens.js"
   },
   "publishConfig": {
