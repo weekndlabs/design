@@ -1,28 +1,31 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@tailwindcss/vite';
-import sitemap from '@astrojs/sitemap';
 
 /**
- * The canonical host, and the only place it is written down.
+ * The canonical origin, and the only place it is written down.
  *
  * The page answers on two hosts, design.weekndlabs.com and
- * weekndlabs.com/design. Exactly one of them can be the indexable one, and every
+ * weekndlabs.com/design. Exactly one can be the indexable one, and every
  * canonical tag and every sitemap entry has to name the same one or Google is
  * told to index a host nothing links to.
  *
- * Page.astro reads this through `Astro.site`, and the sitemap is generated from
- * it, so choosing the other host is a one-line change here.
+ * weekndlabs.com/design won: every inbound link and every internal link already
+ * points there, and one domain is easier to grow than two.
+ *
+ * It is written with a trailing slash on purpose. `new URL('/guide/', base)`
+ * throws away the base path and yields weekndlabs.com/guide, so the join has to
+ * be relative and the base has to end in a slash for it to survive. Page.astro
+ * and the sitemap both depend on that.
+ *
+ * `base` is deliberately NOT set. This same build is also served at the
+ * subdomain root, where a base of /design would send every asset to a 404.
  */
-const SITE = 'https://design.weekndlabs.com';
+const SITE = 'https://weekndlabs.com/design/';
 
 export default defineConfig({
   site: SITE,
   srcDir: './src',
   outDir: './dist',
-  // Without this there was no sitemap at all: weekndlabs.com/sitemap.xml lists
-  // four URLs and none of them is a design page, and this host answered 404.
-  // Discovery rested on a single navbar link.
-  integrations: [sitemap()],
   // Tailwind is here for one reason: the components page has to compile
   // dist/shadcn.css for real. A bridge nobody compiles is a bridge nobody has
   // tested.

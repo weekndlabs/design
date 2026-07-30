@@ -1,5 +1,10 @@
 # robots.txt applies per host, and this site answers on two of them.
 #
+# This host is NOT the canonical one: every page here canonicalises to
+# weekndlabs.com/design. It stays fully crawlable on purpose. Disallowing it
+# would stop Google reading the canonical tag that does the deduplicating, which
+# is the opposite of what blocking a duplicate achieves.
+#
 # weekndlabs.com is behind Cloudflare, which injects a managed block list for AI
 # training crawlers. design.weekndlabs.com is served by Vercel directly, so none
 # of that reached it and this host answered 404 to /robots.txt, which means allow
@@ -43,4 +48,11 @@ Disallow: /
 #
 # The training-only agents above stay blocked, which is what ai-train=no means.
 
-Sitemap: https://design.weekndlabs.com/sitemap-index.xml
+# The canonical host is weekndlabs.com/design, so the sitemap is named there.
+#
+# This file only ever answers at design.weekndlabs.com/robots.txt, because
+# robots.txt is read from an origin root and never from a path. Google reads
+# weekndlabs.com/robots.txt for the canonical host, and that file belongs to the
+# main site's repo, so this directive alone does not get the sitemap discovered.
+# It has to be added there as well, or submitted in Search Console.
+Sitemap: https://weekndlabs.com/design/sitemap.xml

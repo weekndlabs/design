@@ -34,7 +34,6 @@
     "node": ">=22"
   },
   "devDependencies": {
-    "@astrojs/sitemap": "^3.7.3",
     "@fontsource/bricolage-grotesque": "^5.3.0",
     "@fontsource/ibm-plex-mono": "^5.3.0",
     "@fontsource/ibm-plex-sans": "^5.3.0",
