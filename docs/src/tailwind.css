@@ -6,6 +6,11 @@
  * A wrong `@theme inline` block leaves `bg-card` compiling to nothing, and no
  * unit test can see that. Here it either produces utilities or the page renders
  * unstyled, which is the loudest possible failure.
+ *
+ * Preflight stays. shadcn's markup assumes it: without the form-control reset,
+ * every `<button>` picks up the UA's own border and background, so the ghost and
+ * secondary variants render as boxes. It does not fight this site's layout,
+ * because `.wrap` beats `*` on specificity and sits outside `@layer base`.
  */
 @import 'tailwindcss';
 @import '../../dist/shadcn.css';

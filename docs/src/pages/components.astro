@@ -9,88 +9,109 @@
  * Every panel below is the same markup with the same shadcn class strings. Only
  * `data-theme` differs, so a role that works on one background and fails on
  * another has nowhere to hide.
+ *
+ * The layout is guide.astro's, deliberately: the back link, the vertical rhythm
+ * and the ruled section headings are what make the two read as one site rather
+ * than two pages that happen to share a navbar.
  */
 import Page from '../layouts/Page.astro';
 import Showcase from '../components/Showcase.astro';
 import '../tailwind.css';
 
-const THEME_NOTES = {
-  light: 'Warm off-white paper, amber at 4.80:1, 10px corners.',
-  dark: 'Navy, amber at 10.31:1, 10px corners. The default when nothing sets a theme.',
-  paper: 'Cool grey stock, the darkest amber, 3px corners because a filed document has square edges.',
-};
+// Absolute for the same reason every link in SiteChrome.astro is: two hosts, and
+// the proxied one serves this page as /design/components with no trailing slash,
+// so a relative href resolves somewhere else there.
+const DOCS = 'https://weekndlabs.com/design';
+
+const THEMES = [
+  ['light', 'Warm off-white paper, amber at 4.80:1, 10px corners.'],
+  ['dark', 'Navy, amber at 10.31:1, 10px corners. The default when nothing sets a theme.'],
+  ['paper', 'Cool grey stock, the darkest amber, and 3px corners because a filed document has square edges.'],
+];
 ---
 <Page title="Components">
-  <p class="eyebrow mono">WeekndLabs Design</p>
-  <h1>The same components, three times.</h1>
-  {/* Astro trims the whitespace around an element on its own line, so the spaces
-      either side of these inline code spans have to be explicit or the words run
-      together. */}
-  <p class="lede">
-    shadcn/ui markup with nothing behind it but this system's tokens. One import
-    of <code>@weekndlabs/design/shadcn.css</code>, and <code>bg-primary</code>{' '}
-    and <code>text-muted-foreground</code> become real classes. Nothing on this
-    page sets a colour.
-  </p>
+  {/* The layout supplies no wrapper. index.astro and guide.astro each write their
+      own main.wrap, and that class is what centres the column and gives it its
+      horizontal padding. */}
+  <main id="main" class="wrap">
+    <p class="back mono"><a href={DOCS}>&larr; Tokens</a></p>
+    <h1>The same components, three times.</h1>
+    {/* Astro trims the whitespace around an element on its own line, so the
+        spaces either side of these inline code spans have to be explicit or the
+        words run together. */}
+    <p class="lede">
+      shadcn/ui markup with nothing behind it but this system's tokens. One import
+      of <code>@weekndlabs/design/shadcn.css</code>, and <code>bg-primary</code>{' '}
+      and <code>text-muted-foreground</code> become real classes. Nothing on this
+      page sets a colour.
+    </p>
 
-  {Object.entries(THEME_NOTES).map(([theme, note]) => (
-    <section class="theme-block">
-      <h2 class="mono" id={`components-${theme}`}>{theme}</h2>
-      <p class="note">{note}</p>
-      <div data-theme={theme} class="stage">
-        <Showcase />
-      </div>
-    </section>
-  ))}
+    {THEMES.map(([theme, note]) => (
+      <section>
+        <h2 class="mono" id={`components-${theme}`}>{theme}</h2>
+        <p class="note">{note}</p>
+        <div data-theme={theme} class="stage">
+          <Showcase />
+        </div>
+      </section>
+    ))}
+  </main>
+
+  <style>
+    /* guide.astro's rhythm, matched rule for rule. */
+    main { padding-block: var(--wl-space-8); }
+    .back { font-size: var(--wl-text-meta); margin-bottom: var(--wl-space-6); }
+    .back a { text-decoration: none; }
+
+    h1 {
+      font-size: var(--wl-text-hero);
+      letter-spacing: var(--wl-tracking-hero);
+      margin-bottom: var(--wl-space-5);
+    }
+    /* The ruled section heading is the thing that makes the guide read as one
+       document. Without it the theme panels look like three unrelated pages. */
+    h2 {
+      font-size: var(--wl-text-section);
+      margin-top: var(--wl-space-8);
+      margin-bottom: var(--wl-space-4);
+      padding-top: var(--wl-space-5);
+      border-top: 1px solid var(--wl-border);
+    }
+    .lede, .note {
+      max-width: var(--wl-measure-text);
+      margin-bottom: var(--wl-space-4);
+    }
+    .lede {
+      font-size: var(--wl-text-lede);
+      line-height: var(--wl-leading-body);
+      color: var(--wl-muted-foreground);
+    }
+    .note {
+      font-size: var(--wl-text-meta);
+      color: var(--wl-muted-foreground);
+      margin-top: calc(var(--wl-space-4) * -1 + var(--wl-space-1));
+    }
+    /* Inline code matches the guide's, so a variable name looks the same
+       wherever it is mentioned on this site. */
+    .lede code {
+      font-size: 0.9em;
+      background: var(--wl-muted);
+      border: 1px solid color-mix(in oklch, var(--wl-border) 60%, var(--wl-background));
+      border-radius: var(--wl-radius);
+      padding: 1px 5px;
+      color: var(--wl-foreground);
+    }
+
+    /* The stage carries the theme, so the components inside read their roles from
+       it rather than from the page. That is the whole demonstration: the panel
+       switches one attribute and every child follows. */
+    .stage {
+      padding: var(--wl-space-5);
+      border: 1px solid var(--wl-border);
+      border-radius: var(--wl-radius);
+      background: var(--wl-background);
+      color: var(--wl-foreground);
+      font-family: var(--wl-font-ui-body);
+    }
+  </style>
 </Page>
-
-<style>
-  .eyebrow {
-    font-size: var(--wl-text-label);
-    letter-spacing: var(--wl-tracking-label);
-    text-transform: uppercase;
-    color: var(--wl-muted-foreground);
-  }
-  h1 {
-    font-family: var(--wl-font-ui-display);
-    font-size: var(--wl-text-hero);
-    font-weight: var(--wl-weight-display);
-    letter-spacing: var(--wl-tracking-hero);
-    line-height: var(--wl-leading-hero);
-    margin-top: var(--wl-space-3);
-  }
-  .lede {
-    margin-top: var(--wl-space-4);
-    max-width: var(--wl-measure-text);
-    font-size: var(--wl-text-lede);
-    line-height: var(--wl-leading-body);
-    color: var(--wl-muted-foreground);
-  }
-  .lede code {
-    font-family: var(--wl-font-ui-mono);
-    font-size: 0.9em;
-    color: var(--wl-foreground);
-  }
-  .theme-block { margin-top: var(--wl-space-7); }
-  h2 {
-    font-size: var(--wl-text-section);
-    letter-spacing: var(--wl-tracking-section);
-  }
-  .note {
-    margin-top: var(--wl-space-1);
-    font-size: var(--wl-text-meta);
-    color: var(--wl-muted-foreground);
-  }
-  /* The stage carries the theme, so the components inside read their roles from
-     it rather than from the page. That is the whole demonstration: the panel
-     switches one attribute and every child follows. */
-  .stage {
-    margin-top: var(--wl-space-4);
-    padding: var(--wl-space-5);
-    border: 1px solid var(--wl-border);
-    border-radius: var(--wl-radius);
-    background: var(--wl-background);
-    color: var(--wl-foreground);
-    font-family: var(--wl-font-ui-body);
-  }
-</style>
