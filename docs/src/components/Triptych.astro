@@ -9,64 +9,66 @@ import { contrastRatio } from '../../../lib/contrast.js';
       <h3>Omni</h3>
       <p class="lede">Noise-canceling context for AI agents.</p>
       <p class="tags mono"><span>[Rust]</span><span>[MCP]</span></p>
-      <pre class="inset mono">$ omni --pre-hook
+      <pre class="terminal mono">$ omni --pre-hook
 <span class="dim">saved 4.2k tokens</span></pre>
       <p class="ratio mono">
-        ink {contrastRatio(themes[theme].ink, themes[theme].surface).toFixed(2)}:1
+        foreground {contrastRatio(themes[theme].foreground, themes[theme].background).toFixed(2)}:1
       </p>
     </section>
   ))}
 </div>
 
 <style>
+  /* Fits however many themes THEMES holds. Hardcoding three would mean a fourth
+     theme silently landing in a fourth row of one, or off the grid entirely. */
   .triptych {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: var(--wl-space-4);
   }
   .panel {
-    background: rgb(var(--wl-surface));
-    color: rgb(var(--wl-ink));
-    border: 1px solid rgb(var(--wl-rule));
-    border-radius: var(--wl-radius-lg);
+    background: var(--wl-background);
+    color: var(--wl-foreground);
+    border: 1px solid var(--wl-border);
+    border-radius: var(--wl-radius);
     padding: var(--wl-space-5);
   }
   .eyebrow {
-    font-size: var(--wl-text-eyebrow);
-    letter-spacing: var(--wl-tracking-eyebrow);
+    font-size: var(--wl-text-label);
+    letter-spacing: var(--wl-tracking-label);
     text-transform: uppercase;
-    color: rgb(var(--wl-ink-soft));
+    color: var(--wl-muted-foreground);
   }
   h3 { margin-top: var(--wl-space-3); }
   .lede {
-    color: rgb(var(--wl-ink-soft));
-    font-size: var(--wl-text-fine);
+    color: var(--wl-muted-foreground);
+    font-size: var(--wl-text-meta);
     margin-top: var(--wl-space-2);
   }
   .tags {
     margin-top: var(--wl-space-3);
     display: flex;
     gap: var(--wl-space-2);
-    font-size: var(--wl-text-eyebrow);
-    color: rgb(var(--wl-accent));
+    font-size: var(--wl-text-label);
+    color: var(--wl-primary);
   }
-  /* The inset is identical in all three themes on purpose: a terminal is a
+  /* The terminal is identical in all three themes on purpose: a terminal is a
      terminal regardless of the page around it. */
-  .inset {
+  .terminal {
     margin-top: var(--wl-space-4);
-    background: rgb(var(--wl-inset));
-    color: rgb(var(--wl-inset-ink));
-    border-radius: var(--wl-radius-base);
+    background: var(--wl-terminal);
+    color: var(--wl-terminal-foreground);
+    border-radius: var(--wl-radius);
     padding: var(--wl-space-3);
-    font-size: var(--wl-text-eyebrow);
+    font-size: var(--wl-text-label);
     line-height: var(--wl-leading-mono);
     overflow-x: auto;
   }
-  .inset .dim { color: rgb(var(--wl-inset-ink-dim)); }
+  .terminal .dim { color: var(--wl-terminal-foreground-muted); }
   .ratio {
     margin-top: var(--wl-space-4);
-    font-size: var(--wl-text-eyebrow);
-    color: rgb(var(--wl-ink-soft));
+    font-size: var(--wl-text-label);
+    color: var(--wl-muted-foreground);
   }
   @media (max-width: 860px) {
     .triptych { grid-template-columns: minmax(0, 1fr); }

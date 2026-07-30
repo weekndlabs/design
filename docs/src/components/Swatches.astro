@@ -2,16 +2,25 @@
 import { THEMES, ROLES, themes } from '../../../dist/tokens.js';
 import { contrastRatio } from '../../../lib/contrast.js';
 
-const BORDERS = new Set(['rule', 'rule-soft', 'rule-strong']);
-const SURFACES = new Set(['surface', 'surface-panel', 'surface-sunk', 'inset']);
+/**
+ * The table pairs each role with its surface the same way the gate does, so what
+ * the page prints and what the test asserts cannot drift apart. `X-foreground`
+ * measures on `X`; `foreground` is the one whose surface is not its own name
+ * minus a suffix.
+ */
+const FOREGROUND = /-foreground(-[a-z]+)?$/;
+const MARKS = new Set(['border', 'input', 'ring', ...ROLES.filter((r) => r.startsWith('chart-'))]);
 
-const backdrop = (theme, role) =>
-  role.startsWith('inset-') ? themes[theme].inset : themes[theme].surface;
+const backdropRole = (role) =>
+  role === 'foreground' ? 'background' : role.replace(FOREGROUND, '');
+
+const isText = (role) => role === 'foreground' || FOREGROUND.test(role);
 
 const measure = (theme, role) => {
-  if (BORDERS.has(role)) return 'border, exempt';
-  if (SURFACES.has(role)) return 'surface, exempt';
-  return `${contrastRatio(themes[theme][role], backdrop(theme, role)).toFixed(2)}:1`;
+  if (role === 'radius') return themes[theme].radius;
+  if (MARKS.has(role)) return 'mark, exempt';
+  if (!isText(role)) return 'surface, exempt';
+  return `${contrastRatio(themes[theme][role], themes[theme][backdropRole(role)]).toFixed(2)}:1`;
 };
 ---
 {THEMES.map((theme) => (
@@ -21,7 +30,7 @@ const measure = (theme, role) => {
       <table>
         <caption class="sr-only">Semantic roles and measured contrast for the {theme} theme</caption>
         <thead>
-          <tr><th>Role</th><th>Value</th><th>Hex</th><th>On</th><th>Ratio</th></tr>
+          <tr><th>Role</th><th>Value</th><th>oklch</th><th>On</th><th>Ratio</th></tr>
         </thead>
         <tbody>
           {ROLES.map((role) => (
@@ -31,7 +40,7 @@ const measure = (theme, role) => {
                 <span class="chip" style={`background: ${themes[theme][role]}`} aria-hidden="true"></span>
               </td>
               <td class="mono">{themes[theme][role]}</td>
-              <td class="mono">{role.startsWith('inset-') ? 'inset' : 'surface'}</td>
+              <td class="mono">{isText(role) ? backdropRole(role) : '—'}</td>
               <td class="mono">{measure(theme, role)}</td>
             </tr>
           ))}
@@ -46,18 +55,18 @@ const measure = (theme, role) => {
   h2 { font-size: var(--wl-text-section); margin-bottom: var(--wl-space-4); }
   /* Scroll the table, never the page. */
   .scroll { overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; font-size: var(--wl-text-fine); }
+  table { width: 100%; border-collapse: collapse; font-size: var(--wl-text-meta); }
   th, td {
     text-align: left;
     padding: var(--wl-space-2) var(--wl-space-3);
-    border-bottom: 1px solid rgb(var(--wl-rule));
+    border-bottom: 1px solid var(--wl-border);
     white-space: nowrap;
   }
   thead th {
-    font-size: var(--wl-text-eyebrow);
-    letter-spacing: var(--wl-tracking-eyebrow);
+    font-size: var(--wl-text-label);
+    letter-spacing: var(--wl-tracking-label);
     text-transform: uppercase;
-    color: rgb(var(--wl-ink-soft));
+    color: var(--wl-muted-foreground);
     font-weight: var(--wl-weight-body);
   }
   /* Row headers are token names, so they are set in mono and take mono's
@@ -67,8 +76,8 @@ const measure = (theme, role) => {
     display: inline-block;
     width: 28px;
     height: 18px;
-    border-radius: var(--wl-radius-sm);
-    border: 1px solid rgb(var(--wl-rule-strong));
+    border-radius: var(--wl-radius);
+    border: 1px solid var(--wl-input);
     vertical-align: middle;
   }
   .sr-only {

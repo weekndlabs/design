@@ -1,4 +1,3 @@
-import { toTriplet } from '../lib/contrast.js';
 import { THEMES, ROLES } from '../lib/tokens.js';
 
 /**
@@ -9,18 +8,19 @@ import { THEMES, ROLES } from '../lib/tokens.js';
 const isScale = (token) => token.path[0] !== 'color';
 
 /**
- * One block per theme, values as RGB triplets.
+ * One block per theme. Values go out as authored, which is oklch for colours and
+ * a length for radius, so nothing here has to know which is which.
  *
- * night-dark is emitted twice: once under :root as the default, once under
+ * dark is emitted twice: once under :where(:root) as the default, once under
  * [data-theme]. Consumers that never set data-theme still get a usable page.
  */
 export const formatCss = ({ dictionary }) => {
   const byName = Object.fromEntries(dictionary.allTokens.map((t) => [t.path.join('.'), t.value]));
   const block = (theme, selector) => {
     const lines = ROLES.map((role) => {
-      const hex = byName[`color.theme.${theme}.${role}`];
-      if (!hex) throw new Error(`token source has no color.theme.${theme}.${role}`);
-      return `  --wl-${role}: ${toTriplet(hex)};`;
+      const value = byName[`color.theme.${theme}.${role}`];
+      if (!value) throw new Error(`token source has no color.theme.${theme}.${role}`);
+      return `  --wl-${role}: ${value};`;
     });
     return `${selector} {\n${lines.join('\n')}\n}`;
   };
@@ -34,7 +34,7 @@ export const formatCss = ({ dictionary }) => {
     // `:where()` carries no specificity, so this block only ever applies when
     // nothing else has an opinion. A consumer whose own default is light keeps
     // it, and does not have to win an import-order argument to do so.
-    block('night-dark', ':where(:root)'),
+    block('dark', ':where(:root)'),
     ...THEMES.map((t) => block(t, `[data-theme='${t}']`)),
     // The scale stays at full specificity. Nothing else in a consumer defines
     // --wl-* names, so there is no argument here to lose.

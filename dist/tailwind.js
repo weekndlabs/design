@@ -3,50 +3,116 @@ export default {
   "theme": {
     "extend": {
       "colors": {
-        "surface": {
-          "DEFAULT": "rgb(var(--wl-surface) / <alpha-value>)"
+        "background": {
+          "DEFAULT": "var(--wl-background)"
         },
-        "surface-panel": {
-          "DEFAULT": "rgb(var(--wl-surface-panel) / <alpha-value>)"
+        "foreground": {
+          "DEFAULT": "var(--wl-foreground)"
         },
-        "surface-sunk": {
-          "DEFAULT": "rgb(var(--wl-surface-sunk) / <alpha-value>)"
+        "card": {
+          "DEFAULT": "var(--wl-card)"
         },
-        "ink": {
-          "DEFAULT": "rgb(var(--wl-ink) / <alpha-value>)"
+        "card-foreground": {
+          "DEFAULT": "var(--wl-card-foreground)"
         },
-        "ink-soft": {
-          "DEFAULT": "rgb(var(--wl-ink-soft) / <alpha-value>)"
+        "popover": {
+          "DEFAULT": "var(--wl-popover)"
         },
-        "rule": {
-          "DEFAULT": "rgb(var(--wl-rule) / <alpha-value>)"
+        "popover-foreground": {
+          "DEFAULT": "var(--wl-popover-foreground)"
         },
-        "rule-soft": {
-          "DEFAULT": "rgb(var(--wl-rule-soft) / <alpha-value>)"
+        "primary": {
+          "DEFAULT": "var(--wl-primary)"
         },
-        "rule-strong": {
-          "DEFAULT": "rgb(var(--wl-rule-strong) / <alpha-value>)"
+        "primary-foreground": {
+          "DEFAULT": "var(--wl-primary-foreground)"
+        },
+        "secondary": {
+          "DEFAULT": "var(--wl-secondary)"
+        },
+        "secondary-foreground": {
+          "DEFAULT": "var(--wl-secondary-foreground)"
+        },
+        "muted": {
+          "DEFAULT": "var(--wl-muted)"
+        },
+        "muted-foreground": {
+          "DEFAULT": "var(--wl-muted-foreground)"
         },
         "accent": {
-          "DEFAULT": "rgb(var(--wl-accent) / <alpha-value>)"
+          "DEFAULT": "var(--wl-accent)"
         },
-        "accent-strong": {
-          "DEFAULT": "rgb(var(--wl-accent-strong) / <alpha-value>)"
+        "accent-foreground": {
+          "DEFAULT": "var(--wl-accent-foreground)"
         },
-        "inset": {
-          "DEFAULT": "rgb(var(--wl-inset) / <alpha-value>)"
+        "destructive": {
+          "DEFAULT": "var(--wl-destructive)"
         },
-        "inset-ink": {
-          "DEFAULT": "rgb(var(--wl-inset-ink) / <alpha-value>)"
+        "destructive-foreground": {
+          "DEFAULT": "var(--wl-destructive-foreground)"
         },
-        "inset-ink-dim": {
-          "DEFAULT": "rgb(var(--wl-inset-ink-dim) / <alpha-value>)"
+        "success": {
+          "DEFAULT": "var(--wl-success)"
         },
-        "positive": {
-          "DEFAULT": "rgb(var(--wl-positive) / <alpha-value>)"
+        "success-foreground": {
+          "DEFAULT": "var(--wl-success-foreground)"
         },
-        "negative": {
-          "DEFAULT": "rgb(var(--wl-negative) / <alpha-value>)"
+        "warning": {
+          "DEFAULT": "var(--wl-warning)"
+        },
+        "warning-foreground": {
+          "DEFAULT": "var(--wl-warning-foreground)"
+        },
+        "border": {
+          "DEFAULT": "var(--wl-border)"
+        },
+        "input": {
+          "DEFAULT": "var(--wl-input)"
+        },
+        "ring": {
+          "DEFAULT": "var(--wl-ring)"
+        },
+        "terminal": {
+          "DEFAULT": "var(--wl-terminal)"
+        },
+        "terminal-foreground": {
+          "DEFAULT": "var(--wl-terminal-foreground)"
+        },
+        "terminal-foreground-muted": {
+          "DEFAULT": "var(--wl-terminal-foreground-muted)"
+        },
+        "sidebar": {
+          "DEFAULT": "var(--wl-sidebar)"
+        },
+        "sidebar-foreground": {
+          "DEFAULT": "var(--wl-sidebar-foreground)"
+        },
+        "sidebar-accent": {
+          "DEFAULT": "var(--wl-sidebar-accent)"
+        },
+        "sidebar-accent-foreground": {
+          "DEFAULT": "var(--wl-sidebar-accent-foreground)"
+        },
+        "sidebar-border": {
+          "DEFAULT": "var(--wl-sidebar-border)"
+        },
+        "sidebar-ring": {
+          "DEFAULT": "var(--wl-sidebar-ring)"
+        },
+        "chart-1": {
+          "DEFAULT": "var(--wl-chart-1)"
+        },
+        "chart-2": {
+          "DEFAULT": "var(--wl-chart-2)"
+        },
+        "chart-3": {
+          "DEFAULT": "var(--wl-chart-3)"
+        },
+        "chart-4": {
+          "DEFAULT": "var(--wl-chart-4)"
+        },
+        "chart-5": {
+          "DEFAULT": "var(--wl-chart-5)"
         }
       },
       "spacing": {
@@ -62,10 +128,7 @@ export default {
         "9": "var(--wl-space-9)"
       },
       "borderRadius": {
-        "sm": "var(--wl-radius-sm)",
-        "base": "var(--wl-radius-base)",
-        "md": "var(--wl-radius-md)",
-        "lg": "var(--wl-radius-lg)",
+        "DEFAULT": "var(--wl-radius)",
         "full": "var(--wl-radius-full)"
       },
       "maxWidth": {
@@ -75,33 +138,40 @@ export default {
         "text": "var(--wl-measure-text)"
       },
       "fontSize": {
+        "label": "var(--wl-text-label)",
+        "meta": "var(--wl-text-meta)",
+        "body": "var(--wl-text-body)",
+        "lede": "var(--wl-text-lede)",
+        "heading": "var(--wl-text-heading)",
+        "subtitle": "var(--wl-text-subtitle)",
+        "title": "var(--wl-text-title)",
         "display": "var(--wl-text-display)",
         "section": "var(--wl-text-section)",
-        "lede": "var(--wl-text-lede)",
-        "body": "var(--wl-text-body)",
-        "fine": "var(--wl-text-fine)",
-        "eyebrow": "var(--wl-text-eyebrow)"
+        "hero": "var(--wl-text-hero)"
       },
       "letterSpacing": {
-        "display": "var(--wl-tracking-display)",
+        "hero": "var(--wl-tracking-hero)",
         "section": "var(--wl-tracking-section)",
-        "eyebrow": "var(--wl-tracking-eyebrow)"
+        "label": "var(--wl-tracking-label)"
       },
       "fontFamily": {
-        "night-display": "var(--wl-font-night-display)",
-        "night-body": "var(--wl-font-night-body)",
-        "night-mono": "var(--wl-font-night-mono)",
-        "receipt-display": "var(--wl-font-receipt-display)",
-        "receipt-body": "var(--wl-font-receipt-body)",
-        "receipt-mono": "var(--wl-font-receipt-mono)"
+        "ui-display": "var(--wl-font-ui-display)",
+        "ui-body": "var(--wl-font-ui-body)",
+        "ui-mono": "var(--wl-font-ui-mono)",
+        "paper-display": "var(--wl-font-paper-display)",
+        "paper-body": "var(--wl-font-paper-body)",
+        "paper-mono": "var(--wl-font-paper-mono)"
       },
       "fontWeight": {
-        "display": "var(--wl-weight-display)",
         "body": "var(--wl-weight-body)",
+        "medium": "var(--wl-weight-medium)",
+        "semibold": "var(--wl-weight-semibold)",
+        "display": "var(--wl-weight-display)",
         "mono": "var(--wl-weight-mono)"
       },
       "lineHeight": {
-        "display": "var(--wl-leading-display)",
+        "hero": "var(--wl-leading-hero)",
+        "heading": "var(--wl-leading-heading)",
         "body": "var(--wl-leading-body)",
         "mono": "var(--wl-leading-mono)"
       }

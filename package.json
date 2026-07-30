@@ -1,20 +1,23 @@
 {
   "name": "@weekndlabs/design",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Design tokens for WeekndLabs products",
   "type": "module",
   "license": "MIT AND OFL-1.1",
   "files": [
     "dist",
     "tokens",
+    "lib/typography.js",
     "README.md",
     "ABOUT.md"
   ],
   "exports": {
     "./tokens.css": "./dist/tokens.css",
+    "./shadcn.css": "./dist/shadcn.css",
     "./fonts.css": "./dist/fonts.css",
     "./fonts/*": "./dist/fonts/*",
     "./tailwind": "./dist/tailwind.js",
+    "./typography-check": "./lib/typography.js",
     ".": "./dist/tokens.js"
   },
   "publishConfig": {

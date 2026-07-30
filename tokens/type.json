@@ -1,36 +1,43 @@
 {
   "font": {
-    "night": {
+    "ui": {
       "display": { "value": "Bricolage Grotesque, system-ui, sans-serif", "type": "fontFamily" },
       "body":    { "value": "Inter, system-ui, sans-serif", "type": "fontFamily" },
       "mono":    { "value": "JetBrains Mono, ui-monospace, monospace", "type": "fontFamily" }
     },
-    "receipt": {
+    "paper": {
       "display": { "value": "IBM Plex Sans Condensed, IBM Plex Sans, system-ui, sans-serif", "type": "fontFamily" },
       "body":    { "value": "IBM Plex Sans, system-ui, sans-serif", "type": "fontFamily" },
       "mono":    { "value": "IBM Plex Mono, ui-monospace, monospace", "type": "fontFamily" }
     }
   },
   "text": {
-    "display": { "value": "clamp(2.1rem, 5.2vw, 3.9rem)", "type": "fontSize" },
-    "section": { "value": "clamp(1.55rem, 3vw, 2.3rem)", "type": "fontSize" },
-    "lede":    { "value": "1.12rem", "type": "fontSize" },
-    "body":    { "value": "1rem", "type": "fontSize" },
-    "fine":    { "value": "0.86rem", "type": "fontSize" },
-    "eyebrow": { "value": "0.72rem", "type": "fontSize" }
+    "label":    { "value": "0.6875rem", "type": "fontSize" },
+    "meta":     { "value": "0.8125rem", "type": "fontSize" },
+    "body":     { "value": "0.9375rem", "type": "fontSize" },
+    "lede":     { "value": "1.125rem", "type": "fontSize" },
+    "heading":  { "value": "1.125rem", "type": "fontSize" },
+    "subtitle": { "value": "1.25rem", "type": "fontSize" },
+    "title":    { "value": "1.5rem", "type": "fontSize" },
+    "display":  { "value": "2rem", "type": "fontSize" },
+    "section":  { "value": "clamp(1.55rem, 3vw, 2.3rem)", "type": "fontSize" },
+    "hero":     { "value": "clamp(2.1rem, 5.2vw, 3.9rem)", "type": "fontSize" }
   },
   "tracking": {
-    "display": { "value": "-0.03em", "type": "letterSpacing" },
+    "hero":    { "value": "-0.03em", "type": "letterSpacing" },
     "section": { "value": "-0.015em", "type": "letterSpacing" },
-    "eyebrow": { "value": "0.14em", "type": "letterSpacing" }
+    "label":   { "value": "0.14em", "type": "letterSpacing" }
   },
   "weight": {
-    "display": { "value": "700", "type": "fontWeight" },
-    "body":    { "value": "400", "type": "fontWeight" },
-    "mono":    { "value": "400", "type": "fontWeight" }
+    "body":     { "value": "400", "type": "fontWeight" },
+    "medium":   { "value": "500", "type": "fontWeight" },
+    "semibold": { "value": "600", "type": "fontWeight" },
+    "display":  { "value": "700", "type": "fontWeight" },
+    "mono":     { "value": "400", "type": "fontWeight" }
   },
   "leading": {
-    "display": { "value": "1.15", "type": "lineHeight" },
+    "hero":    { "value": "1.15", "type": "lineHeight" },
+    "heading": { "value": "1.25", "type": "lineHeight" },
     "body":    { "value": "1.6", "type": "lineHeight" },
     "mono":    { "value": "1.7", "type": "lineHeight" }
   }

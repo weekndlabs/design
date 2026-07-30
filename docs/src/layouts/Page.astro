@@ -17,7 +17,7 @@ const { title } = Astro.props;
 // is why the OS preference is the fallback rather than a hardcoded default.
 const themeScript = `(function(){var t=null;try{t=localStorage.getItem('theme')}catch(e){}
 var dark=t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;
-document.documentElement.dataset.theme=dark?'night-dark':'night-light'})()`;
+document.documentElement.dataset.theme=dark?'dark':'light'})()`;
 ---
 <!doctype html>
 <html lang="en">
@@ -44,13 +44,13 @@ document.documentElement.dataset.theme=dark?'night-dark':'night-light'})()`;
 
       /* Scrollbars and form controls follow the theme rather than staying dark
          on a light page. */
-      html[data-theme='night-dark'] { color-scheme: dark; }
-      html[data-theme='night-light'] { color-scheme: light; }
+      html[data-theme='dark'] { color-scheme: dark; }
+      html[data-theme='light'] { color-scheme: light; }
 
       body {
-        background: rgb(var(--wl-surface));
-        color: rgb(var(--wl-ink));
-        font-family: var(--wl-font-night-body);
+        background: var(--wl-background);
+        color: var(--wl-foreground);
+        font-family: var(--wl-font-ui-body);
         font-size: 16px;
         font-weight: var(--wl-weight-body);
         line-height: var(--wl-leading-body);
@@ -67,13 +67,13 @@ document.documentElement.dataset.theme=dark?'night-dark':'night-light'})()`;
          700 and 800, so a browser deciding "bold" for itself is a browser
          picking a weight the font may not have. */
       h1, h2, h3 {
-        font-family: var(--wl-font-night-display);
+        font-family: var(--wl-font-ui-display);
         font-weight: var(--wl-weight-display);
         letter-spacing: var(--wl-tracking-section);
-        line-height: var(--wl-leading-display);
+        line-height: var(--wl-leading-hero);
       }
 
-      code, .mono { font-family: var(--wl-font-night-mono); }
+      code, .mono { font-family: var(--wl-font-ui-mono); }
 
       /* `width: 100%` is load-bearing. main is a flex item of the body column,
          and an auto horizontal margin cancels the stretch that would otherwise
@@ -88,16 +88,16 @@ document.documentElement.dataset.theme=dark?'night-dark':'night-light'})()`;
       }
 
       .eyebrow {
-        font-size: var(--wl-text-eyebrow);
-        letter-spacing: var(--wl-tracking-eyebrow);
+        font-size: var(--wl-text-label);
+        letter-spacing: var(--wl-tracking-label);
         text-transform: uppercase;
-        color: rgb(var(--wl-ink-soft));
+        color: var(--wl-muted-foreground);
       }
 
-      a { color: rgb(var(--wl-accent)); }
+      a { color: var(--wl-primary); }
 
       a:focus-visible, button:focus-visible {
-        outline: 2px solid rgb(var(--wl-accent));
+        outline: 2px solid var(--wl-primary);
         outline-offset: 3px;
       }
 
@@ -106,9 +106,9 @@ document.documentElement.dataset.theme=dark?'night-dark':'night-light'})()`;
         position: absolute;
         left: var(--wl-space-5);
         top: calc(var(--wl-space-5) * -4);
-        background: rgb(var(--wl-surface-panel));
-        border: 1px solid rgb(var(--wl-rule));
-        border-radius: var(--wl-radius-md);
+        background: var(--wl-card);
+        border: 1px solid var(--wl-border);
+        border-radius: var(--wl-radius);
         padding: var(--wl-space-2) var(--wl-space-4);
         z-index: 1;
       }
@@ -130,12 +130,12 @@ document.documentElement.dataset.theme=dark?'night-dark':'night-light'})()`;
     <script is:inline>
       document.getElementById('theme-toggle')?.addEventListener('click', function () {
         var root = document.documentElement;
-        var next = root.dataset.theme === 'night-dark' ? 'night-light' : 'night-dark';
+        var next = root.dataset.theme === 'dark' ? 'light' : 'dark';
         root.dataset.theme = next;
         // Stored as 'light'/'dark' rather than the theme name, so a visitor who
         // toggles here and walks back to weekndlabs.com keeps the same choice.
         try {
-          localStorage.setItem('theme', next === 'night-dark' ? 'dark' : 'light');
+          localStorage.setItem('theme', next === 'dark' ? 'dark' : 'light');
         } catch (e) {
           // Safari private mode throws. The theme still applies to this page.
         }
