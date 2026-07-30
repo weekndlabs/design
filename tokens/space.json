@@ -12,10 +12,6 @@
     "9": { "value": "96px", "type": "spacing" }
   },
   "radius": {
-    "sm":   { "value": "2px", "type": "borderRadius" },
-    "base": { "value": "3px", "type": "borderRadius" },
-    "md":   { "value": "4px", "type": "borderRadius" },
-    "lg":   { "value": "5px", "type": "borderRadius" },
     "full": { "value": "9999px", "type": "borderRadius" }
   },
   "measure": {
