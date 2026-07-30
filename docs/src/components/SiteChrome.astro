@@ -90,8 +90,8 @@ const HOME = 'https://weekndlabs.com';
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgb(var(--wl-surface));
-    border-bottom: 1px solid rgb(var(--wl-rule));
+    background: var(--wl-background);
+    border-bottom: 1px solid var(--wl-border);
   }
   .bar-inner {
     max-width: var(--wl-measure-page);
@@ -108,25 +108,25 @@ const HOME = 'https://weekndlabs.com';
     display: flex;
     align-items: center;
     gap: 10px;
-    font-family: var(--wl-font-night-display);
+    font-family: var(--wl-font-ui-display);
     font-weight: var(--wl-weight-display);
     font-size: 1.125rem;
-    color: rgb(var(--wl-ink));
+    color: var(--wl-foreground);
     text-decoration: none;
   }
-  .brand:hover { color: rgb(var(--wl-accent)); }
-  .brand img { border-radius: var(--wl-radius-md); }
+  .brand:hover { color: var(--wl-primary); }
+  .brand img { border-radius: var(--wl-radius); }
 
   .links { display: none; gap: var(--wl-space-6); align-items: center; }
   .links a, .links .current {
-    font-family: var(--wl-font-night-mono);
-    font-size: var(--wl-text-fine);
+    font-family: var(--wl-font-ui-mono);
+    font-size: var(--wl-text-meta);
     text-decoration: none;
   }
   .links a, .links .current { border-bottom: 1px solid transparent; }
-  .links a { color: rgb(var(--wl-ink-soft)); }
-  .links a:hover { color: rgb(var(--wl-ink)); border-bottom-color: rgb(var(--wl-rule)); }
-  .links .current { color: rgb(var(--wl-accent)); border-bottom-color: rgb(var(--wl-accent)); }
+  .links a { color: var(--wl-muted-foreground); }
+  .links a:hover { color: var(--wl-foreground); border-bottom-color: var(--wl-border); }
+  .links .current { color: var(--wl-primary); border-bottom-color: var(--wl-primary); }
 
   .actions { display: flex; align-items: center; gap: var(--wl-space-3); }
 
@@ -137,17 +137,17 @@ const HOME = 'https://weekndlabs.com';
     align-items: center;
     justify-content: center;
     background: none;
-    border: 1px solid rgb(var(--wl-rule));
-    border-radius: var(--wl-radius-sm);
-    color: rgb(var(--wl-ink-soft));
+    border: 1px solid var(--wl-border);
+    border-radius: var(--wl-radius);
+    color: var(--wl-muted-foreground);
     cursor: pointer;
   }
-  #theme-toggle:hover { border-color: rgb(var(--wl-accent)); color: rgb(var(--wl-accent)); }
+  #theme-toggle:hover { border-color: var(--wl-primary); color: var(--wl-primary); }
   /* One icon per theme. Which one shows is decided by data-theme rather than by
      script, so the button is never briefly wrong or briefly empty. */
   .icon-sun, .icon-moon { display: none; }
-  :global(html[data-theme='night-dark']) .icon-sun { display: block; }
-  :global(html[data-theme='night-light']) .icon-moon { display: block; }
+  :global(html[data-theme='dark']) .icon-sun { display: block; }
+  :global(html[data-theme='light']) .icon-moon { display: block; }
 
   .btn {
     display: none;
@@ -155,33 +155,33 @@ const HOME = 'https://weekndlabs.com';
     justify-content: center;
     /* A thumb-sized tap target, the same 44px floor weekndlabs.com sets. */
     min-height: 44px;
-    font-family: var(--wl-font-night-mono);
-    font-size: var(--wl-text-fine);
+    font-family: var(--wl-font-ui-mono);
+    font-size: var(--wl-text-meta);
     text-transform: uppercase;
     padding: 10px var(--wl-space-5);
     border: 1px solid;
-    border-radius: var(--wl-radius-sm);
+    border-radius: var(--wl-radius);
     text-decoration: none;
   }
   .btn.filled {
-    background: rgb(var(--wl-accent));
-    border-color: rgb(var(--wl-accent));
-    color: rgb(var(--wl-surface));
+    background: var(--wl-primary);
+    border-color: var(--wl-primary);
+    color: var(--wl-background);
   }
   .btn.filled:hover {
-    background: rgb(var(--wl-accent-strong));
-    border-color: rgb(var(--wl-accent-strong));
+    background: color-mix(in oklch, var(--wl-primary) 85%, var(--wl-foreground));
+    border-color: color-mix(in oklch, var(--wl-primary) 85%, var(--wl-foreground));
   }
   .btn.outlined {
     background: transparent;
-    border-color: rgb(var(--wl-rule));
-    color: rgb(var(--wl-ink));
+    border-color: var(--wl-border);
+    color: var(--wl-foreground);
   }
-  .btn.outlined:hover { border-color: rgb(var(--wl-accent)); color: rgb(var(--wl-accent)); }
+  .btn.outlined:hover { border-color: var(--wl-primary); color: var(--wl-primary); }
 
   .foot {
-    border-top: 1px solid rgb(var(--wl-rule));
-    background: rgb(var(--wl-surface));
+    border-top: 1px solid var(--wl-border);
+    background: var(--wl-background);
     margin-top: var(--wl-space-9);
     padding: var(--wl-space-7) 0;
   }
@@ -195,11 +195,11 @@ const HOME = 'https://weekndlabs.com';
     gap: var(--wl-space-5);
     text-align: center;
   }
-  .foot p, .foot a { font-size: var(--wl-text-fine); color: rgb(var(--wl-ink-soft)); }
+  .foot p, .foot a { font-size: var(--wl-text-meta); color: var(--wl-muted-foreground); }
   .foot-links { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--wl-space-5); }
   .foot-links a { text-decoration: none; }
-  .foot-links a:hover { color: rgb(var(--wl-ink)); }
-  .foot-links a.sponsor { color: rgb(var(--wl-accent)); }
+  .foot-links a:hover { color: var(--wl-foreground); }
+  .foot-links a.sponsor { color: var(--wl-primary); }
 
   .menu summary {
     height: 36px;
@@ -207,16 +207,16 @@ const HOME = 'https://weekndlabs.com';
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgb(var(--wl-rule));
-    border-radius: var(--wl-radius-sm);
-    color: rgb(var(--wl-ink-soft));
+    border: 1px solid var(--wl-border);
+    border-radius: var(--wl-radius);
+    color: var(--wl-muted-foreground);
     cursor: pointer;
     /* Kill the disclosure triangle in both engines. */
     list-style: none;
   }
   .menu summary::-webkit-details-marker { display: none; }
-  .menu summary:hover { border-color: rgb(var(--wl-accent)); color: rgb(var(--wl-accent)); }
-  .menu summary:focus-visible { outline: 2px solid rgb(var(--wl-accent)); outline-offset: 3px; }
+  .menu summary:hover { border-color: var(--wl-primary); color: var(--wl-primary); }
+  .menu summary:focus-visible { outline: 2px solid var(--wl-primary); outline-offset: 3px; }
   .icon-close { display: none; }
   .menu[open] .icon-menu { display: none; }
   .menu[open] .icon-close { display: block; }
@@ -227,22 +227,22 @@ const HOME = 'https://weekndlabs.com';
     top: 100%;
     left: 0;
     right: 0;
-    background: rgb(var(--wl-surface-panel));
-    border-bottom: 1px solid rgb(var(--wl-rule));
+    background: var(--wl-card);
+    border-bottom: 1px solid var(--wl-border);
     padding: var(--wl-space-1) var(--wl-space-5) var(--wl-space-4);
     display: flex;
     flex-direction: column;
   }
   .panel a, .panel .current {
-    font-family: var(--wl-font-night-mono);
-    font-size: var(--wl-text-fine);
+    font-family: var(--wl-font-ui-mono);
+    font-size: var(--wl-text-meta);
     text-decoration: none;
     padding: 14px 0;
-    border-bottom: 1px solid rgb(var(--wl-rule-soft));
+    border-bottom: 1px solid color-mix(in oklch, var(--wl-border) 60%, var(--wl-background));
   }
-  .panel a { color: rgb(var(--wl-ink)); }
-  .panel a:active { color: rgb(var(--wl-accent)); }
-  .panel .current { color: rgb(var(--wl-accent)); }
+  .panel a { color: var(--wl-foreground); }
+  .panel a:active { color: var(--wl-primary); }
+  .panel .current { color: var(--wl-primary); }
   /* The buttons below bring their own top rule, so the last link drops its
      bottom one instead of drawing a second line beside it. */
   .panel > a:last-of-type { border-bottom: none; }
@@ -251,7 +251,7 @@ const HOME = 'https://weekndlabs.com';
     height: 1px;
     width: 32px;
     margin-top: var(--wl-space-2);
-    background: rgb(var(--wl-accent));
+    background: var(--wl-primary);
   }
   .panel-actions {
     display: flex;
@@ -259,7 +259,7 @@ const HOME = 'https://weekndlabs.com';
     gap: var(--wl-space-3);
     margin-top: var(--wl-space-4);
     padding-top: var(--wl-space-4);
-    border-top: 1px solid rgb(var(--wl-rule));
+    border-top: 1px solid var(--wl-border);
   }
   .panel-actions .btn { display: inline-flex; width: 100%; }
 

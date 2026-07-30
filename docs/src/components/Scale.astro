@@ -41,24 +41,24 @@ const flat = flatten({ ...space, ...type_ });
   .table { margin-top: var(--wl-space-7); }
   h2 { font-size: var(--wl-text-section); margin-bottom: var(--wl-space-3); }
   .note {
-    color: rgb(var(--wl-ink-soft));
-    font-size: var(--wl-text-fine);
+    color: var(--wl-muted-foreground);
+    font-size: var(--wl-text-meta);
     max-width: var(--wl-measure-text);
     margin-bottom: var(--wl-space-4);
   }
   .scroll { overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; font-size: var(--wl-text-fine); }
+  table { width: 100%; border-collapse: collapse; font-size: var(--wl-text-meta); }
   th, td {
     text-align: left;
     padding: var(--wl-space-2) var(--wl-space-3);
-    border-bottom: 1px solid rgb(var(--wl-rule));
+    border-bottom: 1px solid var(--wl-border);
     white-space: nowrap;
   }
   thead th {
-    font-size: var(--wl-text-eyebrow);
-    letter-spacing: var(--wl-tracking-eyebrow);
+    font-size: var(--wl-text-label);
+    letter-spacing: var(--wl-tracking-label);
     text-transform: uppercase;
-    color: rgb(var(--wl-ink-soft));
+    color: var(--wl-muted-foreground);
     font-weight: var(--wl-weight-body);
   }
   tbody th { font-weight: var(--wl-weight-mono); }
