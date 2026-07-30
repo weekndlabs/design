@@ -24,16 +24,23 @@ export async function faces() {
   );
 
   const seen = new Map();
+  // A body face is needed at every UI weight, because shadcn asks for medium and
+  // semibold on controls and a missing weight is a silent fallback to 400.
+  // Display and mono keep the single weight their role names give them.
+  const bodyWeights = ['body', 'medium', 'semibold'].map((r) => weightFor[r]).filter(Boolean);
+
   for (const token of scale.filter((t) => t.path[0] === 'font')) {
     const role = token.path[2];
-    const weight = weightFor[role];
-    if (!weight) throw new Error(`font.${token.path.slice(1).join('.')} has no weight.${role}`);
+    const weights = role === 'body' ? bodyWeights : [weightFor[role]];
+    for (const weight of weights) {
+      if (!weight) throw new Error(`font.${token.path.slice(1).join('.')} has no weight.${role}`);
 
-    const family = firstFamily(token.value);
-    const pkg = packageName(family);
-    // night and receipt share no families today, but two stacks naming the
-    // same one would otherwise copy it twice.
-    seen.set(`${pkg}-${weight}`, { family, pkg, weight });
+      const family = firstFamily(token.value);
+      const pkg = packageName(family);
+      // ui and paper share no families today, but two stacks naming the same one
+      // would otherwise copy it twice.
+      seen.set(`${pkg}-${weight}`, { family, pkg, weight });
+    }
   }
   return [...seen.values()];
 }
@@ -73,6 +80,13 @@ export async function buildFonts() {
         '   in dist/fonts/ next to the file it covers. */',
       ].join('\n'),
       ...declarations,
+      [
+        ':root {',
+        '  /* Inter character variants: a straight-sided a, a single-storey g,',
+        '     open digits. A decision about the typeface, so it ships with it. */',
+        '  font-feature-settings: "cv02", "cv03", "cv04", "cv11";',
+        '}',
+      ].join('\n'),
       '',
     ].join('\n\n')
   );
