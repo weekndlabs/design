@@ -4,118 +4,115 @@ export default {
     "extend": {
       "colors": {
         "background": {
-          "DEFAULT": "rgb(var(--wl-background) / <alpha-value>)"
+          "DEFAULT": "var(--wl-background)"
         },
         "foreground": {
-          "DEFAULT": "rgb(var(--wl-foreground) / <alpha-value>)"
+          "DEFAULT": "var(--wl-foreground)"
         },
         "card": {
-          "DEFAULT": "rgb(var(--wl-card) / <alpha-value>)"
+          "DEFAULT": "var(--wl-card)"
         },
         "card-foreground": {
-          "DEFAULT": "rgb(var(--wl-card-foreground) / <alpha-value>)"
+          "DEFAULT": "var(--wl-card-foreground)"
         },
         "popover": {
-          "DEFAULT": "rgb(var(--wl-popover) / <alpha-value>)"
+          "DEFAULT": "var(--wl-popover)"
         },
         "popover-foreground": {
-          "DEFAULT": "rgb(var(--wl-popover-foreground) / <alpha-value>)"
+          "DEFAULT": "var(--wl-popover-foreground)"
         },
         "primary": {
-          "DEFAULT": "rgb(var(--wl-primary) / <alpha-value>)"
+          "DEFAULT": "var(--wl-primary)"
         },
         "primary-foreground": {
-          "DEFAULT": "rgb(var(--wl-primary-foreground) / <alpha-value>)"
+          "DEFAULT": "var(--wl-primary-foreground)"
         },
         "secondary": {
-          "DEFAULT": "rgb(var(--wl-secondary) / <alpha-value>)"
+          "DEFAULT": "var(--wl-secondary)"
         },
         "secondary-foreground": {
-          "DEFAULT": "rgb(var(--wl-secondary-foreground) / <alpha-value>)"
+          "DEFAULT": "var(--wl-secondary-foreground)"
         },
         "muted": {
-          "DEFAULT": "rgb(var(--wl-muted) / <alpha-value>)"
+          "DEFAULT": "var(--wl-muted)"
         },
         "muted-foreground": {
-          "DEFAULT": "rgb(var(--wl-muted-foreground) / <alpha-value>)"
+          "DEFAULT": "var(--wl-muted-foreground)"
         },
         "accent": {
-          "DEFAULT": "rgb(var(--wl-accent) / <alpha-value>)"
+          "DEFAULT": "var(--wl-accent)"
         },
         "accent-foreground": {
-          "DEFAULT": "rgb(var(--wl-accent-foreground) / <alpha-value>)"
+          "DEFAULT": "var(--wl-accent-foreground)"
         },
         "destructive": {
-          "DEFAULT": "rgb(var(--wl-destructive) / <alpha-value>)"
+          "DEFAULT": "var(--wl-destructive)"
         },
         "destructive-foreground": {
-          "DEFAULT": "rgb(var(--wl-destructive-foreground) / <alpha-value>)"
+          "DEFAULT": "var(--wl-destructive-foreground)"
         },
         "success": {
-          "DEFAULT": "rgb(var(--wl-success) / <alpha-value>)"
+          "DEFAULT": "var(--wl-success)"
         },
         "success-foreground": {
-          "DEFAULT": "rgb(var(--wl-success-foreground) / <alpha-value>)"
+          "DEFAULT": "var(--wl-success-foreground)"
         },
         "warning": {
-          "DEFAULT": "rgb(var(--wl-warning) / <alpha-value>)"
+          "DEFAULT": "var(--wl-warning)"
         },
         "warning-foreground": {
-          "DEFAULT": "rgb(var(--wl-warning-foreground) / <alpha-value>)"
+          "DEFAULT": "var(--wl-warning-foreground)"
         },
         "border": {
-          "DEFAULT": "rgb(var(--wl-border) / <alpha-value>)"
+          "DEFAULT": "var(--wl-border)"
         },
         "input": {
-          "DEFAULT": "rgb(var(--wl-input) / <alpha-value>)"
+          "DEFAULT": "var(--wl-input)"
         },
         "ring": {
-          "DEFAULT": "rgb(var(--wl-ring) / <alpha-value>)"
+          "DEFAULT": "var(--wl-ring)"
         },
         "terminal": {
-          "DEFAULT": "rgb(var(--wl-terminal) / <alpha-value>)"
+          "DEFAULT": "var(--wl-terminal)"
         },
         "terminal-foreground": {
-          "DEFAULT": "rgb(var(--wl-terminal-foreground) / <alpha-value>)"
+          "DEFAULT": "var(--wl-terminal-foreground)"
         },
         "terminal-foreground-muted": {
-          "DEFAULT": "rgb(var(--wl-terminal-foreground-muted) / <alpha-value>)"
+          "DEFAULT": "var(--wl-terminal-foreground-muted)"
         },
         "sidebar": {
-          "DEFAULT": "rgb(var(--wl-sidebar) / <alpha-value>)"
+          "DEFAULT": "var(--wl-sidebar)"
         },
         "sidebar-foreground": {
-          "DEFAULT": "rgb(var(--wl-sidebar-foreground) / <alpha-value>)"
+          "DEFAULT": "var(--wl-sidebar-foreground)"
         },
         "sidebar-accent": {
-          "DEFAULT": "rgb(var(--wl-sidebar-accent) / <alpha-value>)"
+          "DEFAULT": "var(--wl-sidebar-accent)"
         },
         "sidebar-accent-foreground": {
-          "DEFAULT": "rgb(var(--wl-sidebar-accent-foreground) / <alpha-value>)"
+          "DEFAULT": "var(--wl-sidebar-accent-foreground)"
         },
         "sidebar-border": {
-          "DEFAULT": "rgb(var(--wl-sidebar-border) / <alpha-value>)"
+          "DEFAULT": "var(--wl-sidebar-border)"
         },
         "sidebar-ring": {
-          "DEFAULT": "rgb(var(--wl-sidebar-ring) / <alpha-value>)"
+          "DEFAULT": "var(--wl-sidebar-ring)"
         },
         "chart-1": {
-          "DEFAULT": "rgb(var(--wl-chart-1) / <alpha-value>)"
+          "DEFAULT": "var(--wl-chart-1)"
         },
         "chart-2": {
-          "DEFAULT": "rgb(var(--wl-chart-2) / <alpha-value>)"
+          "DEFAULT": "var(--wl-chart-2)"
         },
         "chart-3": {
-          "DEFAULT": "rgb(var(--wl-chart-3) / <alpha-value>)"
+          "DEFAULT": "var(--wl-chart-3)"
         },
         "chart-4": {
-          "DEFAULT": "rgb(var(--wl-chart-4) / <alpha-value>)"
+          "DEFAULT": "var(--wl-chart-4)"
         },
         "chart-5": {
-          "DEFAULT": "rgb(var(--wl-chart-5) / <alpha-value>)"
-        },
-        "radius": {
-          "DEFAULT": "rgb(var(--wl-radius) / <alpha-value>)"
+          "DEFAULT": "var(--wl-chart-5)"
         }
       },
       "spacing": {
@@ -131,6 +128,7 @@ export default {
         "9": "var(--wl-space-9)"
       },
       "borderRadius": {
+        "DEFAULT": "var(--wl-radius)",
         "full": "var(--wl-radius-full)"
       },
       "maxWidth": {

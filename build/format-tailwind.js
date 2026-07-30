@@ -2,12 +2,15 @@ import { ROLES } from '../lib/tokens.js';
 
 /**
  * Tailwind preset. Colours resolve through the CSS variables so a consumer
- * switching data-theme restyles without a rebuild, and the alpha slot keeps
- * modifiers such as border-accent/30 working.
+ * switching data-theme restyles without a rebuild.
+ *
+ * No `<alpha-value>` slot: the variables hold real oklch colours now, so there is
+ * nothing to splice into an rgb() wrapper. Tailwind v4 resolves `bg-primary/30`
+ * through color-mix() on the real colour instead.
  */
 export const formatTailwind = ({ dictionary }) => {
   const colors = Object.fromEntries(
-    ROLES.map((role) => [role, { DEFAULT: `rgb(var(--wl-${role}) / <alpha-value>)` }])
+    ROLES.filter((r) => r !== 'radius').map((role) => [role, { DEFAULT: `var(--wl-${role})` }])
   );
   const group = (prefix) =>
     Object.fromEntries(
@@ -19,7 +22,8 @@ export const formatTailwind = ({ dictionary }) => {
   const extend = {
     colors,
     spacing: group('space'),
-    borderRadius: group('radius'),
+    // DEFAULT is the per-theme ladder, `full` the shared pill.
+    borderRadius: { DEFAULT: 'var(--wl-radius)', ...group('radius') },
     maxWidth: group('measure'),
     fontSize: group('text'),
     letterSpacing: group('tracking'),
