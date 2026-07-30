@@ -1,0 +1,167 @@
+---
+/**
+ * shadcn/ui components, styled by nothing but this system's tokens.
+ *
+ * The class strings are shadcn `new-york`'s own, written as markup because this
+ * site is Astro and shadcn ships React. Copying the classes rather than the
+ * components is the point: if `bg-primary text-primary-foreground` produces the
+ * right button here, it produces the right button in forgepod, and the bridge is
+ * what proves it.
+ *
+ * Rendered once per theme by the page, so a role that only works on one
+ * background cannot hide.
+ */
+---
+<div class="flex flex-col gap-8">
+  <section>
+    <h4 class="mb-3 text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-muted-foreground">Button</h4>
+    <div class="flex flex-wrap items-center gap-2">
+      <button class="inline-flex h-9 items-center justify-center gap-2 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none">
+        Deploy
+      </button>
+      <button class="inline-flex h-9 items-center justify-center gap-2 rounded-md bg-secondary px-4 text-sm font-medium text-secondary-foreground transition-colors hover:bg-secondary/80 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none">
+        Secondary
+      </button>
+      <button class="inline-flex h-9 items-center justify-center gap-2 rounded-md border border-input bg-background px-4 text-sm font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none">
+        Outline
+      </button>
+      <button class="inline-flex h-9 items-center justify-center gap-2 rounded-md px-4 text-sm font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none">
+        Ghost
+      </button>
+      <button class="inline-flex h-9 items-center justify-center gap-2 rounded-md bg-destructive px-4 text-sm font-medium text-destructive-foreground shadow-sm transition-colors hover:bg-destructive/90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none">
+        Delete
+      </button>
+      <button disabled class="inline-flex h-9 items-center justify-center gap-2 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground opacity-50 shadow-sm">
+        Disabled
+      </button>
+    </div>
+  </section>
+
+  <section>
+    <h4 class="mb-3 text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-muted-foreground">Badge</h4>
+    <div class="flex flex-wrap items-center gap-2">
+      <span class="inline-flex items-center rounded-full bg-primary px-2.5 py-0.5 text-xs font-semibold text-primary-foreground">Default</span>
+      <span class="inline-flex items-center rounded-full bg-secondary px-2.5 py-0.5 text-xs font-semibold text-secondary-foreground">Secondary</span>
+      <span class="inline-flex items-center rounded-full bg-destructive px-2.5 py-0.5 text-xs font-semibold text-destructive-foreground">Error</span>
+      <span class="inline-flex items-center rounded-full bg-success px-2.5 py-0.5 text-xs font-semibold text-success-foreground">Passing</span>
+      <span class="inline-flex items-center rounded-full bg-warning px-2.5 py-0.5 text-xs font-semibold text-warning-foreground">Warning</span>
+      <span class="inline-flex items-center rounded-full border border-border px-2.5 py-0.5 text-xs font-semibold text-foreground">Outline</span>
+      {/* The tinted variant every dashboard reaches for. No token of its own:
+          the colour is derived from primary, which is what holding a real oklch
+          colour buys. */}
+      <span class="inline-flex items-center rounded-full border border-primary/20 bg-primary/12 px-2.5 py-0.5 text-xs font-semibold text-primary">Derived</span>
+    </div>
+  </section>
+
+  <section>
+    <h4 class="mb-3 text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-muted-foreground">Input</h4>
+    <div class="flex max-w-sm flex-col gap-2">
+      <label class="text-sm font-medium text-foreground" for="showcase-email">Email</label>
+      <input
+        id="showcase-email"
+        type="email"
+        placeholder="you@weekndlabs.com"
+        class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm text-foreground shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+      />
+      <p class="text-[0.8125rem] text-muted-foreground">We never send anything. There is nothing to send.</p>
+    </div>
+  </section>
+
+  <section>
+    <h4 class="mb-3 text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-muted-foreground">Card</h4>
+    <div class="rounded-lg border border-border bg-card text-card-foreground shadow-sm">
+      <div class="flex flex-col gap-1.5 p-6">
+        <h5 class="text-lg font-semibold leading-tight">Token coverage</h5>
+        <p class="text-[0.8125rem] text-muted-foreground">Every role, measured on the surface it sits on.</p>
+      </div>
+      <div class="px-6 pb-4">
+        <p class="text-sm">Fourteen contrast pairs, derived from the role names so none can be forgotten.</p>
+      </div>
+      <div class="flex items-center gap-2 border-t border-border px-6 py-4">
+        <button class="inline-flex h-8 items-center rounded-md bg-primary px-3 text-[0.8125rem] font-medium text-primary-foreground">Run the gate</button>
+        <button class="inline-flex h-8 items-center rounded-md px-3 text-[0.8125rem] font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground">Later</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h4 class="mb-3 text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-muted-foreground">Alert</h4>
+    <div class="flex flex-col gap-2">
+      <div class="rounded-lg border border-border bg-card px-4 py-3 text-card-foreground">
+        <h5 class="mb-1 text-sm font-medium">Heads up</h5>
+        <p class="text-[0.8125rem] text-muted-foreground">This theme sets its own corner radius.</p>
+      </div>
+      <div class="rounded-lg border border-destructive/40 bg-destructive/10 px-4 py-3">
+        <h5 class="mb-1 text-sm font-medium text-destructive">Contrast failed</h5>
+        <p class="text-[0.8125rem] text-destructive/90">primary-foreground on primary = 1.27:1, need 4.5.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h4 class="mb-3 text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-muted-foreground">Table</h4>
+    <div class="overflow-x-auto rounded-lg border border-border">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-border bg-muted/50">
+            <th class="px-4 py-2 text-left text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-muted-foreground">Theme</th>
+            <th class="px-4 py-2 text-left text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-muted-foreground">Radius</th>
+            <th class="px-4 py-2 text-left text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-muted-foreground">State</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-border">
+            <td class="px-4 py-2 font-medium">light</td>
+            <td class="px-4 py-2 text-muted-foreground">10px</td>
+            <td class="px-4 py-2"><span class="inline-flex items-center rounded-full bg-success px-2 py-0.5 text-xs font-semibold text-success-foreground">pass</span></td>
+          </tr>
+          <tr class="border-b border-border">
+            <td class="px-4 py-2 font-medium">dark</td>
+            <td class="px-4 py-2 text-muted-foreground">10px</td>
+            <td class="px-4 py-2"><span class="inline-flex items-center rounded-full bg-success px-2 py-0.5 text-xs font-semibold text-success-foreground">pass</span></td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 font-medium">paper</td>
+            <td class="px-4 py-2 text-muted-foreground">3px</td>
+            <td class="px-4 py-2"><span class="inline-flex items-center rounded-full bg-success px-2 py-0.5 text-xs font-semibold text-success-foreground">pass</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h4 class="mb-3 text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-muted-foreground">Sidebar, skeleton, charts</h4>
+    <div class="grid gap-3 sm:grid-cols-2">
+      <nav class="rounded-lg border border-sidebar-border bg-sidebar p-2 text-sidebar-foreground">
+        <a class="flex items-center rounded-md bg-sidebar-accent px-3 py-2 text-sm font-medium text-sidebar-accent-foreground" href="#">Overview</a>
+        <a class="flex items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-sidebar-accent hover:text-sidebar-accent-foreground" href="#">Tokens</a>
+        <a class="flex items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-sidebar-accent hover:text-sidebar-accent-foreground" href="#">Contrast</a>
+      </nav>
+      <div class="flex flex-col gap-3">
+        <div class="flex flex-col gap-2">
+          <div class="h-4 w-3/4 animate-pulse rounded-md bg-muted"></div>
+          <div class="h-4 w-1/2 animate-pulse rounded-md bg-muted"></div>
+        </div>
+        {/* Five series, separated by hue rather than lightness, which is why the
+            gate measures degrees here and not a contrast ratio. */}
+        <div class="flex h-16 items-end gap-1.5">
+          <div class="w-6 rounded-t-sm bg-chart-1" style="height: 100%"></div>
+          <div class="w-6 rounded-t-sm bg-chart-2" style="height: 72%"></div>
+          <div class="w-6 rounded-t-sm bg-chart-3" style="height: 58%"></div>
+          <div class="w-6 rounded-t-sm bg-chart-4" style="height: 41%"></div>
+          <div class="w-6 rounded-t-sm bg-chart-5" style="height: 30%"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h4 class="mb-3 text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-muted-foreground">Terminal</h4>
+    {/* Identical in every theme on purpose. A terminal is a terminal regardless
+        of the page around it. */}
+    <pre class="overflow-x-auto rounded-md bg-terminal p-3 text-xs leading-relaxed text-terminal-foreground"><code>$ npm test
+<span class="text-terminal-foreground-muted"># pass 48
+# fail 0</span></code></pre>
+  </section>
+</div>
