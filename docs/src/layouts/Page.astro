@@ -35,8 +35,10 @@ document.documentElement.dataset.theme=dark?'dark':'light'})()`;
     <link rel="apple-touch-icon" href="https://weekndlabs.com/apple-icon.png" type="image/png" sizes="180x180" />
     <meta name="description" content="Design tokens for WeekndLabs products. One grammar, three faces." />
     {/* weekndlabs.com proxies this site at /design, so the same HTML answers on
-        two hosts. Name the one that actually serves it. */}
-    <link rel="canonical" href={new URL(Astro.url.pathname, 'https://design.weekndlabs.com').href} />
+        two hosts and exactly one of them can be the indexable one. The host is
+        not written here: it comes from `site` in astro.config.mjs, which the
+        sitemap is also generated from, so the two can never disagree. */}
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />
     <style is:global>
       @import '../../../dist/tokens.css';
 

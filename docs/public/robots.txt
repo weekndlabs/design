@@ -1,0 +1,46 @@
+# robots.txt applies per host, and this site answers on two of them.
+#
+# weekndlabs.com is behind Cloudflare, which injects a managed block list for AI
+# training crawlers. design.weekndlabs.com is served by Vercel directly, so none
+# of that reached it and this host answered 404 to /robots.txt, which means allow
+# everything. The main site's policy was not being applied here at all.
+#
+# This file states the same policy by hand. It will drift: Cloudflare maintains
+# its list and adds agents over time, and nothing syncs the two. Compare against
+# https://weekndlabs.com/robots.txt when the policy matters.
+
+User-agent: *
+Content-Signal: search=yes,ai-train=no,use=reference
+Allow: /
+
+# Training crawlers, matching the set Cloudflare blocks on weekndlabs.com.
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: CloudflareBrowserRenderingCrawler
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: meta-externalagent
+Disallow: /
+
+# ClaudeBot and GPTBot are NOT blocked here, and that is deliberate rather than an
+# oversight. The Content-Signal above says use=reference: being cited is wanted.
+# Those two are the agents that fetch a page in order to cite it, so blocking them
+# asks for the citation and refuses the fetch. The main site blocks them and its
+# own signal contradicts that; this host does not repeat the contradiction.
+#
+# The training-only agents above stay blocked, which is what ai-train=no means.
+
+Sitemap: https://design.weekndlabs.com/sitemap-index.xml
