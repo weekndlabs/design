@@ -48,6 +48,18 @@
       "dark":  { "value": "oklch(0.7698 0.1279 154.44)", "type": "color" },
       "light": { "value": "oklch(0.474 0.0951 152.58)", "type": "color" }
     },
+    "ember": {
+      "dark":  { "value": "oklch(0.7083 0.1503 53.08)", "type": "color" },
+      "light": { "value": "oklch(0.4631 0.1267 47.71)", "type": "color" }
+    },
+    "cyan": {
+      "dark":  { "value": "oklch(0.7768 0.0991 208.66)", "type": "color" },
+      "light": { "value": "oklch(0.4881 0.0746 211.29)", "type": "color" }
+    },
+    "violet": {
+      "dark":  { "value": "oklch(0.6974 0.1251 299.4)", "type": "color" },
+      "light": { "value": "oklch(0.4452 0.1451 293.51)", "type": "color" }
+    },
     "clay": {
       "dark":  { "value": "oklch(0.6861 0.1319 25.61)", "type": "color" },
       "light": { "value": "oklch(0.4893 0.1261 27.01)", "type": "color" }
