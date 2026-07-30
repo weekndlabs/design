@@ -22,7 +22,26 @@ export const formatShadcn = () => {
     // pointing the variant here is shadcn's own customisation point rather than
     // a departure from it. One switch, and copied shadcn code still works.
     "@custom-variant dark (&:is([data-theme='dark'] *));",
-    `@theme inline {\n${colors}\n\n  --radius: var(--wl-radius);\n}`,
+    // The ladder, not just `--radius`. Tailwind resolves `rounded-md` from
+    // `--radius-md`, so setting `--radius` alone leaves every corner on
+    // Tailwind's own defaults and the theme's radius never renders. That shipped
+    // once and was only caught by compiling the bridge for real.
+    //
+    // The multipliers are shadcn CLI v4's own, so a component copied from shadcn
+    // lands on the radius it was drawn with.
+    [
+      '@theme inline {',
+      colors,
+      '',
+      '  --radius: var(--wl-radius);',
+      '  --radius-xs: calc(var(--wl-radius) * 0.5);',
+      '  --radius-sm: calc(var(--wl-radius) * 0.75);',
+      '  --radius-md: calc(var(--wl-radius) * 0.875);',
+      '  --radius-lg: var(--wl-radius);',
+      '  --radius-xl: calc(var(--wl-radius) * 1.5);',
+      '  --radius-full: var(--wl-radius-full);',
+      '}',
+    ].join('\n'),
     '',
   ].join('\n\n');
 };

@@ -1,0 +1,96 @@
+---
+/**
+ * The page that shows the system doing its job.
+ *
+ * The token tables prove the values exist and pass. They cannot show whether the
+ * values make a good button, and a design system that never shows a button is
+ * asking to be taken on faith.
+ *
+ * Every panel below is the same markup with the same shadcn class strings. Only
+ * `data-theme` differs, so a role that works on one background and fails on
+ * another has nowhere to hide.
+ */
+import Page from '../layouts/Page.astro';
+import Showcase from '../components/Showcase.astro';
+import '../tailwind.css';
+
+const THEME_NOTES = {
+  light: 'Warm off-white paper, amber at 4.80:1, 10px corners.',
+  dark: 'Navy, amber at 10.31:1, 10px corners. The default when nothing sets a theme.',
+  paper: 'Cool grey stock, the darkest amber, 3px corners because a filed document has square edges.',
+};
+---
+<Page title="Components">
+  <p class="eyebrow mono">WeekndLabs Design</p>
+  <h1>The same components, three times.</h1>
+  {/* Astro trims the whitespace around an element on its own line, so the spaces
+      either side of these inline code spans have to be explicit or the words run
+      together. */}
+  <p class="lede">
+    shadcn/ui markup with nothing behind it but this system's tokens. One import
+    of <code>@weekndlabs/design/shadcn.css</code>, and <code>bg-primary</code>{' '}
+    and <code>text-muted-foreground</code> become real classes. Nothing on this
+    page sets a colour.
+  </p>
+
+  {Object.entries(THEME_NOTES).map(([theme, note]) => (
+    <section class="theme-block">
+      <h2 class="mono" id={`components-${theme}`}>{theme}</h2>
+      <p class="note">{note}</p>
+      <div data-theme={theme} class="stage">
+        <Showcase />
+      </div>
+    </section>
+  ))}
+</Page>
+
+<style>
+  .eyebrow {
+    font-size: var(--wl-text-label);
+    letter-spacing: var(--wl-tracking-label);
+    text-transform: uppercase;
+    color: var(--wl-muted-foreground);
+  }
+  h1 {
+    font-family: var(--wl-font-ui-display);
+    font-size: var(--wl-text-hero);
+    font-weight: var(--wl-weight-display);
+    letter-spacing: var(--wl-tracking-hero);
+    line-height: var(--wl-leading-hero);
+    margin-top: var(--wl-space-3);
+  }
+  .lede {
+    margin-top: var(--wl-space-4);
+    max-width: var(--wl-measure-text);
+    font-size: var(--wl-text-lede);
+    line-height: var(--wl-leading-body);
+    color: var(--wl-muted-foreground);
+  }
+  .lede code {
+    font-family: var(--wl-font-ui-mono);
+    font-size: 0.9em;
+    color: var(--wl-foreground);
+  }
+  .theme-block { margin-top: var(--wl-space-7); }
+  h2 {
+    font-size: var(--wl-text-section);
+    letter-spacing: var(--wl-tracking-section);
+  }
+  .note {
+    margin-top: var(--wl-space-1);
+    font-size: var(--wl-text-meta);
+    color: var(--wl-muted-foreground);
+  }
+  /* The stage carries the theme, so the components inside read their roles from
+     it rather than from the page. That is the whole demonstration: the panel
+     switches one attribute and every child follows. */
+  .stage {
+    margin-top: var(--wl-space-4);
+    padding: var(--wl-space-5);
+    border: 1px solid var(--wl-border);
+    border-radius: var(--wl-radius);
+    background: var(--wl-background);
+    color: var(--wl-foreground);
+    font-family: var(--wl-font-ui-body);
+  }
+</style>

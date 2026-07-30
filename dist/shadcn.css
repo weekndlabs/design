@@ -44,5 +44,11 @@
   --color-chart-5: var(--wl-chart-5);
 
   --radius: var(--wl-radius);
+  --radius-xs: calc(var(--wl-radius) * 0.5);
+  --radius-sm: calc(var(--wl-radius) * 0.75);
+  --radius-md: calc(var(--wl-radius) * 0.875);
+  --radius-lg: var(--wl-radius);
+  --radius-xl: calc(var(--wl-radius) * 1.5);
+  --radius-full: var(--wl-radius-full);
 }
 

@@ -1,0 +1,15 @@
+/**
+ * The docs site's Tailwind entry, and the only place `shadcn.css` is actually
+ * compiled by Tailwind.
+ *
+ * Until this existed, `dist/shadcn.css` was asserted by regex and nothing more.
+ * A wrong `@theme inline` block leaves `bg-card` compiling to nothing, and no
+ * unit test can see that. Here it either produces utilities or the page renders
+ * unstyled, which is the loudest possible failure.
+ */
+@import 'tailwindcss';
+@import '../../dist/shadcn.css';
+
+/* Tailwind v4 discovers candidates by scanning source files. Naming the
+   directory keeps that working when the site is built from a different cwd. */
+@source '../src';
