@@ -9,7 +9,8 @@
     "tokens",
     "lib/typography.js",
     "README.md",
-    "ABOUT.md"
+    "ABOUT.md",
+    "CHANGELOG.md"
   ],
   "exports": {
     "./tokens.css": "./dist/tokens.css",
