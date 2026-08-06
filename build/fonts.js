@@ -4,18 +4,51 @@ import { loadScale } from '../lib/tokens.js';
 
 const at = (path) => fileURLToPath(new URL(path, import.meta.url));
 
-/** `"Bricolage Grotesque, system-ui, sans-serif"` -> `"Bricolage Grotesque"` */
+/** `"Inter, ui-sans-serif, sans-serif"` -> `"Inter"` */
 export const firstFamily = (stack) => stack.split(',')[0].trim();
 
-/** `"IBM Plex Sans Condensed"` -> `"ibm-plex-sans-condensed"`, the fontsource name. */
+/** `"Instrument Serif"` -> `"instrument-serif"`, the fontsource package name. */
 export const packageName = (family) => family.toLowerCase().replaceAll(' ', '-');
 
 /**
- * The faces the package ships, derived from the tokens rather than listed here.
+ * What a font role cannot say about itself.
  *
- * A face is a family from `font.*` at the weight `weight.*` gives its role, so
- * the files on disk cannot drift from the tokens that name them. Adding a
- * weight token is what adds a file; nothing else has to be remembered.
+ * A token names a family. It cannot say whether that family ships as one
+ * variable file or one file per weight, or whether the face wanted is the
+ * italic. Three lines of fact, keyed by role, beats deriving it from a package
+ * layout that changes when fontsource reorganises.
+ *
+ * `scope: 'variable'` matters beyond the filename. Inter's variable file carries
+ * the `opsz` axis, and browsers apply it from the rendered size on their own, so
+ * a heading and a body line are drawn by one file with different letterforms.
+ * That is the whole reason there is one sans family here and not two.
+ */
+const FACES = {
+  sans: {
+    scope: '@fontsource-variable',
+    file: (pkg) => `${pkg}-latin-opsz-normal.woff2`,
+    weight: '100 900',
+    style: 'normal',
+  },
+  mono: {
+    scope: '@fontsource',
+    file: (pkg, weight) => `${pkg}-latin-${weight}-normal.woff2`,
+    style: 'normal',
+  },
+  accent: {
+    scope: '@fontsource',
+    file: (pkg, weight) => `${pkg}-latin-${weight}-italic.woff2`,
+    style: 'italic',
+  },
+};
+
+/**
+ * The faces the package ships, derived from `font.*` rather than listed here.
+ *
+ * A family named by a token with no file shipped is the failure that matters:
+ * the page falls back to system-ui and nobody notices until they compare
+ * screenshots. So the token source is what decides, and this throws when a role
+ * it names has no entry in FACES above.
  */
 export async function faces() {
   const scale = await loadScale();
@@ -23,26 +56,30 @@ export async function faces() {
     scale.filter((t) => t.path[0] === 'weight').map((t) => [t.path[1], t.value])
   );
 
-  const seen = new Map();
-  // A body face is needed at every UI weight, because shadcn asks for medium and
-  // semibold on controls and a missing weight is a silent fallback to 400.
-  // Display and mono keep the single weight their role names give them.
-  const bodyWeights = ['body', 'medium', 'semibold'].map((r) => weightFor[r]).filter(Boolean);
-
-  for (const token of scale.filter((t) => t.path[0] === 'font')) {
-    const role = token.path[2];
-    const weights = role === 'body' ? bodyWeights : [weightFor[role]];
-    for (const weight of weights) {
-      if (!weight) throw new Error(`font.${token.path.slice(1).join('.')} has no weight.${role}`);
+  return scale
+    .filter((t) => t.path[0] === 'font')
+    .map((token) => {
+      const role = token.path.at(-1);
+      const face = FACES[role];
+      if (!face) throw new Error(`font.${role} has no face definition in build/fonts.js`);
 
       const family = firstFamily(token.value);
       const pkg = packageName(family);
-      // ui and paper share no families today, but two stacks naming the same one
-      // would otherwise copy it twice.
-      seen.set(`${pkg}-${weight}`, { family, pkg, weight });
-    }
-  }
-  return [...seen.values()];
+      // A variable file spans a range, so its weight is not a token lookup.
+      const weight = face.weight ?? weightFor[role] ?? weightFor.body;
+      if (!weight) throw new Error(`font.${role} has no weight.${role} to ship`);
+
+      return {
+        role,
+        family,
+        pkg,
+        weight,
+        style: face.style,
+        source: `${face.scope}/${pkg}/files/${face.file(pkg, weight)}`,
+        licence: `${face.scope}/${pkg}/LICENSE`,
+        file: `${pkg}-${face.style === 'italic' ? `${weight}-italic` : weight.replaceAll(' ', '-')}.woff2`,
+      };
+    });
 }
 
 /**
@@ -55,14 +92,13 @@ export async function buildFonts() {
   mkdirSync(out, { recursive: true });
 
   const declarations = [];
-  for (const { family, pkg, weight } of await faces()) {
-    const file = `${pkg}-${weight}.woff2`;
-    copyFileSync(at(`../node_modules/@fontsource/${pkg}/files/${pkg}-latin-${weight}-normal.woff2`), out + file);
-    copyFileSync(at(`../node_modules/@fontsource/${pkg}/LICENSE`), `${out}${pkg}.LICENSE.txt`);
+  for (const { family, pkg, weight, style, source, licence, file } of await faces()) {
+    copyFileSync(at(`../node_modules/${source}`), out + file);
+    copyFileSync(at(`../node_modules/${licence}`), `${out}${pkg}.LICENSE.txt`);
     declarations.push(
       `@font-face {\n` +
         `  font-family: '${family}';\n` +
-        `  font-style: normal;\n` +
+        `  font-style: ${style};\n` +
         `  font-weight: ${weight};\n` +
         `  font-display: swap;\n` +
         `  src: url('./fonts/${file}') format('woff2');\n` +
@@ -75,7 +111,8 @@ export async function buildFonts() {
     [
       '/* Generated by @weekndlabs/design. Do not edit. */',
       [
-        '/* Latin subset, one weight per face, matching the weight tokens.',
+        '/* Latin subset. Inter is one variable file carrying the whole weight range',
+        '   and the optical size axis; the other two are single faces.',
         '   Every family is SIL Open Font License 1.1. The licence for each one is',
         '   in dist/fonts/ next to the file it covers. */',
       ].join('\n'),
@@ -85,6 +122,9 @@ export async function buildFonts() {
         '  /* Inter character variants: a straight-sided a, a single-storey g,',
         '     open digits. A decision about the typeface, so it ships with it. */',
         '  font-feature-settings: "cv02", "cv03", "cv04", "cv11";',
+        '  /* Browsers apply opsz from the rendered size by default, but a reset',
+        '     that sets this to none silently costs the display cut on headings. */',
+        '  font-optical-sizing: auto;',
         '}',
       ].join('\n'),
       '',

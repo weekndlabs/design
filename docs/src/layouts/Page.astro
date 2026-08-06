@@ -33,7 +33,7 @@ document.documentElement.dataset.theme=dark?'dark':'light'})()`;
     <link rel="icon" href="https://weekndlabs.com/favicon.ico" type="image/x-icon" sizes="48x48" />
     <link rel="icon" href="https://weekndlabs.com/icon.png" type="image/png" sizes="512x512" />
     <link rel="apple-touch-icon" href="https://weekndlabs.com/apple-icon.png" type="image/png" sizes="180x180" />
-    <meta name="description" content="Design tokens for WeekndLabs products. One grammar, three faces." />
+    <meta name="description" content="Design tokens for WeekndLabs products. One neutral ground, one system blue, continuous corners." />
     {/* weekndlabs.com proxies this site at /design, so the same HTML answers on
         two hosts and exactly one of them can be the indexable one. The origin is
         not written here: it comes from `site` in astro.config.mjs, which the
@@ -55,7 +55,7 @@ document.documentElement.dataset.theme=dark?'dark':'light'})()`;
       body {
         background: var(--wl-background);
         color: var(--wl-foreground);
-        font-family: var(--wl-font-ui-body);
+        font-family: var(--wl-font-sans);
         font-size: 16px;
         font-weight: var(--wl-weight-body);
         line-height: var(--wl-leading-body);
@@ -72,13 +72,18 @@ document.documentElement.dataset.theme=dark?'dark':'light'})()`;
          700 and 800, so a browser deciding "bold" for itself is a browser
          picking a weight the font may not have. */
       h1, h2, h3 {
-        font-family: var(--wl-font-ui-display);
+        font-family: var(--wl-font-sans);
         font-weight: var(--wl-weight-display);
         letter-spacing: var(--wl-tracking-section);
         line-height: var(--wl-leading-hero);
       }
 
-      code, .mono { font-family: var(--wl-font-ui-mono); }
+      code, .mono { font-family: var(--wl-font-mono); }
+      /* An import path has no spaces to break at, so at 320 a single inline
+         code span is wider than the column and the whole page scrolls
+         sideways. `anywhere` only takes effect when the line cannot fit,
+         which leaves normal prose alone. */
+      code { overflow-wrap: anywhere; }
 
       /* `width: 100%` is load-bearing. main is a flex item of the body column,
          and an auto horizontal margin cancels the stretch that would otherwise
@@ -113,7 +118,8 @@ document.documentElement.dataset.theme=dark?'dark':'light'})()`;
         top: calc(var(--wl-space-5) * -4);
         background: var(--wl-card);
         border: 1px solid var(--wl-border);
-        border-radius: var(--wl-radius);
+        border-radius: var(--wl-radius-card);
+        corner-shape: var(--wl-corner-shape);
         padding: var(--wl-space-2) var(--wl-space-4);
         z-index: 1;
       }

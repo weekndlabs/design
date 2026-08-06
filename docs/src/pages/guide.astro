@@ -62,15 +62,17 @@ const DOCS = 'https://weekndlabs.com/design';
       font-size: 0.9em;
       background: var(--wl-muted);
       border: 1px solid color-mix(in oklch, var(--wl-border) 60%, var(--wl-background));
-      border-radius: var(--wl-radius);
+      border-radius: var(--wl-radius-card);
+      corner-shape: var(--wl-corner-shape);
       padding: 1px 5px;
     }
-    /* Same treatment the triptych gives its terminal, for the same reason: a
+    /* Same treatment the diptych gives its terminal, for the same reason: a
        block of machine output reads the same regardless of the page around it. */
     .prose :global(pre) {
-      background: var(--wl-terminal);
+      background: var(--wl-terminal-ground);
       color: var(--wl-terminal-foreground);
-      border-radius: var(--wl-radius);
+      border-radius: var(--wl-radius-card);
+      corner-shape: var(--wl-corner-shape);
       padding: var(--wl-space-4);
       margin-bottom: var(--wl-space-5);
       overflow-x: auto;

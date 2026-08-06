@@ -25,9 +25,9 @@ npm i github:weekndlabs/design
 ```
 
 Tokens change how a page looks, so a bump is worth reading before it ships. At
-`0.x` anything that moves a value is a minor. `0.3.0` renames every role and
-every theme and moves colour values to oklch, so read the migration notes below
-before taking it.
+`0.x` anything that moves a value is a minor. `0.4.0` replaces every colour in
+the system, drops the `paper` theme and three of the six typefaces, so read the
+migration notes below before taking it.
 
 ## Use it with Tailwind v4 and shadcn/ui
 
@@ -62,12 +62,11 @@ page with no rebuild.
 Then set the theme on `<html>`:
 
 ```html
-<html data-theme="paper">
+<html data-theme="dark">
 ```
 
-The three values are `light`, `dark` and `paper`, and they are the only strings
-that select a theme. Store the visitor's choice as `dark` or `light` and set it
-straight through:
+`light` and `dark` are the only strings that select a theme. Store the visitor's
+choice and set it straight through:
 
 ```js
 document.documentElement.dataset.theme = localStorage.theme ?? 'dark';
@@ -103,15 +102,46 @@ of subtracting lightness. Subtracting is only correct on a light background:
 .button:hover { background: color-mix(in oklch, var(--wl-primary) 85%, var(--wl-foreground)); }
 ```
 
-Everything unthemed is ready as-is: `var(--wl-space-5)`, `var(--wl-radius-full)`,
-`var(--wl-text-hero)`, `var(--wl-font-ui-mono)`. `--wl-radius` is themed, because
-corners are part of a theme's character: 10px on `light` and `dark`, 3px on
-`paper`.
+Everything unthemed is ready as-is: `var(--wl-space-5)`, `var(--wl-text-hero)`,
+`var(--wl-font-mono)`.
 
-Weight and line-height are named per face, not as one shared scale, because the
-faces do not carry the same weights. Asking Bricolage for 400 gets
-you a weight it does not ship. Pair `--wl-weight-mono` and `--wl-leading-mono`
-with `--wl-font-ui-mono`, and the display pair with the display face.
+## Corners
+
+Four steps, and every one of them continuous rather than circular:
+
+```css
+.button { border-radius: var(--wl-radius-control); corner-shape: var(--wl-corner-shape); }
+.card   { border-radius: var(--wl-radius-card);    corner-shape: var(--wl-corner-shape); }
+.window { border-radius: var(--wl-radius-window);  corner-shape: var(--wl-corner-shape); }
+.pill   { border-radius: var(--wl-radius-full);    corner-shape: var(--wl-corner-shape); }
+```
+
+6, 10, 14 and 9999px, which is what macOS uses for a control, a card, a window
+and a pill. `corner-shape` is the signature of this system: it is the curvature
+Apple draws icons and windows with, and a browser without it ignores the
+declaration and keeps the radius, so it needs no `@supports` guard.
+
+`--wl-radius` still exists and equals `--wl-radius-card`. It is what shadcn reads
+and what Tailwind derives its whole `rounded-*` ladder from, and a test ties the
+two together so they cannot drift.
+
+## Container widths
+
+`narrow` 640px, `medium` 900px, `wide` 1280px, and they are deliberately not CSS
+variables:
+
+```js
+import { containers } from '@weekndlabs/design';
+```
+
+In Tailwind they arrive through `shadcn.css` as `--container-*`, which is what
+makes `@max-narrow:` compile. Writing
+`@container (max-width: var(--wl-container-narrow))` by hand does not work: a
+container query cannot read a custom property, and it fails by never matching
+rather than by erroring.
+
+Container queries also do not raise specificity, so a block of them ties with the
+plain rules it is meant to beat and loses on source order. Emit them last.
 
 ## Fonts
 
@@ -122,21 +152,26 @@ find them and does not hit a font host:
 @import '@weekndlabs/design/fonts.css';
 ```
 
-Ten files, latin subset, matching the weight tokens. For `ui`: Inter 400, 500 and
-600, Bricolage Grotesque 700, JetBrains Mono 400. For `paper`: IBM Plex Sans 400,
-500 and 600, IBM Plex Sans Condensed 700, IBM Plex Mono 400. About 215KB in
-total, and a face is only downloaded if the page uses it.
+Three files, latin subset, 113KB in total, and a face is only downloaded if the
+page uses it.
 
-The body faces ship at 500 and 600 because shadcn puts `font-medium` and
-`font-semibold` on nearly every control. Without them a button silently renders
-at 400 and the whole interface reads limp, with no error to explain it.
+Inter is one variable file at 71KB carrying the whole 100 to 900 range and the
+optical size axis. That axis is why there is one sans here and not two: the same
+file draws a hero and a caption with different letterforms, which is what SF Pro
+Display and SF Pro Text do with two separate files. Browsers apply it from the
+rendered size on their own, and `fonts.css` sets `font-optical-sizing: auto`
+because a reset that turns it off costs the display cut with no error.
+
+JetBrains Mono 400 is the machine voice. Instrument Serif italic is one face for
+an editorial line on a marketing page, and never appears inside an app.
 
 The stylesheet also sets Inter's character variants, `cv02 cv03 cv04 cv11`. That
 configures the typeface, so it belongs with the typeface.
 
-Adding a weight means adding the token first. The face list is derived from
-`font.*` and `weight.*` at build time, so a weight nothing declares has no file
-and a family with no weight fails the build instead of shipping a gap.
+The face list is derived from `font.*` at build time. A family the tokens name
+with no file shipped fails the build rather than falling back to system-ui, and
+`dist/fonts/` may hold nothing the tokens do not name, because the build copies
+and never deletes.
 
 If your bundler rewrites asset urls, import the stylesheet as a module rather
 than with a CSS `@import`. A plain `@import` leaves `url('./fonts/…')` alone and
@@ -167,9 +202,10 @@ Then `bg-background`, `text-foreground`, `border-primary` and `p-5` all resolve
 to tokens. There is no `<alpha-value>` slot any more: the variables hold real
 colours, so v4 gets opacity from `color-mix` and v3 gets none from the preset.
 
-The preset carries the type scale too, so `font-ui-body`, `text-hero`,
+The preset carries the type scale too, so `font-sans`, `text-hero`,
 `tracking-label`, `font-weight-semibold` and `leading-mono` resolve without
-adding anything to your config.
+adding anything to your config. `rounded-control`, `rounded-card` and
+`rounded-window` come with it.
 
 ## Guard the type scale
 
@@ -199,20 +235,21 @@ them.
 ## Use it in JavaScript
 
 ```js
-import { THEMES, ROLES, TEXT_ROLES, themes } from '@weekndlabs/design';
+import { THEMES, ROLES, TERMINAL, TEXT_ROLES, themes, terminal, containers } from '@weekndlabs/design';
 
-themes['paper'].primary; // 'oklch(0.4624 0.0989 72.22)'
+themes.dark.primary;   // 'oklch(0.9707 0.0027 286.35)'
+terminal.green;        // 'oklch(0.7685 0.1643 152.62)'
+containers.narrow;     // '640px'
 ```
 
-## The three themes
+## The two themes
 
-| Theme | Product | Notes |
-|---|---|---|
-| `light` | Bubo, weekndlabs.com, forgepod | Light mode |
-| `dark` | Bubo, weekndlabs.com, forgepod | The fallback, also emitted under `:where(:root)` |
-| `paper` | Omni | Paper stock, amber ink, light only, 3px corners |
+| Theme | Notes |
+|---|---|
+| `light` | Neutral ground, ink text, blue at 4.62:1 on the dimmest surface it can sit on |
+| `dark` | The fallback, also emitted under `:where(:root)` |
 
-All three fill the same roles. A component names a role, never a colour.
+Both fill the same roles. A component names a role, never a colour.
 
 Surfaces and text:
 
@@ -230,9 +267,9 @@ Brand and status:
 
 | Role | Meaning |
 |---|---|
-| `primary` / `primary-foreground` | the brand amber at whatever value passes here |
+| `primary` / `primary-foreground` | ink, inverted per theme. A filled pill is the only solid button on a page |
 | `destructive`, `success`, `warning` and their foregrounds | status |
-| `ring` | focus ring, tracks `primary` |
+| `ring` | focus ring, and the system blue. Also `chart-1` |
 
 Marks:
 
@@ -243,17 +280,26 @@ Marks:
 | `chart-1` to `chart-5` | categorical series, separated by hue |
 | `radius` | corner radius for this theme |
 
-Terminal, which shadcn has no name for:
+Terminal, which shadcn has no name for. Ten roles, and none of them themed:
 
 | Role | Meaning |
 |---|---|
-| `terminal` | sunken terminal surface, the same in every theme |
-| `terminal-foreground` | phosphor text on it |
-| `terminal-foreground-muted` | secondary phosphor |
+| `terminal-ground` | the surface, equal to the dark theme's `card` |
+| `terminal-foreground`, `terminal-dim` | primary and secondary text on it |
+| `terminal-red` and five more | the ANSI colours, 25 degrees apart in hue |
+| `terminal-selection` | selection fill |
 
-**`accent` does not mean the brand.** It was the amber before `0.3.0`. Under
-shadcn's vocabulary `--accent` is the dim hover surface and `--primary` carries
-the brand. Reach for `primary` where you used to reach for `accent`.
+In Tailwind the ground is the default, so `bg-terminal` and `text-terminal-green`
+both compile.
+
+The ground does not follow the theme, and that is the point. The same palette
+over a white ground tops out at 2.87:1 and every colour in it fails, so a themed
+terminal is not one palette with two grounds, it is two palettes and two sets of
+ratios to keep true. A terminal is a terminal whatever the page around it does.
+
+**`accent` does not mean the brand.** Under shadcn's vocabulary `--accent` is the
+dim hover surface and `--primary` carries the brand. Reach for `primary` where
+you used to reach for `accent`.
 
 ## The contrast rule
 
@@ -272,16 +318,27 @@ remembered to add is still tested.
 `border`, `input`, `ring` and the five `chart-*` are marks, so they carry no text
 threshold and no component may use them as a text colour.
 
-Two rules measure hue rather than contrast, because a ratio cannot see what is
-being asked. `warning` has to sit at least 20 degrees off `primary`, since amber
-is both this system's brand and the conventional warning colour. The chart marks
-have to sit 25 degrees apart from each other, and a good categorical palette
+Three rules measure something a ratio cannot see.
+
+`warning` has to sit at least 20 degrees off `primary` in hue. The chart marks
+have to sit 25 degrees apart from each other, and so do the six terminal
+colours, because output uses them one word at a time. A good categorical palette
 often holds lightness steady on purpose, so a luminance test there would reject
-the palettes that are correct.
+the palettes that are correct. That rule caught the terminal cyan at 24.9
+degrees from the blue and moved it.
+
+No neutral role may carry chroma above 0.008. Apple's greys sit near 0.004 and
+still read as grey; past the ceiling a theme starts leaning toward a colour. The
+usual way this fails is a dark theme drifting blue while its light twin stays
+neutral, which nobody sees without putting the two side by side.
 
 `npm test` computes every ratio and fails when one drops. When it fails, change
-the colour, not the threshold. `light primary` sits at 4.80:1, so there is very
-little room to give away.
+the colour, not the threshold. The blue sits at 4.62:1 on the dimmest surface it
+is allowed on, so there is very little room to give away.
+
+`npm run check:overflow` is the other gate, and it needs Chrome, so it is a
+script rather than part of `npm test`. It loads each built docs page in an
+iframe at fourteen widths from 280 to 1280 and fails on sideways scroll.
 
 ## Change a token
 
@@ -308,11 +365,38 @@ own, the Tailwind preset and the JS export follow, and the docs site renders a
 fourth panel without an edit. The gate then holds the new theme to every rule
 above. Adding a theme is a matter of finding values that pass, for every role.
 
-Fonts do not follow `data-theme`. The families are emitted unthemed, as
-`--wl-font-ui-*` and `--wl-font-paper-*`, so a new theme picks one of the
-existing groups or brings its own woff2.
+Fonts and corners do not follow `data-theme`. There is one sans, one mono and
+one accent serif, and one radius ladder, so a new theme picks a set of colours
+and nothing else.
+
+## Migrating from 0.3.x
+
+Every colour changed. There is no mapping table for values, because none of the
+old primitives survive: `sand`, `navy`, `stone`, `amber`, `phosphor` and
+`black.crt` are gone, replaced by one neutral ladder and one system blue. Role
+names are unchanged, so a component that names roles needs no edit and simply
+looks different.
+
+Three things do need an edit:
+
+| 0.3.x | 0.4.0 |
+|---|---|
+| `data-theme="paper"` | `light` or `dark`. Omni keeps its paper stock in its own stylesheet |
+| `--wl-terminal` | `--wl-terminal-ground` |
+| `--wl-terminal-foreground-muted` | `--wl-terminal-dim` |
+| `--wl-font-ui-body`, `--wl-font-ui-display` | `--wl-font-sans` |
+| `--wl-font-ui-mono` | `--wl-font-mono` |
+| `--wl-font-paper-*` | gone with the theme |
+| `--wl-radius` alone | still there, plus `control`, `card` and `window` |
+
+`primary` is ink now, not the brand amber. If you were using it as a colour
+accent rather than as the solid button, you want `ring`.
 
 ## Migrating from 0.2.x
+
+This section describes the move to `0.3.0` and still names `paper`, which
+`0.4.0` removes. Coming from `0.2.x`, do this one first and then the section
+above.
 
 Colours are oklch and hold a real colour, so `rgb(var(--wl-x))` becomes
 `var(--wl-x)` and `rgb(var(--wl-x) / 0.4)` becomes
@@ -359,6 +443,7 @@ Radius: the `sm`, `base`, `md` and `lg` steps are gone, replaced by one themed
 npm install
 npm run build       # tokens -> dist/
 npm test            # completeness, format, contrast, type scale
+npm run check:overflow  # sideways scroll, needs Chrome and a docs build
 npm run docs:dev    # the docs site
 npm run docs:build
 ```
@@ -366,6 +451,6 @@ npm run docs:build
 ## Licence
 
 `MIT AND OFL-1.1`. The code and the tokens are MIT. The font files are not ours
-to relicense: all six families are under the SIL Open Font License 1.1, and each
-licence ships in `dist/fonts/` beside the file it covers. Keep them together if
-you redistribute the package further.
+to relicense: Inter, JetBrains Mono and Instrument Serif are under the SIL Open
+Font License 1.1, and each licence ships in `dist/fonts/` beside the file it
+covers. Keep them together if you redistribute the package further.

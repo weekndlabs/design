@@ -1,4 +1,4 @@
-import { ROLES } from '../lib/tokens.js';
+import { ROLES, TERMINAL } from '../lib/tokens.js';
 
 /**
  * Tailwind preset. Colours resolve through the CSS variables so a consumer
@@ -20,7 +20,12 @@ export const formatTailwind = ({ dictionary }) => {
     );
 
   const extend = {
-    colors,
+    colors: {
+      ...colors,
+      terminal: Object.fromEntries(TERMINAL.map((r) => [
+        r === 'ground' ? 'DEFAULT' : r, `var(--wl-terminal-${r})`,
+      ])),
+    },
     spacing: group('space'),
     // DEFAULT is the per-theme ladder, `full` the shared pill.
     borderRadius: { DEFAULT: 'var(--wl-radius)', ...group('radius') },

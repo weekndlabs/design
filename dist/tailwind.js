@@ -72,15 +72,6 @@ export default {
         "ring": {
           "DEFAULT": "var(--wl-ring)"
         },
-        "terminal": {
-          "DEFAULT": "var(--wl-terminal)"
-        },
-        "terminal-foreground": {
-          "DEFAULT": "var(--wl-terminal-foreground)"
-        },
-        "terminal-foreground-muted": {
-          "DEFAULT": "var(--wl-terminal-foreground-muted)"
-        },
         "sidebar": {
           "DEFAULT": "var(--wl-sidebar)"
         },
@@ -113,6 +104,18 @@ export default {
         },
         "chart-5": {
           "DEFAULT": "var(--wl-chart-5)"
+        },
+        "terminal": {
+          "DEFAULT": "var(--wl-terminal-ground)",
+          "foreground": "var(--wl-terminal-foreground)",
+          "dim": "var(--wl-terminal-dim)",
+          "red": "var(--wl-terminal-red)",
+          "green": "var(--wl-terminal-green)",
+          "yellow": "var(--wl-terminal-yellow)",
+          "blue": "var(--wl-terminal-blue)",
+          "magenta": "var(--wl-terminal-magenta)",
+          "cyan": "var(--wl-terminal-cyan)",
+          "selection": "var(--wl-terminal-selection)"
         }
       },
       "spacing": {
@@ -129,6 +132,9 @@ export default {
       },
       "borderRadius": {
         "DEFAULT": "var(--wl-radius)",
+        "control": "var(--wl-radius-control)",
+        "card": "var(--wl-radius-card)",
+        "window": "var(--wl-radius-window)",
         "full": "var(--wl-radius-full)"
       },
       "maxWidth": {
@@ -155,12 +161,9 @@ export default {
         "label": "var(--wl-tracking-label)"
       },
       "fontFamily": {
-        "ui-display": "var(--wl-font-ui-display)",
-        "ui-body": "var(--wl-font-ui-body)",
-        "ui-mono": "var(--wl-font-ui-mono)",
-        "paper-display": "var(--wl-font-paper-display)",
-        "paper-body": "var(--wl-font-paper-body)",
-        "paper-mono": "var(--wl-font-paper-mono)"
+        "sans": "var(--wl-font-sans)",
+        "mono": "var(--wl-font-mono)",
+        "accent": "var(--wl-font-accent)"
       },
       "fontWeight": {
         "body": "var(--wl-weight-body)",

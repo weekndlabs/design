@@ -166,7 +166,7 @@ rather than one amber phosphor.
 | `terminal-yellow` | `#F0B84A` | 9.45 |
 | `terminal-blue` | `#409CFF` | 6.01 |
 | `terminal-magenta` | `#DA8FFF` | 7.58 |
-| `terminal-cyan` | `#5AC8F5` | 8.92 |
+| `terminal-cyan` | `#45D3E0` | 9.44 |
 | `terminal-selection` | `#34618E` | selection fill |
 
 The ground does not follow the theme. The same palette on a white terminal tops

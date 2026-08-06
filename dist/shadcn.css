@@ -28,9 +28,6 @@
   --color-border: var(--wl-border);
   --color-input: var(--wl-input);
   --color-ring: var(--wl-ring);
-  --color-terminal: var(--wl-terminal);
-  --color-terminal-foreground: var(--wl-terminal-foreground);
-  --color-terminal-foreground-muted: var(--wl-terminal-foreground-muted);
   --color-sidebar: var(--wl-sidebar);
   --color-sidebar-foreground: var(--wl-sidebar-foreground);
   --color-sidebar-accent: var(--wl-sidebar-accent);
@@ -42,6 +39,21 @@
   --color-chart-3: var(--wl-chart-3);
   --color-chart-4: var(--wl-chart-4);
   --color-chart-5: var(--wl-chart-5);
+
+  --color-terminal: var(--wl-terminal-ground);
+  --color-terminal-foreground: var(--wl-terminal-foreground);
+  --color-terminal-dim: var(--wl-terminal-dim);
+  --color-terminal-red: var(--wl-terminal-red);
+  --color-terminal-green: var(--wl-terminal-green);
+  --color-terminal-yellow: var(--wl-terminal-yellow);
+  --color-terminal-blue: var(--wl-terminal-blue);
+  --color-terminal-magenta: var(--wl-terminal-magenta);
+  --color-terminal-cyan: var(--wl-terminal-cyan);
+  --color-terminal-selection: var(--wl-terminal-selection);
+
+  --container-narrow: 640px;
+  --container-medium: 900px;
+  --container-wide: 1280px;
 
   --radius: var(--wl-radius);
   --radius-xs: calc(var(--wl-radius) * 0.5);
