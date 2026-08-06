@@ -82,6 +82,19 @@ with, before it shipped:
 part of `npm test`. It loads each built docs page in an iframe at fourteen widths
 from 280 to 1280 and fails on sideways scroll. It found two on its first run.
 
+## 0.4.1
+
+Fixes one thing, found by the first consumer to adopt 0.4.0.
+
+The Tailwind preset shipped the spacing scale under numeric keys, which
+redefined Tailwind's own. The two ladders agree at steps 1 to 4 and diverge
+after: step 5 is 24px against Tailwind's 20px, step 9 is 96px against 36px. So
+`h-9` on weekndlabs.com's theme toggle went from 36px to 96px, and the low steps
+matching is what made it look fine everywhere else.
+
+Spacing utilities are now `p-wl-5`, `gap-wl-4` and so on. A gate rejects any
+numeric key in a preset group whose Tailwind counterpart is numeric.
+
 ## 0.3.1
 
 Radius ladder mapped in full for shadcn, and the components page added.

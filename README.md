@@ -198,8 +198,11 @@ You still need the CSS file for the variables the preset points at:
 @import '@weekndlabs/design/tokens.css';
 ```
 
-Then `bg-background`, `text-foreground`, `border-primary` and `p-5` all resolve
-to tokens. There is no `<alpha-value>` slot any more: the variables hold real
+Then `bg-background`, `text-foreground` and `border-primary` all resolve to
+tokens. Spacing is prefixed: `p-wl-5` is the system's step 5, and `p-5` still
+means what Tailwind says it means. The two scales are both numeric and they
+disagree from step 5 up, so sharing the keys would redefine `p-6` and `h-9` for
+every consumer with no error. There is no `<alpha-value>` slot any more: the variables hold real
 colours, so v4 gets opacity from `color-mix` and v3 gets none from the preset.
 
 The preset carries the type scale too, so `font-sans`, `text-hero`,

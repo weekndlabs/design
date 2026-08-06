@@ -19,6 +19,16 @@ export const formatTailwind = ({ dictionary }) => {
         .map((t) => [t.path.slice(1).join('-'), `var(--wl-${t.path.join('-')})`])
     );
 
+  // Tailwind's own spacing scale is numeric, and so is this one, but they
+  // disagree from step 5 upward: 20 vs 24, 24 vs 32, 36 vs 96. Emitting the
+  // system's steps under those keys silently redefines `p-6` and `h-9` for
+  // every consumer, and the low steps happen to match, so it looks correct
+  // until a layout explodes somewhere unrelated. Prefixed, `p-wl-5` asks for
+  // the system's step and `p-5` still means what Tailwind says it means.
+  const spacing = Object.fromEntries(
+    Object.entries(group('space')).map(([step, value]) => [`wl-${step}`, value])
+  );
+
   const extend = {
     colors: {
       ...colors,
@@ -26,7 +36,7 @@ export const formatTailwind = ({ dictionary }) => {
         r === 'ground' ? 'DEFAULT' : r, `var(--wl-terminal-${r})`,
       ])),
     },
-    spacing: group('space'),
+    spacing,
     // DEFAULT is the per-theme ladder, `full` the shared pill.
     borderRadius: { DEFAULT: 'var(--wl-radius)', ...group('radius') },
     maxWidth: group('measure'),
