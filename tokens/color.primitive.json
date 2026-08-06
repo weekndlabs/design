@@ -39,7 +39,7 @@
       "dark":  { "value": "oklch(0.7669 0.1715 313.76)", "type": "color" }
     },
     "cyan": {
-      "dark": { "value": "oklch(0.7865 0.1184 228.08)", "type": "color" }
+      "dark": { "value": "oklch(0.7978 0.119 203.96)", "type": "color" }
     },
 
     "term": {

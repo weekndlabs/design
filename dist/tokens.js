@@ -88,6 +88,6 @@ export const terminal = {
   "yellow": "oklch(0.8143 0.1396 81.16)",
   "blue": "oklch(0.6854 0.1699 252.99)",
   "magenta": "oklch(0.7669 0.1715 313.76)",
-  "cyan": "oklch(0.7865 0.1184 228.08)",
+  "cyan": "oklch(0.7978 0.119 203.96)",
   "selection": "oklch(0.4638 0.0925 251.6)"
 };
