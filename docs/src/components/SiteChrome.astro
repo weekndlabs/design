@@ -115,8 +115,10 @@ const HOME = 'https://weekndlabs.com';
     text-decoration: none;
   }
   .brand:hover { color: var(--wl-primary); }
-  border-radius: var(--wl-radius-control);
-  corner-shape: var(--wl-corner-shape);
+  .brand img {
+    border-radius: var(--wl-radius-control);
+    corner-shape: var(--wl-corner-shape);
+  }
 
   .links { display: none; gap: var(--wl-space-6); align-items: center; }
   .links a, .links .current {

@@ -79,6 +79,11 @@ document.documentElement.dataset.theme=dark?'dark':'light'})()`;
       }
 
       code, .mono { font-family: var(--wl-font-mono); }
+      /* An import path has no spaces to break at, so at 320 a single inline
+         code span is wider than the column and the whole page scrolls
+         sideways. `anywhere` only takes effect when the line cannot fit,
+         which leaves normal prose alone. */
+      code { overflow-wrap: anywhere; }
 
       /* `width: 100%` is load-bearing. main is a flex item of the body column,
          and an auto horizontal margin cancels the stretch that would otherwise

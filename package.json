@@ -27,6 +27,7 @@
     "build": "node build/index.js",
     "prepublishOnly": "npm run build && npm test",
     "test": "node --test lib/*.test.js",
+    "check:overflow": "node scripts/check-overflow.mjs",
     "docs:dev": "astro dev --root docs",
     "docs:build": "astro build --root docs"
   },
