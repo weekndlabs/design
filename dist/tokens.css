@@ -158,4 +158,15 @@
   --wl-leading-heading: 1.25;
   --wl-leading-body: 1.6;
   --wl-leading-mono: 1.7;
+
+  --wl-terminal-ground: oklch(0.2273 0.0038 286.09);
+  --wl-terminal-foreground: oklch(0.9707 0.0027 286.35);
+  --wl-terminal-dim: oklch(0.6812 0.0073 286.21);
+  --wl-terminal-red: oklch(0.7097 0.1828 26.96);
+  --wl-terminal-green: oklch(0.7685 0.1643 152.62);
+  --wl-terminal-yellow: oklch(0.8143 0.1396 81.16);
+  --wl-terminal-blue: oklch(0.6854 0.1699 252.99);
+  --wl-terminal-magenta: oklch(0.7669 0.1715 313.76);
+  --wl-terminal-cyan: oklch(0.7865 0.1184 228.08);
+  --wl-terminal-selection: oklch(0.4638 0.0925 251.6);
 }

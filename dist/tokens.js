@@ -2,6 +2,7 @@
 export const THEMES = ["light","dark"];
 export const ROLES = ["background","foreground","card","card-foreground","popover","popover-foreground","primary","primary-foreground","secondary","secondary-foreground","muted","muted-foreground","accent","accent-foreground","destructive","destructive-foreground","success","success-foreground","warning","warning-foreground","border","input","ring","sidebar","sidebar-foreground","sidebar-accent","sidebar-accent-foreground","sidebar-border","sidebar-ring","chart-1","chart-2","chart-3","chart-4","chart-5","radius"];
 export const TEXT_ROLES = ["body","display","heading","hero","label","lede","meta","section","subtitle","title"];
+export const TERMINAL = ["ground","foreground","dim","red","green","yellow","blue","magenta","cyan","selection"];
 export const themes = {
   "light": {
     "background": "oklch(0.9851 0 0)",
@@ -77,4 +78,16 @@ export const themes = {
     "chart-5": "oklch(0.7669 0.1715 313.76)",
     "radius": "10px"
   }
+};
+export const terminal = {
+  "ground": "oklch(0.2273 0.0038 286.09)",
+  "foreground": "oklch(0.9707 0.0027 286.35)",
+  "dim": "oklch(0.6812 0.0073 286.21)",
+  "red": "oklch(0.7097 0.1828 26.96)",
+  "green": "oklch(0.7685 0.1643 152.62)",
+  "yellow": "oklch(0.8143 0.1396 81.16)",
+  "blue": "oklch(0.6854 0.1699 252.99)",
+  "magenta": "oklch(0.7669 0.1715 313.76)",
+  "cyan": "oklch(0.7865 0.1184 228.08)",
+  "selection": "oklch(0.4638 0.0925 251.6)"
 };

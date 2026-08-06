@@ -104,6 +104,18 @@ export default {
         },
         "chart-5": {
           "DEFAULT": "var(--wl-chart-5)"
+        },
+        "terminal": {
+          "DEFAULT": "var(--wl-terminal-ground)",
+          "foreground": "var(--wl-terminal-foreground)",
+          "dim": "var(--wl-terminal-dim)",
+          "red": "var(--wl-terminal-red)",
+          "green": "var(--wl-terminal-green)",
+          "yellow": "var(--wl-terminal-yellow)",
+          "blue": "var(--wl-terminal-blue)",
+          "magenta": "var(--wl-terminal-magenta)",
+          "cyan": "var(--wl-terminal-cyan)",
+          "selection": "var(--wl-terminal-selection)"
         }
       },
       "spacing": {

@@ -40,6 +40,17 @@
   --color-chart-4: var(--wl-chart-4);
   --color-chart-5: var(--wl-chart-5);
 
+  --color-terminal-ground: var(--wl-terminal-ground);
+  --color-terminal-foreground: var(--wl-terminal-foreground);
+  --color-terminal-dim: var(--wl-terminal-dim);
+  --color-terminal-red: var(--wl-terminal-red);
+  --color-terminal-green: var(--wl-terminal-green);
+  --color-terminal-yellow: var(--wl-terminal-yellow);
+  --color-terminal-blue: var(--wl-terminal-blue);
+  --color-terminal-magenta: var(--wl-terminal-magenta);
+  --color-terminal-cyan: var(--wl-terminal-cyan);
+  --color-terminal-selection: var(--wl-terminal-selection);
+
   --radius: var(--wl-radius);
   --radius-xs: calc(var(--wl-radius) * 0.5);
   --radius-sm: calc(var(--wl-radius) * 0.75);
