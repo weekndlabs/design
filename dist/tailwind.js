@@ -119,16 +119,16 @@ export default {
         }
       },
       "spacing": {
-        "0": "var(--wl-space-0)",
-        "1": "var(--wl-space-1)",
-        "2": "var(--wl-space-2)",
-        "3": "var(--wl-space-3)",
-        "4": "var(--wl-space-4)",
-        "5": "var(--wl-space-5)",
-        "6": "var(--wl-space-6)",
-        "7": "var(--wl-space-7)",
-        "8": "var(--wl-space-8)",
-        "9": "var(--wl-space-9)"
+        "wl-0": "var(--wl-space-0)",
+        "wl-1": "var(--wl-space-1)",
+        "wl-2": "var(--wl-space-2)",
+        "wl-3": "var(--wl-space-3)",
+        "wl-4": "var(--wl-space-4)",
+        "wl-5": "var(--wl-space-5)",
+        "wl-6": "var(--wl-space-6)",
+        "wl-7": "var(--wl-space-7)",
+        "wl-8": "var(--wl-space-8)",
+        "wl-9": "var(--wl-space-9)"
       },
       "borderRadius": {
         "DEFAULT": "var(--wl-radius)",
