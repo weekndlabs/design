@@ -130,12 +130,9 @@
   --wl-measure-doc: 900px;
   --wl-measure-article: 748px;
   --wl-measure-text: 660px;
-  --wl-font-ui-display: Bricolage Grotesque, system-ui, sans-serif;
-  --wl-font-ui-body: Inter, system-ui, sans-serif;
-  --wl-font-ui-mono: JetBrains Mono, ui-monospace, monospace;
-  --wl-font-paper-display: IBM Plex Sans Condensed, IBM Plex Sans, system-ui, sans-serif;
-  --wl-font-paper-body: IBM Plex Sans, system-ui, sans-serif;
-  --wl-font-paper-mono: IBM Plex Mono, ui-monospace, monospace;
+  --wl-font-sans: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --wl-font-mono: JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, monospace;
+  --wl-font-accent: Instrument Serif, Georgia, serif;
   --wl-text-label: 0.6875rem;
   --wl-text-meta: 0.8125rem;
   --wl-text-body: 0.9375rem;

@@ -55,7 +55,7 @@ document.documentElement.dataset.theme=dark?'dark':'light'})()`;
       body {
         background: var(--wl-background);
         color: var(--wl-foreground);
-        font-family: var(--wl-font-ui-body);
+        font-family: var(--wl-font-sans);
         font-size: 16px;
         font-weight: var(--wl-weight-body);
         line-height: var(--wl-leading-body);
@@ -72,13 +72,13 @@ document.documentElement.dataset.theme=dark?'dark':'light'})()`;
          700 and 800, so a browser deciding "bold" for itself is a browser
          picking a weight the font may not have. */
       h1, h2, h3 {
-        font-family: var(--wl-font-ui-display);
+        font-family: var(--wl-font-sans);
         font-weight: var(--wl-weight-display);
         letter-spacing: var(--wl-tracking-section);
         line-height: var(--wl-leading-hero);
       }
 
-      code, .mono { font-family: var(--wl-font-ui-mono); }
+      code, .mono { font-family: var(--wl-font-mono); }
 
       /* `width: 100%` is load-bearing. main is a flex item of the body column,
          and an auto horizontal margin cancels the stretch that would otherwise

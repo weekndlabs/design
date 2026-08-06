@@ -158,12 +158,9 @@ export default {
         "label": "var(--wl-tracking-label)"
       },
       "fontFamily": {
-        "ui-display": "var(--wl-font-ui-display)",
-        "ui-body": "var(--wl-font-ui-body)",
-        "ui-mono": "var(--wl-font-ui-mono)",
-        "paper-display": "var(--wl-font-paper-display)",
-        "paper-body": "var(--wl-font-paper-body)",
-        "paper-mono": "var(--wl-font-paper-mono)"
+        "sans": "var(--wl-font-sans)",
+        "mono": "var(--wl-font-mono)",
+        "accent": "var(--wl-font-accent)"
       },
       "fontWeight": {
         "body": "var(--wl-weight-body)",
