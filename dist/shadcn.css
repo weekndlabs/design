@@ -40,7 +40,7 @@
   --color-chart-4: var(--wl-chart-4);
   --color-chart-5: var(--wl-chart-5);
 
-  --color-terminal-ground: var(--wl-terminal-ground);
+  --color-terminal: var(--wl-terminal-ground);
   --color-terminal-foreground: var(--wl-terminal-foreground);
   --color-terminal-dim: var(--wl-terminal-dim);
   --color-terminal-red: var(--wl-terminal-red);

@@ -1,6 +1,6 @@
 ---
 import Page from '../layouts/Page.astro';
-import Triptych from '../components/Triptych.astro';
+import Diptych from '../components/Diptych.astro';
 import Swatches from '../components/Swatches.astro';
 import Scale from '../components/Scale.astro';
 
@@ -22,17 +22,18 @@ const DOCS = 'https://weekndlabs.com/design';
 <Page title="Tokens">
   <main id="main" class="wrap">
     <p class="eyebrow mono">WeekndLabs Design</p>
-    <h1>One grammar, three faces.</h1>
+    <h1>One grammar, two grounds.</h1>
     <p class="lede">
-      Omni, Bubo and weekndlabs.com share a spacing scale, a type scale and a set
-      of semantic roles. Each fills those roles with its own values. Below is the
-      same card rendered in all three themes at once.
+      Omni, Bubo and weekndlabs.com share one neutral ground, one system blue,
+      one sans on an optical size axis, and corners that are continuous rather
+      than circular. Below is the same card in both themes at once, with the
+      measured contrast printed under each.
     </p>
     <p class="guide-link mono">
       <a href={`${DOCS}/components`}>See the components &rarr;</a>
       <a href={`${DOCS}/guide`}>Install and usage &rarr;</a>
     </p>
-    <div class="triptych-slot"><Triptych /></div>
+    <div class="diptych-slot"><Diptych /></div>
     <Swatches />
     <Scale />
   </main>
@@ -57,6 +58,6 @@ const DOCS = 'https://weekndlabs.com/design';
       gap: var(--wl-space-4);
     }
     .guide-link a { text-decoration: none; }
-    .triptych-slot { margin-top: var(--wl-space-7); }
+    .diptych-slot { margin-top: var(--wl-space-7); }
   </style>
 </Page>

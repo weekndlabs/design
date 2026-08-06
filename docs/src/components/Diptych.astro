@@ -2,15 +2,15 @@
 import { THEMES, themes } from '../../../dist/tokens.js';
 import { contrastRatio } from '../../../lib/contrast.js';
 ---
-<div class="triptych">
+<div class="diptych">
   {THEMES.map((theme) => (
     <section data-theme={theme} class="panel">
       <p class="eyebrow mono">{theme}</p>
       <h3>WeekndLabs</h3>
-      <p class="lede">One grammar, worn three different ways.</p>
+      <p class="lede">One grammar, two grounds.</p>
       <p class="tags mono"><span>[Tokens]</span><span>[shadcn]</span></p>
       <pre class="terminal mono">$ npm i @weekndlabs/design
-<span class="dim">+ @weekndlabs/design@0.3.0</span></pre>
+<span class="dim">+ @weekndlabs/design@0.4.0</span></pre>
       <p class="ratio mono">
         foreground {contrastRatio(themes[theme].foreground, themes[theme].background).toFixed(2)}:1
       </p>
@@ -19,9 +19,9 @@ import { contrastRatio } from '../../../lib/contrast.js';
 </div>
 
 <style>
-  /* Fits however many themes THEMES holds. Hardcoding three would mean a fourth
-     theme silently landing in a fourth row of one, or off the grid entirely. */
-  .triptych {
+  /* Fits however many themes THEMES holds. Hardcoding two would mean a third
+     theme silently landing in a row of one, or off the grid entirely. */
+  .diptych {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: var(--wl-space-4);
@@ -30,7 +30,8 @@ import { contrastRatio } from '../../../lib/contrast.js';
     background: var(--wl-background);
     color: var(--wl-foreground);
     border: 1px solid var(--wl-border);
-    border-radius: var(--wl-radius);
+    border-radius: var(--wl-radius-window);
+    corner-shape: var(--wl-corner-shape);
     padding: var(--wl-space-5);
   }
   .eyebrow {
@@ -52,25 +53,27 @@ import { contrastRatio } from '../../../lib/contrast.js';
     font-size: var(--wl-text-label);
     color: var(--wl-primary);
   }
-  /* The terminal is identical in all three themes on purpose: a terminal is a
-     terminal regardless of the page around it. */
+  /* Identical in both themes on purpose. A terminal is a terminal whatever the
+     page around it does, and one ground is what keeps its palette to a single
+     set of ratios. */
   .terminal {
     margin-top: var(--wl-space-4);
-    background: var(--wl-terminal);
+    background: var(--wl-terminal-ground);
     color: var(--wl-terminal-foreground);
-    border-radius: var(--wl-radius);
+    border-radius: var(--wl-radius-card);
+    corner-shape: var(--wl-corner-shape);
     padding: var(--wl-space-3);
     font-size: var(--wl-text-label);
     line-height: var(--wl-leading-mono);
     overflow-x: auto;
   }
-  .terminal .dim { color: var(--wl-terminal-foreground-muted); }
+  .terminal .dim { color: var(--wl-terminal-dim); }
   .ratio {
     margin-top: var(--wl-space-4);
     font-size: var(--wl-text-label);
     color: var(--wl-muted-foreground);
   }
   @media (max-width: 860px) {
-    .triptych { grid-template-columns: minmax(0, 1fr); }
+    .diptych { grid-template-columns: minmax(0, 1fr); }
   }
 </style>

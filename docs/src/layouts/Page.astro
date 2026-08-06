@@ -33,7 +33,7 @@ document.documentElement.dataset.theme=dark?'dark':'light'})()`;
     <link rel="icon" href="https://weekndlabs.com/favicon.ico" type="image/x-icon" sizes="48x48" />
     <link rel="icon" href="https://weekndlabs.com/icon.png" type="image/png" sizes="512x512" />
     <link rel="apple-touch-icon" href="https://weekndlabs.com/apple-icon.png" type="image/png" sizes="180x180" />
-    <meta name="description" content="Design tokens for WeekndLabs products. One grammar, three faces." />
+    <meta name="description" content="Design tokens for WeekndLabs products. One neutral ground, one system blue, continuous corners." />
     {/* weekndlabs.com proxies this site at /design, so the same HTML answers on
         two hosts and exactly one of them can be the indexable one. The origin is
         not written here: it comes from `site` in astro.config.mjs, which the
@@ -113,7 +113,8 @@ document.documentElement.dataset.theme=dark?'dark':'light'})()`;
         top: calc(var(--wl-space-5) * -4);
         background: var(--wl-card);
         border: 1px solid var(--wl-border);
-        border-radius: var(--wl-radius);
+        border-radius: var(--wl-radius-card);
+        corner-shape: var(--wl-corner-shape);
         padding: var(--wl-space-2) var(--wl-space-4);
         z-index: 1;
       }
