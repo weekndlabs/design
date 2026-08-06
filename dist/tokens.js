@@ -91,3 +91,8 @@ export const terminal = {
   "cyan": "oklch(0.7978 0.119 203.96)",
   "selection": "oklch(0.4638 0.0925 251.6)"
 };
+export const containers = {
+  "narrow": "640px",
+  "medium": "900px",
+  "wide": "1280px"
+};

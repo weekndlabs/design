@@ -10,12 +10,19 @@ import { ROLES, TERMINAL } from '../lib/tokens.js';
  * resolving it at parse time, which is what lets `data-theme` restyle a built
  * page with no rebuild.
  */
-export const formatShadcn = () => {
+export const formatShadcn = ({ dictionary }) => {
   const colors = ROLES.filter((r) => r !== 'radius')
     .map((role) => `  --color-${role}: var(--wl-${role});`)
     .join('\n');
   // Without these, `bg-terminal` and `text-terminal-green` compile to nothing,
   // and the ten tokens would only be reachable through raw var().
+  // Literal values, not var(). Tailwind resolves a container query at build
+  // time, so `@max-narrow:` compiles to a real width; a var() here would leave
+  // it unresolvable and the variant would emit nothing.
+  const containers = dictionary.allTokens
+    .filter((t) => t.path[0] === 'container')
+    .map((t) => `  --container-${t.path[1]}: ${t.value};`)
+    .join('\n');
   const terminal = TERMINAL.map((role) =>
     `  --color-terminal-${role === 'ground' ? 'ground' : role}: var(--wl-terminal-${role});`).join('\n');
 
@@ -38,6 +45,8 @@ export const formatShadcn = () => {
       colors,
       '',
       terminal,
+      '',
+      containers,
       '',
       '  --radius: var(--wl-radius);',
       '  --radius-xs: calc(var(--wl-radius) * 0.5);',

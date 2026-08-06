@@ -5,7 +5,15 @@ import { THEMES, ROLES, TERMINAL } from '../lib/tokens.js';
  * groups instead would mean a new group silently vanishing from the CSS until
  * someone remembered to add it here.
  */
-const isScale = (token) => token.path[0] !== 'color';
+/**
+ * Container widths are the exception, and they are deliberately not here.
+ *
+ * `@container (max-width: var(--wl-container-narrow))` does not work, the same
+ * way a media query cannot read a custom property. Emitting them as CSS
+ * variables would advertise a query that silently never matches, so they ship
+ * as JS values only.
+ */
+const isScale = (token) => token.path[0] !== 'color' && token.path[0] !== 'container';
 
 /**
  * One block per theme. Values go out as authored, which is oklch for colours and

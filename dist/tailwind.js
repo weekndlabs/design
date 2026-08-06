@@ -132,6 +132,9 @@ export default {
       },
       "borderRadius": {
         "DEFAULT": "var(--wl-radius)",
+        "control": "var(--wl-radius-control)",
+        "card": "var(--wl-radius-card)",
+        "window": "var(--wl-radius-window)",
         "full": "var(--wl-radius-full)"
       },
       "maxWidth": {

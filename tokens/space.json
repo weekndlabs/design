@@ -12,7 +12,18 @@
     "9": { "value": "96px", "type": "spacing" }
   },
   "radius": {
-    "full": { "value": "9999px", "type": "borderRadius" }
+    "control": { "value": "6px", "type": "borderRadius" },
+    "card":    { "value": "10px", "type": "borderRadius" },
+    "window":  { "value": "14px", "type": "borderRadius" },
+    "full":    { "value": "9999px", "type": "borderRadius" }
+  },
+  "corner": {
+    "shape": { "value": "squircle", "type": "other" }
+  },
+  "container": {
+    "narrow": { "value": "640px", "type": "sizing" },
+    "medium": { "value": "900px", "type": "sizing" },
+    "wide":   { "value": "1280px", "type": "sizing" }
   },
   "measure": {
     "page":    { "value": "1280px", "type": "sizing" },

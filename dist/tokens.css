@@ -125,7 +125,11 @@
   --wl-space-7: 48px;
   --wl-space-8: 64px;
   --wl-space-9: 96px;
+  --wl-radius-control: 6px;
+  --wl-radius-card: 10px;
+  --wl-radius-window: 14px;
   --wl-radius-full: 9999px;
+  --wl-corner-shape: squircle;
   --wl-measure-page: 1280px;
   --wl-measure-doc: 900px;
   --wl-measure-article: 748px;

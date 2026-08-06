@@ -51,6 +51,10 @@
   --color-terminal-cyan: var(--wl-terminal-cyan);
   --color-terminal-selection: var(--wl-terminal-selection);
 
+  --container-narrow: 640px;
+  --container-medium: 900px;
+  --container-wide: 1280px;
+
   --radius: var(--wl-radius);
   --radius-xs: calc(var(--wl-radius) * 0.5);
   --radius-sm: calc(var(--wl-radius) * 0.75);
