@@ -72,15 +72,6 @@ export default {
         "ring": {
           "DEFAULT": "var(--wl-ring)"
         },
-        "terminal": {
-          "DEFAULT": "var(--wl-terminal)"
-        },
-        "terminal-foreground": {
-          "DEFAULT": "var(--wl-terminal-foreground)"
-        },
-        "terminal-foreground-muted": {
-          "DEFAULT": "var(--wl-terminal-foreground-muted)"
-        },
         "sidebar": {
           "DEFAULT": "var(--wl-sidebar)"
         },

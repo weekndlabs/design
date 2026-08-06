@@ -28,9 +28,6 @@
   --color-border: var(--wl-border);
   --color-input: var(--wl-input);
   --color-ring: var(--wl-ring);
-  --color-terminal: var(--wl-terminal);
-  --color-terminal-foreground: var(--wl-terminal-foreground);
-  --color-terminal-foreground-muted: var(--wl-terminal-foreground-muted);
   --color-sidebar: var(--wl-sidebar);
   --color-sidebar-foreground: var(--wl-sidebar-foreground);
   --color-sidebar-accent: var(--wl-sidebar-accent);
