@@ -7,6 +7,8 @@ import { formatShadcn } from './format-shadcn.js';
 import { formatDts, formatTailwindDts } from './format-dts.js';
 import { formatMarketing, formatCatalog } from './format-archetype.js';
 import { buildFonts } from './fonts.js';
+import { copyFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 
 const sd = new StyleDictionary({
   source: SOURCE,
@@ -47,4 +49,11 @@ const sd = new StyleDictionary({
 
 await sd.buildAllPlatforms();
 await buildFonts();
+
+// Hand-written, so it is copied rather than generated. lib/components.test.js
+// is what holds it to the tokens.
+copyFileSync(
+  fileURLToPath(new URL('../css/components.css', import.meta.url)),
+  fileURLToPath(new URL('../dist/components.css', import.meta.url))
+);
 console.log('built dist/');

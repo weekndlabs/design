@@ -33,7 +33,7 @@ export const formatMarketing = ({ dictionary }) =>
   background: var(--wl-gradient-hero);
   border-radius: var(--wl-radius-section);
   corner-shape: var(--wl-corner-shape);
-  color: oklch(1 0 0);
+  color: var(--wl-hero-fg);
   padding: var(--wl-space-8) var(--wl-space-7);
   text-align: center;
   overflow: hidden;
@@ -60,10 +60,13 @@ export const formatMarketing = ({ dictionary }) =>
 }`,
 
     `/* Near black, lit from above. The inset highlights are what make a filled
-   control read as a physical key rather than a rectangle. */
+   control read as a physical key rather than a rectangle.
+   Fixed rather than themed, and a token rather than a literal: this button only
+   ever sits on the hero gradient, which is bright in both themes, so inverting
+   it with the page would put white on pale blue. */
 .wl-marketing .wl-btn-glossy {
-  background: oklch(0.16 0 0);
-  color: oklch(1 0 0);
+  background: var(--wl-btn-glossy-bg);
+  color: var(--wl-btn-glossy-fg);
   border: 0;
   box-shadow: var(--wl-shadow-glossy);
 }`,
