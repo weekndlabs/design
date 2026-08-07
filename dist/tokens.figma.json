@@ -1,0 +1,685 @@
+{
+  "$description": "WeekndLabs design tokens. Generated from tokens/*.json, do not edit. Colour carries a Figma mode per theme.",
+  "color": {
+    "background": {
+      "$type": "color",
+      "$value": "oklch(0.9851 0 0)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(0.9851 0 0)",
+            "dark": "oklch(0.1921 0.004 286.02)"
+          }
+        }
+      }
+    },
+    "foreground": {
+      "$type": "color",
+      "$value": "oklch(0.2316 0.0038 286.1)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(0.2316 0.0038 286.1)",
+            "dark": "oklch(0.9707 0.0027 286.35)"
+          }
+        }
+      }
+    },
+    "card": {
+      "$type": "color",
+      "$value": "oklch(1 0 0)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(1 0 0)",
+            "dark": "oklch(0.2273 0.0038 286.09)"
+          }
+        }
+      }
+    },
+    "card-foreground": {
+      "$type": "color",
+      "$value": "oklch(0.2316 0.0038 286.1)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(0.2316 0.0038 286.1)",
+            "dark": "oklch(0.9707 0.0027 286.35)"
+          }
+        }
+      }
+    },
+    "popover": {
+      "$type": "color",
+      "$value": "oklch(1 0 0)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(1 0 0)",
+            "dark": "oklch(0.2273 0.0038 286.09)"
+          }
+        }
+      }
+    },
+    "popover-foreground": {
+      "$type": "color",
+      "$value": "oklch(0.2316 0.0038 286.1)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(0.2316 0.0038 286.1)",
+            "dark": "oklch(0.9707 0.0027 286.35)"
+          }
+        }
+      }
+    },
+    "primary": {
+      "$type": "color",
+      "$value": "oklch(0.2316 0.0038 286.1)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(0.2316 0.0038 286.1)",
+            "dark": "oklch(0.9707 0.0027 286.35)"
+          }
+        }
+      }
+    },
+    "primary-foreground": {
+      "$type": "color",
+      "$value": "oklch(1 0 0)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(1 0 0)",
+            "dark": "oklch(0.2273 0.0038 286.09)"
+          }
+        }
+      }
+    },
+    "secondary": {
+      "$type": "color",
+      "$value": "oklch(0.9702 0 0)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(0.9702 0 0)",
+            "dark": "oklch(0.2939 0.0036 286.18)"
+          }
+        }
+      }
+    },
+    "secondary-foreground": {
+      "$type": "color",
+      "$value": "oklch(0.2316 0.0038 286.1)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(0.2316 0.0038 286.1)",
+            "dark": "oklch(0.9707 0.0027 286.35)"
+          }
+        }
+      }
+    },
+    "muted": {
+      "$type": "color",
+      "$value": "oklch(0.9702 0 0)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(0.9702 0 0)",
+            "dark": "oklch(0.2939 0.0036 286.18)"
+          }
+        }
+      }
+    },
+    "muted-foreground": {
+      "$type": "color",
+      "$value": "oklch(0.5399 0.0077 286.14)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(0.5399 0.0077 286.14)",
+            "dark": "oklch(0.6812 0.0073 286.21)"
+          }
+        }
+      }
+    },
+    "accent": {
+      "$type": "color",
+      "$value": "oklch(0.9702 0 0)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(0.9702 0 0)",
+            "dark": "oklch(0.2939 0.0036 286.18)"
+          }
+        }
+      }
+    },
+    "accent-foreground": {
+      "$type": "color",
+      "$value": "oklch(0.2316 0.0038 286.1)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(0.2316 0.0038 286.1)",
+            "dark": "oklch(0.9707 0.0027 286.35)"
+          }
+        }
+      }
+    },
+    "destructive": {
+      "$type": "color",
+      "$value": "oklch(0.5013 0.1783 28.7)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(0.5013 0.1783 28.7)",
+            "dark": "oklch(0.7097 0.1828 26.96)"
+          }
+        }
+      }
+    },
+    "destructive-foreground": {
+      "$type": "color",
+      "$value": "oklch(1 0 0)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(1 0 0)",
+            "dark": "oklch(0.2273 0.0038 286.09)"
+          }
+        }
+      }
+    },
+    "success": {
+      "$type": "color",
+      "$value": "oklch(0.5135 0.1185 153.14)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(0.5135 0.1185 153.14)",
+            "dark": "oklch(0.7685 0.1643 152.62)"
+          }
+        }
+      }
+    },
+    "success-foreground": {
+      "$type": "color",
+      "$value": "oklch(1 0 0)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(1 0 0)",
+            "dark": "oklch(0.2273 0.0038 286.09)"
+          }
+        }
+      }
+    },
+    "warning": {
+      "$type": "color",
+      "$value": "oklch(0.5078 0.108 73.3)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(0.5078 0.108 73.3)",
+            "dark": "oklch(0.8143 0.1396 81.16)"
+          }
+        }
+      }
+    },
+    "warning-foreground": {
+      "$type": "color",
+      "$value": "oklch(1 0 0)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(1 0 0)",
+            "dark": "oklch(0.2273 0.0038 286.09)"
+          }
+        }
+      }
+    },
+    "border": {
+      "$type": "color",
+      "$value": "oklch(0.9219 0 0)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(0.9219 0 0)",
+            "dark": "oklch(0.3492 0.0034 286.22)"
+          }
+        }
+      }
+    },
+    "input": {
+      "$type": "color",
+      "$value": "oklch(0.8699 0 0)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(0.8699 0 0)",
+            "dark": "oklch(0.4024 0.0033 286.25)"
+          }
+        }
+      }
+    },
+    "ring": {
+      "$type": "color",
+      "$value": "oklch(0.5462 0.1891 256.36)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(0.5462 0.1891 256.36)",
+            "dark": "oklch(0.6854 0.1699 252.99)"
+          }
+        }
+      }
+    },
+    "sidebar": {
+      "$type": "color",
+      "$value": "oklch(0.9702 0 0)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(0.9702 0 0)",
+            "dark": "oklch(0.2273 0.0038 286.09)"
+          }
+        }
+      }
+    },
+    "sidebar-foreground": {
+      "$type": "color",
+      "$value": "oklch(0.2316 0.0038 286.1)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(0.2316 0.0038 286.1)",
+            "dark": "oklch(0.9707 0.0027 286.35)"
+          }
+        }
+      }
+    },
+    "sidebar-accent": {
+      "$type": "color",
+      "$value": "oklch(1 0 0)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(1 0 0)",
+            "dark": "oklch(0.2939 0.0036 286.18)"
+          }
+        }
+      }
+    },
+    "sidebar-accent-foreground": {
+      "$type": "color",
+      "$value": "oklch(0.2316 0.0038 286.1)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(0.2316 0.0038 286.1)",
+            "dark": "oklch(0.9707 0.0027 286.35)"
+          }
+        }
+      }
+    },
+    "sidebar-border": {
+      "$type": "color",
+      "$value": "oklch(0.9219 0 0)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(0.9219 0 0)",
+            "dark": "oklch(0.3492 0.0034 286.22)"
+          }
+        }
+      }
+    },
+    "sidebar-ring": {
+      "$type": "color",
+      "$value": "oklch(0.5462 0.1891 256.36)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(0.5462 0.1891 256.36)",
+            "dark": "oklch(0.6854 0.1699 252.99)"
+          }
+        }
+      }
+    },
+    "chart-1": {
+      "$type": "color",
+      "$value": "oklch(0.5462 0.1891 256.36)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(0.5462 0.1891 256.36)",
+            "dark": "oklch(0.6854 0.1699 252.99)"
+          }
+        }
+      }
+    },
+    "chart-2": {
+      "$type": "color",
+      "$value": "oklch(0.5135 0.1185 153.14)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(0.5135 0.1185 153.14)",
+            "dark": "oklch(0.7685 0.1643 152.62)"
+          }
+        }
+      }
+    },
+    "chart-3": {
+      "$type": "color",
+      "$value": "oklch(0.5078 0.108 73.3)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(0.5078 0.108 73.3)",
+            "dark": "oklch(0.8143 0.1396 81.16)"
+          }
+        }
+      }
+    },
+    "chart-4": {
+      "$type": "color",
+      "$value": "oklch(0.5013 0.1783 28.7)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(0.5013 0.1783 28.7)",
+            "dark": "oklch(0.7097 0.1828 26.96)"
+          }
+        }
+      }
+    },
+    "chart-5": {
+      "$type": "color",
+      "$value": "oklch(0.4436 0.1935 305.94)",
+      "$extensions": {
+        "com.figma": {
+          "modes": {
+            "light": "oklch(0.4436 0.1935 305.94)",
+            "dark": "oklch(0.7669 0.1715 313.76)"
+          }
+        }
+      }
+    }
+  },
+  "terminal": {
+    "ground": {
+      "$type": "color",
+      "$value": "oklch(0.2273 0.0038 286.09)"
+    },
+    "foreground": {
+      "$type": "color",
+      "$value": "oklch(0.9707 0.0027 286.35)"
+    },
+    "dim": {
+      "$type": "color",
+      "$value": "oklch(0.6812 0.0073 286.21)"
+    },
+    "red": {
+      "$type": "color",
+      "$value": "oklch(0.7097 0.1828 26.96)"
+    },
+    "green": {
+      "$type": "color",
+      "$value": "oklch(0.7685 0.1643 152.62)"
+    },
+    "yellow": {
+      "$type": "color",
+      "$value": "oklch(0.8143 0.1396 81.16)"
+    },
+    "blue": {
+      "$type": "color",
+      "$value": "oklch(0.6854 0.1699 252.99)"
+    },
+    "magenta": {
+      "$type": "color",
+      "$value": "oklch(0.7669 0.1715 313.76)"
+    },
+    "cyan": {
+      "$type": "color",
+      "$value": "oklch(0.7978 0.119 203.96)"
+    },
+    "selection": {
+      "$type": "color",
+      "$value": "oklch(0.4638 0.0925 251.6)"
+    }
+  },
+  "space": {
+    "0": {
+      "$type": "dimension",
+      "$value": "2px"
+    },
+    "1": {
+      "$type": "dimension",
+      "$value": "4px"
+    },
+    "2": {
+      "$type": "dimension",
+      "$value": "8px"
+    },
+    "3": {
+      "$type": "dimension",
+      "$value": "12px"
+    },
+    "4": {
+      "$type": "dimension",
+      "$value": "16px"
+    },
+    "5": {
+      "$type": "dimension",
+      "$value": "24px"
+    },
+    "6": {
+      "$type": "dimension",
+      "$value": "32px"
+    },
+    "7": {
+      "$type": "dimension",
+      "$value": "48px"
+    },
+    "8": {
+      "$type": "dimension",
+      "$value": "64px"
+    },
+    "9": {
+      "$type": "dimension",
+      "$value": "96px"
+    }
+  },
+  "radius": {
+    "control": {
+      "$type": "dimension",
+      "$value": "6px"
+    },
+    "card": {
+      "$type": "dimension",
+      "$value": "10px"
+    },
+    "window": {
+      "$type": "dimension",
+      "$value": "14px"
+    },
+    "full": {
+      "$type": "dimension",
+      "$value": "9999px"
+    }
+  },
+  "measure": {
+    "page": {
+      "$type": "dimension",
+      "$value": "1280px"
+    },
+    "doc": {
+      "$type": "dimension",
+      "$value": "900px"
+    },
+    "article": {
+      "$type": "dimension",
+      "$value": "748px"
+    },
+    "text": {
+      "$type": "dimension",
+      "$value": "660px"
+    }
+  },
+  "container": {
+    "narrow": {
+      "$type": "dimension",
+      "$value": "640px"
+    },
+    "medium": {
+      "$type": "dimension",
+      "$value": "900px"
+    },
+    "wide": {
+      "$type": "dimension",
+      "$value": "1280px"
+    }
+  },
+  "text": {
+    "label": {
+      "$type": "dimension",
+      "$value": "0.6875rem"
+    },
+    "meta": {
+      "$type": "dimension",
+      "$value": "0.8125rem"
+    },
+    "body": {
+      "$type": "dimension",
+      "$value": "0.9375rem"
+    },
+    "lede": {
+      "$type": "dimension",
+      "$value": "1.125rem"
+    },
+    "heading": {
+      "$type": "dimension",
+      "$value": "1.125rem"
+    },
+    "subtitle": {
+      "$type": "dimension",
+      "$value": "1.25rem"
+    },
+    "title": {
+      "$type": "dimension",
+      "$value": "1.5rem"
+    },
+    "display": {
+      "$type": "dimension",
+      "$value": "2rem"
+    },
+    "section": {
+      "$type": "dimension",
+      "$value": "clamp(1.55rem, 3vw, 2.3rem)"
+    },
+    "hero": {
+      "$type": "dimension",
+      "$value": "clamp(2.1rem, 5.2vw, 3.9rem)"
+    }
+  },
+  "tracking": {
+    "hero": {
+      "$type": "dimension",
+      "$value": "-0.03em"
+    },
+    "section": {
+      "$type": "dimension",
+      "$value": "-0.015em"
+    },
+    "label": {
+      "$type": "dimension",
+      "$value": "0.14em"
+    }
+  },
+  "leading": {
+    "hero": {
+      "$type": "number",
+      "$value": "1.15"
+    },
+    "heading": {
+      "$type": "number",
+      "$value": "1.25"
+    },
+    "body": {
+      "$type": "number",
+      "$value": "1.6"
+    },
+    "mono": {
+      "$type": "number",
+      "$value": "1.7"
+    }
+  },
+  "weight": {
+    "body": {
+      "$type": "number",
+      "$value": "400"
+    },
+    "medium": {
+      "$type": "number",
+      "$value": "500"
+    },
+    "semibold": {
+      "$type": "number",
+      "$value": "600"
+    },
+    "display": {
+      "$type": "number",
+      "$value": "700"
+    },
+    "mono": {
+      "$type": "number",
+      "$value": "400"
+    }
+  },
+  "font": {
+    "sans": {
+      "$type": "fontFamily",
+      "$value": "Inter, ui-sans-serif, system-ui, -apple-system, sans-serif"
+    },
+    "mono": {
+      "$type": "fontFamily",
+      "$value": "JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, monospace"
+    },
+    "accent": {
+      "$type": "fontFamily",
+      "$value": "Instrument Serif, Georgia, serif"
+    }
+  },
+  "duration": {
+    "fast": {
+      "$type": "duration",
+      "$value": "120ms"
+    },
+    "base": {
+      "$type": "duration",
+      "$value": "180ms"
+    },
+    "slow": {
+      "$type": "duration",
+      "$value": "260ms"
+    }
+  },
+  "icon": {
+    "sm": {
+      "$type": "dimension",
+      "$value": "16px"
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": "20px"
+    },
+    "stroke": {
+      "$type": "dimension",
+      "$value": "1.5"
+    }
+  }
+}

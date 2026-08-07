@@ -34,7 +34,8 @@
     "./marketing.css": "./dist/marketing.css",
     "./catalog.css": "./dist/catalog.css",
     "./components.css": "./dist/components.css",
-    "./prose.css": "./dist/prose.css"
+    "./prose.css": "./dist/prose.css",
+    "./figma": "./dist/tokens.figma.json"
   },
   "publishConfig": {
     "access": "public"

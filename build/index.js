@@ -6,6 +6,7 @@ import { formatTs } from './format-ts.js';
 import { formatShadcn } from './format-shadcn.js';
 import { formatDts, formatTailwindDts } from './format-dts.js';
 import { formatMarketing, formatCatalog } from './format-archetype.js';
+import { formatFigma } from './format-figma.js';
 import { buildFonts } from './fonts.js';
 import { copyFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -22,6 +23,7 @@ const sd = new StyleDictionary({
       'wl/tailwind-dts': formatTailwindDts,
       'wl/marketing': formatMarketing,
       'wl/catalog': formatCatalog,
+      'wl/figma': formatFigma,
     },
   },
   platforms: {
@@ -42,6 +44,7 @@ const sd = new StyleDictionary({
         { destination: 'tailwind.d.ts', format: 'wl/tailwind-dts' },
         { destination: 'marketing.css', format: 'wl/marketing' },
         { destination: 'catalog.css', format: 'wl/catalog' },
+        { destination: 'tokens.figma.json', format: 'wl/figma' },
       ],
     },
   },
