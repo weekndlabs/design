@@ -115,10 +115,8 @@ const HOME = 'https://weekndlabs.com';
     text-decoration: none;
   }
   .brand:hover { color: var(--wl-primary); }
-  .brand img {
-    border-radius: var(--wl-radius-control);
-    corner-shape: var(--wl-corner-shape);
-  }
+  /* No radius on the mark. It is a squircle already, and a CSS corner on top of
+     one clips the curve it came with. */
 
   .links { display: none; gap: var(--wl-space-6); align-items: center; }
   .links a, .links .current {
