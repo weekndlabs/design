@@ -52,8 +52,10 @@ await buildFonts();
 
 // Hand-written, so it is copied rather than generated. lib/components.test.js
 // is what holds it to the tokens.
-copyFileSync(
-  fileURLToPath(new URL('../css/components.css', import.meta.url)),
-  fileURLToPath(new URL('../dist/components.css', import.meta.url))
-);
+for (const file of ['components.css', 'prose.css']) {
+  copyFileSync(
+    fileURLToPath(new URL(`../css/${file}`, import.meta.url)),
+    fileURLToPath(new URL(`../dist/${file}`, import.meta.url))
+  );
+}
 console.log('built dist/');

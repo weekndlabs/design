@@ -1,0 +1,156 @@
+/* Long-form text: a README rendered to a page, a changelog, a blog post.
+ *
+ * Selected by element inside `.wl-prose`, because markdown arrives as bare tags
+ * and there is nowhere to put a class. Scoped so nothing else on a page
+ * inherits it.
+ *
+ * This lived in the docs site until 0.5.0, which meant every other product that
+ * rendered markdown either wrote it again or went without. Same rules as the
+ * component layer: every value is a token, and lib/components.test.js holds
+ * this file to that.
+ */
+
+.wl-prose {
+  color: var(--wl-foreground);
+  font-family: var(--wl-font-sans);
+  font-size: var(--wl-text-body);
+  line-height: var(--wl-leading-body);
+}
+
+/* Headings carry the ruled line that makes a long document read as one thing
+   rather than as a stack of unrelated sections. */
+.wl-prose h1 {
+  font-size: var(--wl-text-hero);
+  letter-spacing: var(--wl-tracking-hero);
+  line-height: var(--wl-leading-hero);
+  font-weight: var(--wl-weight-display);
+  margin: 0 0 var(--wl-space-5);
+  text-wrap: balance;
+}
+.wl-prose h2 {
+  font-size: var(--wl-text-section);
+  letter-spacing: var(--wl-tracking-section);
+  line-height: var(--wl-leading-heading);
+  font-weight: var(--wl-weight-semibold);
+  margin: var(--wl-space-8) 0 var(--wl-space-4);
+  padding-top: var(--wl-space-5);
+  border-top: 1px solid var(--wl-border);
+  text-wrap: balance;
+}
+.wl-prose h3 {
+  font-size: var(--wl-text-lede);
+  line-height: var(--wl-leading-heading);
+  font-weight: var(--wl-weight-semibold);
+  margin: var(--wl-space-6) 0 var(--wl-space-3);
+}
+.wl-prose h4 {
+  font-size: var(--wl-text-body);
+  font-weight: var(--wl-weight-semibold);
+  margin: var(--wl-space-5) 0 var(--wl-space-2);
+}
+
+/* A measure, not a container width. Past about 70 characters the eye loses the
+   start of the next line, and no amount of leading fixes it. */
+.wl-prose p,
+.wl-prose ul,
+.wl-prose ol,
+.wl-prose blockquote {
+  max-width: var(--wl-measure-text);
+  margin: 0 0 var(--wl-space-4);
+}
+.wl-prose ul,
+.wl-prose ol { padding-inline-start: var(--wl-space-5); }
+.wl-prose li { margin-bottom: var(--wl-space-2); }
+.wl-prose li > ul,
+.wl-prose li > ol { margin-top: var(--wl-space-2); }
+
+.wl-prose a { color: var(--wl-ring); text-underline-offset: 2px; }
+
+.wl-prose blockquote {
+  border-inline-start: 2px solid var(--wl-border);
+  padding-inline-start: var(--wl-space-4);
+  color: var(--wl-muted-foreground);
+}
+
+.wl-prose hr { height: 1px; border: 0; background: var(--wl-border); margin: var(--wl-space-7) 0; }
+
+.wl-prose img { max-width: 100%; height: auto; border-radius: var(--wl-radius-card); corner-shape: var(--wl-corner-shape); }
+
+/* Inline code is a fragment of the thing being described, so it sits in the
+   text. A block is machine output, so it gets the terminal ground: mono means a
+   machine emitted it, and that block reads the same whatever the page does. */
+.wl-prose code {
+  font-family: var(--wl-font-mono);
+  font-size: 0.9em;
+  background: var(--wl-muted);
+  border: 1px solid color-mix(in oklch, var(--wl-border) 60%, var(--wl-background));
+  border-radius: var(--wl-radius-control);
+  corner-shape: var(--wl-corner-shape);
+  padding: 1px 5px;
+  /* An import path has no space to break at, so one span can be wider than the
+     column and the whole page then scrolls sideways. `anywhere` only takes
+     effect when the line cannot fit, so ordinary prose is untouched. */
+  overflow-wrap: anywhere;
+}
+.wl-prose pre {
+  background: var(--wl-terminal-ground);
+  color: var(--wl-terminal-foreground);
+  border-radius: var(--wl-radius-card);
+  corner-shape: var(--wl-corner-shape);
+  padding: var(--wl-space-4);
+  margin: 0 0 var(--wl-space-5);
+  overflow-x: auto;
+  font-size: var(--wl-text-meta);
+  line-height: var(--wl-leading-mono);
+}
+/* The block already carries the surface. The code inside must not draw a second
+   box on top of it. */
+.wl-prose pre code {
+  background: none;
+  border: 0;
+  padding: 0;
+  font-size: inherit;
+  overflow-wrap: normal;
+}
+
+.wl-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--wl-text-meta);
+  margin: 0 0 var(--wl-space-5);
+  /* A markdown table has no fixed width and often carries names and numbers, so
+     let it scroll inside itself rather than widening the page. */
+  display: block;
+  overflow-x: auto;
+}
+.wl-prose th,
+.wl-prose td {
+  text-align: start;
+  padding: var(--wl-space-2) var(--wl-space-3);
+  border-bottom: 1px solid var(--wl-border);
+  vertical-align: top;
+}
+.wl-prose thead th {
+  font-size: var(--wl-text-label);
+  letter-spacing: var(--wl-tracking-label);
+  text-transform: uppercase;
+  color: var(--wl-muted-foreground);
+  font-weight: var(--wl-weight-body);
+  white-space: nowrap;
+}
+
+.wl-prose kbd {
+  font-family: var(--wl-font-mono);
+  font-size: var(--wl-text-label);
+  border: 1px solid var(--wl-border);
+  border-radius: var(--wl-radius-control);
+  corner-shape: var(--wl-corner-shape);
+  padding: 1px 5px;
+  color: var(--wl-muted-foreground);
+}
+
+/* Last in the file, for the reason every other sheet here says. */
+@container (max-width: 640px) {
+  .wl-prose h2 { margin-top: var(--wl-space-6); }
+  .wl-prose pre { padding: var(--wl-space-3); }
+}

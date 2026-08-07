@@ -33,7 +33,8 @@
     },
     "./marketing.css": "./dist/marketing.css",
     "./catalog.css": "./dist/catalog.css",
-    "./components.css": "./dist/components.css"
+    "./components.css": "./dist/components.css",
+    "./prose.css": "./dist/prose.css"
   },
   "publishConfig": {
     "access": "public"
