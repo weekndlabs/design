@@ -335,6 +335,315 @@
 }
 .wl-nav-links a[aria-current='page'] { color: var(--wl-foreground); }
 
+/* ---------- tier 2 ----------------------------------------------------
+ * The overlays and the data components. Every one of them is styling only:
+ * open and close, focus trapping and dismissal are the consumer's, or Radix's,
+ * because a stylesheet cannot own behaviour and pretending otherwise ships
+ * half a dialog.
+ *
+ * Where a component has a native element that already carries the behaviour,
+ * these style that element rather than a div: <dialog> for the dialog and the
+ * sheet, <details> for the accordion, <input type="checkbox"> for the switch
+ * and the checkbox. The keyboard and screen reader support comes free and
+ * cannot regress.
+ */
+
+/* ---------- segmented control ----------------------------------------- */
+
+.wl-segmented {
+  display: inline-flex;
+  gap: var(--wl-space-0);
+  padding: var(--wl-space-0);
+  background: var(--wl-muted);
+  border: 1px solid var(--wl-border);
+  border-radius: var(--wl-radius-full);
+  corner-shape: var(--wl-corner-shape);
+}
+.wl-segmented > button {
+  font: inherit;
+  font-size: var(--wl-text-meta);
+  border: 0;
+  cursor: pointer;
+  min-height: 44px;
+  padding: var(--wl-space-1) var(--wl-space-3);
+  border-radius: var(--wl-radius-full);
+  corner-shape: var(--wl-corner-shape);
+  background: transparent;
+  color: var(--wl-muted-foreground);
+}
+.wl-segmented > button[aria-pressed='true'],
+.wl-segmented > button[aria-selected='true'] {
+  background: var(--wl-card);
+  color: var(--wl-foreground);
+  box-shadow: 0 1px 2px color-mix(in oklab, var(--wl-foreground) 8%, transparent);
+}
+
+/* ---------- tabs ------------------------------------------------------ */
+
+.wl-tabs { display: flex; gap: var(--wl-space-5); border-bottom: 1px solid var(--wl-border); }
+.wl-tabs > [role='tab'] {
+  font: inherit;
+  font-size: var(--wl-text-meta);
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  padding: var(--wl-space-3) var(--wl-space-0);
+  min-height: 44px;
+  color: var(--wl-muted-foreground);
+  cursor: pointer;
+}
+.wl-tabs > [role='tab'][aria-selected='true'] { color: var(--wl-foreground); border-bottom-color: var(--wl-primary); }
+
+/* ---------- accordion ------------------------------------------------- */
+
+/* Built on <details>, so it opens with no script and a screen reader announces
+   its state without an aria-expanded that someone has to remember to update. */
+.wl-accordion { border-top: 1px solid var(--wl-border); }
+.wl-accordion > summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--wl-space-4);
+  padding: var(--wl-space-4) var(--wl-space-0);
+  min-height: 44px;
+  font-weight: var(--wl-weight-medium);
+}
+.wl-accordion > summary::-webkit-details-marker { display: none; }
+.wl-accordion > summary::after { content: '+'; font-family: var(--wl-font-mono); color: var(--wl-muted-foreground); }
+.wl-accordion[open] > summary::after { content: '\2212'; }
+.wl-accordion > :not(summary) { padding-bottom: var(--wl-space-4); color: var(--wl-muted-foreground); }
+
+/* ---------- dialog and sheet ------------------------------------------ */
+
+/* <dialog> with showModal() gets the focus trap, the inert background, the
+   Escape key and the top layer from the platform. None of that is worth
+   rebuilding, and every rebuild of it is worse. */
+.wl-dialog {
+  border: 1px solid var(--wl-border);
+  border-radius: var(--wl-radius-window);
+  corner-shape: var(--wl-corner-shape);
+  background: var(--wl-popover);
+  color: var(--wl-popover-foreground);
+  padding: var(--wl-space-5);
+  max-width: min(var(--wl-measure-text), calc(100vw - var(--wl-space-6)));
+  box-shadow: 0 20px 50px -20px color-mix(in oklab, var(--wl-foreground) 35%, transparent);
+}
+.wl-dialog::backdrop { background: color-mix(in oklab, black 45%, transparent); }
+
+.wl-sheet {
+  border: 0;
+  border-inline-start: 1px solid var(--wl-border);
+  border-radius: 0;
+  background: var(--wl-popover);
+  color: var(--wl-popover-foreground);
+  padding: var(--wl-space-5);
+  /* The safe area matters here and nowhere else in this file: a sheet is the
+     one surface that reaches a screen edge on a phone. */
+  padding-bottom: calc(var(--wl-space-5) + env(safe-area-inset-bottom));
+  margin: 0 0 0 auto;
+  height: 100dvh;
+  max-height: 100dvh;
+  width: min(420px, 100vw);
+}
+.wl-sheet::backdrop { background: color-mix(in oklab, black 45%, transparent); }
+
+/* ---------- popover and dropdown -------------------------------------- */
+
+.wl-popover {
+  background: var(--wl-popover);
+  color: var(--wl-popover-foreground);
+  border: 1px solid var(--wl-border);
+  border-radius: var(--wl-radius-card);
+  corner-shape: var(--wl-corner-shape);
+  padding: var(--wl-space-2);
+  box-shadow: 0 8px 24px -12px color-mix(in oklab, var(--wl-foreground) 40%, transparent);
+}
+.wl-menu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--wl-space-2);
+  width: 100%;
+  min-height: 44px;
+  padding: var(--wl-space-1) var(--wl-space-3);
+  border: 0;
+  border-radius: var(--wl-radius-control);
+  corner-shape: var(--wl-corner-shape);
+  background: transparent;
+  color: var(--wl-foreground);
+  font: inherit;
+  font-size: var(--wl-text-meta);
+  text-align: start;
+  cursor: pointer;
+}
+.wl-menu-item[aria-disabled='true'] { color: var(--wl-muted-foreground); pointer-events: none; }
+
+/* ---------- tooltip --------------------------------------------------- */
+
+/* Inverted, small, and never the only carrier of a fact. A tooltip is invisible
+   to touch and to most screen readers unless the consumer wires it up. */
+.wl-tooltip {
+  background: var(--wl-foreground);
+  color: var(--wl-background);
+  border-radius: var(--wl-radius-control);
+  corner-shape: var(--wl-corner-shape);
+  padding: var(--wl-space-1) var(--wl-space-2);
+  font-size: var(--wl-text-label);
+  max-width: 28ch;
+}
+
+/* ---------- toast ----------------------------------------------------- */
+
+.wl-toast {
+  display: flex;
+  align-items: center;
+  gap: var(--wl-space-3);
+  background: var(--wl-popover);
+  color: var(--wl-popover-foreground);
+  border: 1px solid var(--wl-border);
+  border-radius: var(--wl-radius-card);
+  corner-shape: var(--wl-corner-shape);
+  padding: var(--wl-space-3) var(--wl-space-4);
+  box-shadow: 0 8px 24px -12px color-mix(in oklab, var(--wl-foreground) 40%, transparent);
+}
+.wl-toast-good { border-inline-start: 3px solid var(--wl-success); }
+.wl-toast-bad { border-inline-start: 3px solid var(--wl-destructive); }
+
+/* ---------- table ----------------------------------------------------- */
+
+.wl-table { width: 100%; border-collapse: collapse; font-size: var(--wl-text-meta); }
+.wl-table th,
+.wl-table td { text-align: start; padding: var(--wl-space-2) var(--wl-space-3); border-bottom: 1px solid var(--wl-border); }
+.wl-table th {
+  font-size: var(--wl-text-label);
+  font-weight: var(--wl-weight-medium);
+  letter-spacing: var(--wl-tracking-label);
+  text-transform: uppercase;
+  color: var(--wl-muted-foreground);
+}
+/* Digits in a column only line up with tabular figures, and a table of numbers
+   that does not line up is harder to read than no table. */
+.wl-table td.wl-num { text-align: end; font-variant-numeric: tabular-nums; }
+/* A table is the widest thing on any page. Its own scroller keeps the page from
+   scrolling sideways instead. */
+.wl-table-scroll { overflow-x: auto; }
+
+/* ---------- avatar, skeleton, progress -------------------------------- */
+
+.wl-avatar {
+  display: inline-grid;
+  place-items: center;
+  width: var(--wl-space-6);
+  height: var(--wl-space-6);
+  border-radius: var(--wl-radius-full);
+  corner-shape: var(--wl-corner-shape);
+  background: var(--wl-muted);
+  color: var(--wl-muted-foreground);
+  font-size: var(--wl-text-label);
+  overflow: hidden;
+}
+
+.wl-skeleton {
+  background: var(--wl-muted);
+  border-radius: var(--wl-radius-control);
+  corner-shape: var(--wl-corner-shape);
+  animation: wl-pulse var(--wl-duration-slow) var(--wl-ease-in-out) infinite alternate;
+}
+@keyframes wl-pulse { from { opacity: 1; } to { opacity: 0.55; } }
+
+.wl-progress {
+  appearance: none;
+  width: 100%;
+  height: var(--wl-space-2);
+  border: 0;
+  border-radius: var(--wl-radius-full);
+  corner-shape: var(--wl-corner-shape);
+  background: var(--wl-muted);
+  overflow: hidden;
+}
+.wl-progress::-webkit-progress-bar { background: var(--wl-muted); }
+.wl-progress::-webkit-progress-value { background: var(--wl-primary); }
+.wl-progress::-moz-progress-bar { background: var(--wl-primary); }
+
+/* ---------- switch, checkbox, radio ----------------------------------- */
+
+/* Real inputs, restyled. A div with role="switch" has to reimplement the space
+   key, the label association and the form value, and usually reimplements two
+   of the three. */
+.wl-switch {
+  appearance: none;
+  position: relative;
+  width: calc(var(--wl-space-6) + var(--wl-space-2));
+  height: var(--wl-space-5);
+  border-radius: var(--wl-radius-full);
+  corner-shape: var(--wl-corner-shape);
+  background: var(--wl-input);
+  cursor: pointer;
+  transition: background-color var(--wl-duration-fast) var(--wl-ease-out);
+}
+.wl-switch::after {
+  content: '';
+  position: absolute;
+  inset-block: var(--wl-space-0);
+  inset-inline-start: var(--wl-space-0);
+  aspect-ratio: 1;
+  border-radius: var(--wl-radius-full);
+  background: var(--wl-card);
+  transition: translate var(--wl-duration-fast) var(--wl-ease-out);
+}
+.wl-switch:checked { background: var(--wl-primary); }
+.wl-switch:checked::after { translate: calc(var(--wl-space-5) - var(--wl-space-1)) 0; }
+
+.wl-check,
+.wl-radio {
+  appearance: none;
+  width: var(--wl-space-4);
+  height: var(--wl-space-4);
+  border: 1px solid var(--wl-input);
+  background: var(--wl-card);
+  cursor: pointer;
+  display: inline-grid;
+  place-content: center;
+}
+.wl-check { border-radius: var(--wl-radius-control); corner-shape: var(--wl-corner-shape); }
+.wl-radio { border-radius: var(--wl-radius-full); }
+.wl-check:checked,
+.wl-radio:checked { background: var(--wl-primary); border-color: var(--wl-primary); }
+.wl-check:checked::after {
+  content: '';
+  width: var(--wl-space-2);
+  height: var(--wl-space-1);
+  border: 2px solid var(--wl-primary-foreground);
+  border-block-start: 0;
+  border-inline-end: 0;
+  rotate: -45deg;
+  translate: 0 -1px;
+}
+.wl-radio:checked::after {
+  content: '';
+  width: var(--wl-space-1);
+  height: var(--wl-space-1);
+  border-radius: var(--wl-radius-full);
+  background: var(--wl-primary-foreground);
+}
+
+/* The control itself is small on purpose, so the label carries the target. */
+.wl-field {
+  display: flex;
+  align-items: center;
+  gap: var(--wl-space-2);
+  min-height: 44px;
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wl-skeleton { animation: none; }
+  .wl-switch,
+  .wl-switch::after { transition: none; }
+}
+
 /* ---------- narrow ----------------------------------------------------
  * Last in the file on purpose. These tie with the rules above on specificity,
  * so source order is the only thing that makes them win. Container queries
@@ -348,4 +657,6 @@
   .wl-toolbar,
   .wl-nav { padding: var(--wl-space-2) var(--wl-space-3); }
   .wl-row { padding: var(--wl-space-3); }
+  .wl-tabs { gap: var(--wl-space-4); overflow-x: auto; scrollbar-width: none; }
+  .wl-sheet { width: 100vw; }
 }
