@@ -210,6 +210,86 @@ The preset carries the type scale too, so `font-sans`, `text-hero`,
 adding anything to your config. `rounded-control`, `rounded-card` and
 `rounded-window` come with it.
 
+## Components
+
+```css
+@import '@weekndlabs/design/components.css';
+```
+
+Classes, not React components. forgepod already ships shadcn/ui and the docs
+site is Astro, so a React package would be wrong for both, and a consumer
+already on shadcn needs none of this because the roles match.
+
+Tier 1: `.wl-btn` in four weights, `.wl-icon-btn`, `.wl-link`, `.wl-card`,
+`.wl-badge`, `.wl-chip`, `.wl-input`, `.wl-textarea`, `.wl-label`, `.wl-kbd`,
+`.wl-list` with `.wl-row`, `.wl-sep`, `.wl-toolbar`, `.wl-nav`.
+
+Tier 2: `.wl-segmented`, `.wl-tabs`, `.wl-accordion`, `.wl-dialog`, `.wl-sheet`,
+`.wl-popover` with `.wl-menu-item`, `.wl-tooltip`, `.wl-toast`, `.wl-table`,
+`.wl-avatar`, `.wl-skeleton`, `.wl-progress`, `.wl-switch`, `.wl-check`,
+`.wl-radio`.
+
+Styling only. Opening, closing, focus trapping and dismissal stay yours, because
+a stylesheet cannot own behaviour. Where the platform already has the element,
+these style that element: `<dialog>` for the dialog and the sheet, `<details>`
+for the accordion, real inputs for the switch and the checkbox. The keyboard and
+screen reader support comes with them and cannot regress.
+
+Four rules the layer holds itself to, each one a test:
+
+| Rule | Why |
+|---|---|
+| every value is a token | a colour here is one the contrast gate cannot measure |
+| every control clears 44px | the floor for a thumb |
+| focus is visible, `outline: none` is refused | a keyboard user has to see where they are |
+| hover sits behind `@media (hover: hover)` | a touch device leaves it stuck on whatever was last tapped |
+
+Container queries come last in the file, because they tie with the rules they
+beat on specificity and source order is all that decides.
+
+## Prose
+
+```css
+@import '@weekndlabs/design/prose.css';
+```
+
+Wrap long-form text in `.wl-prose`. Selected by element, because markdown
+arrives as bare tags. A code span breaks anywhere, since an import path has no
+space to break at and one span wider than the column scrolls the whole page. A
+table scrolls inside itself for the same reason.
+
+## The two page archetypes
+
+```css
+@import '@weekndlabs/design/marketing.css';
+@import '@weekndlabs/design/catalog.css';
+```
+
+A page that sells one thing and a page that lists many things want different
+vocabularies. The core stays single and these sit on top, scoped to `.wl-marketing`
+and `.wl-catalog`, so one page can hold a hero above a shelf.
+
+`marketing` brings a 30px section radius that steps down in a narrow container,
+an inset-lit control, and the serif on one line. Its hero gradient is derived
+from `--wl-ring` rather than being a colour of its own, so the archetype spends
+no new hue.
+
+`catalog` brings a 16:10 media ratio, a three step elevation ladder, and a
+filter row that scrolls sideways rather than wrapping onto three lines.
+
+An archetype may add tokens. It may not redefine a core one, and a test fails if
+an archetype token reaches `tokens.css`.
+
+## Figma
+
+```
+@weekndlabs/design/figma
+```
+
+`dist/tokens.figma.json`, in W3C Design Tokens format, which Figma Variables and
+Tokens Studio both import. Colour carries a mode per theme inside one
+collection, which is how Figma models a theme.
+
 ## Guard the type scale
 
 The package ships the gate that keeps the scale from sprawling:
@@ -237,8 +317,11 @@ them.
 
 ## Use it in JavaScript
 
-```js
-import { THEMES, ROLES, TERMINAL, TEXT_ROLES, themes, terminal, containers } from '@weekndlabs/design';
+Typed, and the types are generated from the same source as the values, so
+`themes.dark.forground` fails to compile rather than resolving to undefined.
+
+```ts
+import { THEMES, ROLES, TERMINAL, TEXT_ROLES, themes, terminal, containers, type Role } from '@weekndlabs/design';
 
 themes.dark.primary;   // 'oklch(0.9707 0.0027 286.35)'
 terminal.green;        // 'oklch(0.7685 0.1643 152.62)'
