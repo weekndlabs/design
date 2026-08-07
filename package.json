@@ -29,7 +29,9 @@
     "./typography-check": {
       "types": "./lib/typography.d.ts",
       "default": "./lib/typography.js"
-    }
+    },
+    "./marketing.css": "./dist/marketing.css",
+    "./catalog.css": "./dist/catalog.css"
   },
   "publishConfig": {
     "access": "public"

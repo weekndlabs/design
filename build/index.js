@@ -5,6 +5,7 @@ import { formatTailwind } from './format-tailwind.js';
 import { formatTs } from './format-ts.js';
 import { formatShadcn } from './format-shadcn.js';
 import { formatDts, formatTailwindDts } from './format-dts.js';
+import { formatMarketing, formatCatalog } from './format-archetype.js';
 import { buildFonts } from './fonts.js';
 
 const sd = new StyleDictionary({
@@ -17,6 +18,8 @@ const sd = new StyleDictionary({
       'wl/shadcn': formatShadcn,
       'wl/dts': formatDts,
       'wl/tailwind-dts': formatTailwindDts,
+      'wl/marketing': formatMarketing,
+      'wl/catalog': formatCatalog,
     },
   },
   platforms: {
@@ -35,6 +38,8 @@ const sd = new StyleDictionary({
         { destination: 'shadcn.css', format: 'wl/shadcn' },
         { destination: 'tokens.d.ts', format: 'wl/dts' },
         { destination: 'tailwind.d.ts', format: 'wl/tailwind-dts' },
+        { destination: 'marketing.css', format: 'wl/marketing' },
+        { destination: 'catalog.css', format: 'wl/catalog' },
       ],
     },
   },
