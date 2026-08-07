@@ -82,6 +82,56 @@ with, before it shipped:
 part of `npm test`. It loads each built docs page in an iframe at fourteen widths
 from 280 to 1280 and fails on sideways scroll. It found two on its first run.
 
+## 0.5.0
+
+The layers the tokens were always for. Nothing in 0.4.x changes meaning, so a
+consumer on 0.4.0 can take this and import nothing new.
+
+### Components, `@weekndlabs/design/components.css`
+
+Closes #23. Thirty controls as `.wl-*` classes, in two tiers. Styling only:
+opening, closing and focus trapping stay with the consumer. Where the platform
+has the element, these style that element rather than a div, so `<dialog>`
+brings the focus trap and `<details>` brings the accordion's state.
+
+Four rules, each a test: every value is a token, every control clears 44px,
+focus is visible and `outline: none` is refused, and hover sits behind
+`@media (hover: hover)`.
+
+### Prose, `@weekndlabs/design/prose.css`
+
+Closes #24. `.wl-prose`, moved out of the docs site, where it meant any other
+product rendering markdown wrote it again or went without.
+
+### Archetypes, `marketing.css` and `catalog.css`
+
+Two page vocabularies over one unchanged core, scoped to a class so a page can
+hold both. The marketing hero gradient derives from `--wl-ring` rather than
+being a colour of its own. A test fails if an archetype token reaches the core.
+
+### Types
+
+Closes #33. `dist/tokens.d.ts` is generated beside the values, so the `Role`
+union is the `ROLES` array and cannot drift. `tailwindcss` becomes an optional
+peer, since only a consumer importing the preset resolves its declaration.
+
+### Figma, `dist/tokens.figma.json`
+
+Partly closes #25. The tokens in W3C Design Tokens format, colour carrying a
+mode per theme in one collection. The library itself still needs an account
+this machine does not have.
+
+### New tokens
+
+`duration` fast, base and slow. `ease` out and in-out. `icon` sm, md and a
+stroke width. All three exist because the components needed them.
+
+### Breaking, and only if you took an unpublished 0.4.1
+
+Spacing utilities in the Tailwind preset are `p-wl-5`, not `p-5`. 0.4.1 was
+tagged and never published, so this reaches npm for the first time here. The
+reason is in that entry below.
+
 ## 0.4.1
 
 Fixes one thing, found by the first consumer to adopt 0.4.0.

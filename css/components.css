@@ -1,0 +1,662 @@
+/* Tier 1. The controls every page needs, in the system's own vocabulary.
+ *
+ * Three rules this file keeps, and lib/components.test.js enforces:
+ *
+ * Every value is a token. No hex, no rem typed by hand, no colour that the
+ * contrast gate cannot see. Where a step is missing, it is derived from a token
+ * with oklch(from ...) or color-mix rather than invented.
+ *
+ * Every interactive element clears a 44px tap target and shows a focus ring
+ * that is not the browser's default outline. A keyboard user who cannot see
+ * where they are is the failure this layer exists to prevent.
+ *
+ * Container queries come last in the file. They tie with the rules above them
+ * on specificity, so source order is all that decides.
+ *
+ * These are classes, not components. forgepod ships shadcn/ui, the docs site is
+ * Astro, and a React package would be wrong for both. A consumer using shadcn
+ * needs none of this: the roles already match.
+ */
+
+/* ---------- shared ---------------------------------------------------- */
+
+.wl-btn,
+.wl-icon-btn,
+.wl-chip,
+.wl-input,
+.wl-textarea {
+  font-family: var(--wl-font-sans);
+  font-size: var(--wl-text-body);
+  line-height: var(--wl-leading-body);
+  corner-shape: var(--wl-corner-shape);
+  transition:
+    background-color var(--wl-duration-fast) var(--wl-ease-out),
+    border-color var(--wl-duration-fast) var(--wl-ease-out),
+    opacity var(--wl-duration-fast) var(--wl-ease-out);
+}
+
+:where(.wl-btn, .wl-icon-btn, .wl-chip, .wl-input, .wl-textarea, .wl-link):focus-visible {
+  outline: 2px solid var(--wl-ring);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wl-btn,
+  .wl-icon-btn,
+  .wl-chip,
+  .wl-input,
+  .wl-textarea {
+    transition: none;
+  }
+}
+
+/* ---------- button ---------------------------------------------------- */
+
+/* One weighted button per view. `solid` is ink rather than the accent, which is
+ * the shape of this identity: a filled pill is the only solid control on a
+ * page, and the blue is left for links, focus and emphasis. It inverts per
+ * theme on its own, so there is no dark variant to maintain. */
+.wl-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--wl-space-2);
+  min-height: 44px;
+  padding: var(--wl-space-2) var(--wl-space-5);
+  border: 1px solid transparent;
+  border-radius: var(--wl-radius-full);
+  font-weight: var(--wl-weight-medium);
+  text-decoration: none;
+  cursor: pointer;
+  background: var(--wl-primary);
+  color: var(--wl-primary-foreground);
+}
+
+.wl-btn-quiet {
+  background: var(--wl-card);
+  color: var(--wl-foreground);
+  border-color: var(--wl-border);
+}
+
+.wl-btn-plain {
+  background: transparent;
+  color: var(--wl-muted-foreground);
+  border-color: transparent;
+}
+
+.wl-btn-danger {
+  background: var(--wl-destructive);
+  color: var(--wl-destructive-foreground);
+}
+
+/* Hover is gated. A touch device fires it on tap and then leaves it stuck on
+ * whatever was last touched, so a phone shows a hovered control nobody hovered. */
+@media (hover: hover) {
+  .wl-btn:hover { opacity: 0.9; }
+  .wl-btn-quiet:hover { background: var(--wl-muted); opacity: 1; }
+  .wl-btn-plain:hover { color: var(--wl-foreground); }
+}
+
+.wl-btn:active { opacity: 0.85; }
+
+.wl-btn:disabled,
+.wl-btn[aria-disabled='true'] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* The small size keeps the 44px target through padding on a transparent box,
+ * so a dense toolbar stays usable with a thumb. */
+.wl-btn-sm {
+  font-size: var(--wl-text-meta);
+  padding: var(--wl-space-1) var(--wl-space-3);
+  min-height: 44px;
+}
+
+/* ---------- icon button ----------------------------------------------- */
+
+.wl-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--wl-border);
+  border-radius: var(--wl-radius-control);
+  background: transparent;
+  color: var(--wl-muted-foreground);
+  cursor: pointer;
+}
+
+@media (hover: hover) {
+  .wl-icon-btn:hover { color: var(--wl-foreground); border-color: var(--wl-input); }
+}
+
+/* The icon inside is 20px on a 44px box. The target is the button, not the
+ * glyph, which is the distinction a 20px hit area gets wrong. */
+.wl-icon-btn > svg { width: var(--wl-icon-md); height: var(--wl-icon-md); }
+
+/* ---------- link ------------------------------------------------------ */
+
+.wl-link {
+  color: var(--wl-ring);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+}
+
+@media (hover: hover) {
+  .wl-link:hover { text-decoration-thickness: 2px; }
+}
+
+/* ---------- card ------------------------------------------------------ */
+
+/* Separated by a hairline, not a shadow. Shadow is reserved for surfaces that
+ * genuinely float, and a card in a grid does not. */
+.wl-card {
+  background: var(--wl-card);
+  color: var(--wl-card-foreground);
+  border: 1px solid var(--wl-border);
+  border-radius: var(--wl-radius-card);
+  corner-shape: var(--wl-corner-shape);
+}
+
+.wl-card-body { padding: var(--wl-space-5); }
+.wl-card-title {
+  font-size: var(--wl-text-title);
+  font-weight: var(--wl-weight-semibold);
+  letter-spacing: var(--wl-tracking-section);
+  line-height: var(--wl-leading-heading);
+  margin: 0;
+}
+.wl-card-note {
+  color: var(--wl-muted-foreground);
+  font-size: var(--wl-text-meta);
+  margin: var(--wl-space-2) 0 0;
+}
+
+/* ---------- badge ----------------------------------------------------- */
+
+.wl-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wl-space-1);
+  padding: var(--wl-space-0) var(--wl-space-2);
+  border: 1px solid var(--wl-border);
+  border-radius: var(--wl-radius-full);
+  corner-shape: var(--wl-corner-shape);
+  font-family: var(--wl-font-sans);
+  font-size: var(--wl-text-label);
+  color: var(--wl-muted-foreground);
+  white-space: nowrap;
+}
+
+/* Status is carried by the label as well as the colour. A badge that says only
+ * green is unreadable to a third of colour-blind readers and to anyone
+ * screenshotting in greyscale. */
+.wl-badge-good { color: var(--wl-success); border-color: transparent; background: color-mix(in oklab, var(--wl-success) 14%, transparent); }
+.wl-badge-warn { color: var(--wl-warning); border-color: transparent; background: color-mix(in oklab, var(--wl-warning) 14%, transparent); }
+.wl-badge-bad { color: var(--wl-destructive); border-color: transparent; background: color-mix(in oklab, var(--wl-destructive) 14%, transparent); }
+.wl-badge-info { color: var(--wl-ring); border-color: transparent; background: color-mix(in oklab, var(--wl-ring) 14%, transparent); }
+
+/* ---------- chip ------------------------------------------------------ */
+
+.wl-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wl-space-1);
+  min-height: 44px;
+  padding: var(--wl-space-1) var(--wl-space-3);
+  border: 1px solid var(--wl-border);
+  border-radius: var(--wl-radius-full);
+  background: var(--wl-card);
+  color: var(--wl-muted-foreground);
+  font-size: var(--wl-text-meta);
+  cursor: pointer;
+}
+
+.wl-chip[aria-pressed='true'] {
+  background: var(--wl-primary);
+  color: var(--wl-primary-foreground);
+  border-color: transparent;
+}
+
+@media (hover: hover) {
+  .wl-chip:hover { color: var(--wl-foreground); }
+  .wl-chip[aria-pressed='true']:hover { color: var(--wl-primary-foreground); opacity: 0.9; }
+}
+
+/* ---------- input and textarea ---------------------------------------- */
+
+.wl-input,
+.wl-textarea {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  padding: var(--wl-space-2) var(--wl-space-3);
+  border: 1px solid var(--wl-input);
+  border-radius: var(--wl-radius-control);
+  background: var(--wl-card);
+  color: var(--wl-foreground);
+}
+
+.wl-textarea { min-height: calc(44px * 2); resize: vertical; }
+
+.wl-input::placeholder,
+.wl-textarea::placeholder { color: var(--wl-muted-foreground); }
+
+.wl-input:disabled,
+.wl-textarea:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.wl-input[aria-invalid='true'],
+.wl-textarea[aria-invalid='true'] { border-color: var(--wl-destructive); }
+
+.wl-label {
+  display: block;
+  font-size: var(--wl-text-meta);
+  font-weight: var(--wl-weight-medium);
+  color: var(--wl-foreground);
+  margin-bottom: var(--wl-space-1);
+}
+
+.wl-hint { font-size: var(--wl-text-meta); color: var(--wl-muted-foreground); margin-top: var(--wl-space-1); }
+.wl-error { font-size: var(--wl-text-meta); color: var(--wl-destructive); margin-top: var(--wl-space-1); }
+
+/* ---------- kbd ------------------------------------------------------- */
+
+.wl-kbd {
+  font-family: var(--wl-font-mono);
+  font-size: var(--wl-text-label);
+  line-height: 1;
+  padding: var(--wl-space-0) var(--wl-space-1);
+  border: 1px solid var(--wl-border);
+  border-radius: var(--wl-radius-control);
+  corner-shape: var(--wl-corner-shape);
+  background: var(--wl-background);
+  color: var(--wl-muted-foreground);
+}
+
+/* ---------- list row -------------------------------------------------- */
+
+.wl-list { border: 1px solid var(--wl-border); border-radius: var(--wl-radius-card); corner-shape: var(--wl-corner-shape); overflow: hidden; background: var(--wl-card); }
+.wl-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--wl-space-4);
+  align-items: center;
+  padding: var(--wl-space-3) var(--wl-space-4);
+  border-bottom: 1px solid var(--wl-border);
+  min-height: 44px;
+}
+.wl-row:last-child { border-bottom: 0; }
+.wl-row-sub { color: var(--wl-muted-foreground); font-size: var(--wl-text-meta); }
+
+/* ---------- separator ------------------------------------------------- */
+
+.wl-sep { height: 1px; border: 0; background: var(--wl-border); margin: var(--wl-space-5) 0; }
+.wl-sep-v { width: 1px; align-self: stretch; background: var(--wl-border); }
+
+/* ---------- toolbar and nav bar --------------------------------------- */
+
+.wl-toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--wl-space-3);
+  padding: var(--wl-space-2) var(--wl-space-4);
+  background: var(--wl-card);
+  border-bottom: 1px solid var(--wl-border);
+  min-width: 0;
+}
+
+.wl-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--wl-space-5);
+  padding: var(--wl-space-2) var(--wl-space-4);
+  background: var(--wl-background);
+  border-bottom: 1px solid var(--wl-border);
+  min-width: 0;
+}
+
+/* A definite width on a flex or grid item sets the track's minimum, and a
+ * max-width beside it then resolves against the track it just widened. Both
+ * sideways-scroll bugs this system has had came from that shape, so every box
+ * here that can hold one opts out. */
+.wl-toolbar > *,
+.wl-nav > *,
+.wl-row > * { min-width: 0; }
+
+.wl-nav-links { display: flex; align-items: center; gap: var(--wl-space-5); font-size: var(--wl-text-meta); }
+.wl-nav-links a { color: var(--wl-muted-foreground); text-decoration: none; }
+@media (hover: hover) {
+  .wl-nav-links a:hover { color: var(--wl-foreground); }
+}
+.wl-nav-links a[aria-current='page'] { color: var(--wl-foreground); }
+
+/* ---------- tier 2 ----------------------------------------------------
+ * The overlays and the data components. Every one of them is styling only:
+ * open and close, focus trapping and dismissal are the consumer's, or Radix's,
+ * because a stylesheet cannot own behaviour and pretending otherwise ships
+ * half a dialog.
+ *
+ * Where a component has a native element that already carries the behaviour,
+ * these style that element rather than a div: <dialog> for the dialog and the
+ * sheet, <details> for the accordion, <input type="checkbox"> for the switch
+ * and the checkbox. The keyboard and screen reader support comes free and
+ * cannot regress.
+ */
+
+/* ---------- segmented control ----------------------------------------- */
+
+.wl-segmented {
+  display: inline-flex;
+  gap: var(--wl-space-0);
+  padding: var(--wl-space-0);
+  background: var(--wl-muted);
+  border: 1px solid var(--wl-border);
+  border-radius: var(--wl-radius-full);
+  corner-shape: var(--wl-corner-shape);
+}
+.wl-segmented > button {
+  font: inherit;
+  font-size: var(--wl-text-meta);
+  border: 0;
+  cursor: pointer;
+  min-height: 44px;
+  padding: var(--wl-space-1) var(--wl-space-3);
+  border-radius: var(--wl-radius-full);
+  corner-shape: var(--wl-corner-shape);
+  background: transparent;
+  color: var(--wl-muted-foreground);
+}
+.wl-segmented > button[aria-pressed='true'],
+.wl-segmented > button[aria-selected='true'] {
+  background: var(--wl-card);
+  color: var(--wl-foreground);
+  box-shadow: 0 1px 2px color-mix(in oklab, var(--wl-foreground) 8%, transparent);
+}
+
+/* ---------- tabs ------------------------------------------------------ */
+
+.wl-tabs { display: flex; gap: var(--wl-space-5); border-bottom: 1px solid var(--wl-border); }
+.wl-tabs > [role='tab'] {
+  font: inherit;
+  font-size: var(--wl-text-meta);
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  padding: var(--wl-space-3) var(--wl-space-0);
+  min-height: 44px;
+  color: var(--wl-muted-foreground);
+  cursor: pointer;
+}
+.wl-tabs > [role='tab'][aria-selected='true'] { color: var(--wl-foreground); border-bottom-color: var(--wl-primary); }
+
+/* ---------- accordion ------------------------------------------------- */
+
+/* Built on <details>, so it opens with no script and a screen reader announces
+   its state without an aria-expanded that someone has to remember to update. */
+.wl-accordion { border-top: 1px solid var(--wl-border); }
+.wl-accordion > summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--wl-space-4);
+  padding: var(--wl-space-4) var(--wl-space-0);
+  min-height: 44px;
+  font-weight: var(--wl-weight-medium);
+}
+.wl-accordion > summary::-webkit-details-marker { display: none; }
+.wl-accordion > summary::after { content: '+'; font-family: var(--wl-font-mono); color: var(--wl-muted-foreground); }
+.wl-accordion[open] > summary::after { content: '\2212'; }
+.wl-accordion > :not(summary) { padding-bottom: var(--wl-space-4); color: var(--wl-muted-foreground); }
+
+/* ---------- dialog and sheet ------------------------------------------ */
+
+/* <dialog> with showModal() gets the focus trap, the inert background, the
+   Escape key and the top layer from the platform. None of that is worth
+   rebuilding, and every rebuild of it is worse. */
+.wl-dialog {
+  border: 1px solid var(--wl-border);
+  border-radius: var(--wl-radius-window);
+  corner-shape: var(--wl-corner-shape);
+  background: var(--wl-popover);
+  color: var(--wl-popover-foreground);
+  padding: var(--wl-space-5);
+  max-width: min(var(--wl-measure-text), calc(100vw - var(--wl-space-6)));
+  box-shadow: 0 20px 50px -20px color-mix(in oklab, var(--wl-foreground) 35%, transparent);
+}
+.wl-dialog::backdrop { background: color-mix(in oklab, black 45%, transparent); }
+
+.wl-sheet {
+  border: 0;
+  border-inline-start: 1px solid var(--wl-border);
+  border-radius: 0;
+  background: var(--wl-popover);
+  color: var(--wl-popover-foreground);
+  padding: var(--wl-space-5);
+  /* The safe area matters here and nowhere else in this file: a sheet is the
+     one surface that reaches a screen edge on a phone. */
+  padding-bottom: calc(var(--wl-space-5) + env(safe-area-inset-bottom));
+  margin: 0 0 0 auto;
+  height: 100dvh;
+  max-height: 100dvh;
+  width: min(420px, 100vw);
+}
+.wl-sheet::backdrop { background: color-mix(in oklab, black 45%, transparent); }
+
+/* ---------- popover and dropdown -------------------------------------- */
+
+.wl-popover {
+  background: var(--wl-popover);
+  color: var(--wl-popover-foreground);
+  border: 1px solid var(--wl-border);
+  border-radius: var(--wl-radius-card);
+  corner-shape: var(--wl-corner-shape);
+  padding: var(--wl-space-2);
+  box-shadow: 0 8px 24px -12px color-mix(in oklab, var(--wl-foreground) 40%, transparent);
+}
+.wl-menu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--wl-space-2);
+  width: 100%;
+  min-height: 44px;
+  padding: var(--wl-space-1) var(--wl-space-3);
+  border: 0;
+  border-radius: var(--wl-radius-control);
+  corner-shape: var(--wl-corner-shape);
+  background: transparent;
+  color: var(--wl-foreground);
+  font: inherit;
+  font-size: var(--wl-text-meta);
+  text-align: start;
+  cursor: pointer;
+}
+.wl-menu-item[aria-disabled='true'] { color: var(--wl-muted-foreground); pointer-events: none; }
+
+/* ---------- tooltip --------------------------------------------------- */
+
+/* Inverted, small, and never the only carrier of a fact. A tooltip is invisible
+   to touch and to most screen readers unless the consumer wires it up. */
+.wl-tooltip {
+  background: var(--wl-foreground);
+  color: var(--wl-background);
+  border-radius: var(--wl-radius-control);
+  corner-shape: var(--wl-corner-shape);
+  padding: var(--wl-space-1) var(--wl-space-2);
+  font-size: var(--wl-text-label);
+  max-width: 28ch;
+}
+
+/* ---------- toast ----------------------------------------------------- */
+
+.wl-toast {
+  display: flex;
+  align-items: center;
+  gap: var(--wl-space-3);
+  background: var(--wl-popover);
+  color: var(--wl-popover-foreground);
+  border: 1px solid var(--wl-border);
+  border-radius: var(--wl-radius-card);
+  corner-shape: var(--wl-corner-shape);
+  padding: var(--wl-space-3) var(--wl-space-4);
+  box-shadow: 0 8px 24px -12px color-mix(in oklab, var(--wl-foreground) 40%, transparent);
+}
+.wl-toast-good { border-inline-start: 3px solid var(--wl-success); }
+.wl-toast-bad { border-inline-start: 3px solid var(--wl-destructive); }
+
+/* ---------- table ----------------------------------------------------- */
+
+.wl-table { width: 100%; border-collapse: collapse; font-size: var(--wl-text-meta); }
+.wl-table th,
+.wl-table td { text-align: start; padding: var(--wl-space-2) var(--wl-space-3); border-bottom: 1px solid var(--wl-border); }
+.wl-table th {
+  font-size: var(--wl-text-label);
+  font-weight: var(--wl-weight-medium);
+  letter-spacing: var(--wl-tracking-label);
+  text-transform: uppercase;
+  color: var(--wl-muted-foreground);
+}
+/* Digits in a column only line up with tabular figures, and a table of numbers
+   that does not line up is harder to read than no table. */
+.wl-table td.wl-num { text-align: end; font-variant-numeric: tabular-nums; }
+/* A table is the widest thing on any page. Its own scroller keeps the page from
+   scrolling sideways instead. */
+.wl-table-scroll { overflow-x: auto; }
+
+/* ---------- avatar, skeleton, progress -------------------------------- */
+
+.wl-avatar {
+  display: inline-grid;
+  place-items: center;
+  width: var(--wl-space-6);
+  height: var(--wl-space-6);
+  border-radius: var(--wl-radius-full);
+  corner-shape: var(--wl-corner-shape);
+  background: var(--wl-muted);
+  color: var(--wl-muted-foreground);
+  font-size: var(--wl-text-label);
+  overflow: hidden;
+}
+
+.wl-skeleton {
+  background: var(--wl-muted);
+  border-radius: var(--wl-radius-control);
+  corner-shape: var(--wl-corner-shape);
+  animation: wl-pulse var(--wl-duration-slow) var(--wl-ease-in-out) infinite alternate;
+}
+@keyframes wl-pulse { from { opacity: 1; } to { opacity: 0.55; } }
+
+.wl-progress {
+  appearance: none;
+  width: 100%;
+  height: var(--wl-space-2);
+  border: 0;
+  border-radius: var(--wl-radius-full);
+  corner-shape: var(--wl-corner-shape);
+  background: var(--wl-muted);
+  overflow: hidden;
+}
+.wl-progress::-webkit-progress-bar { background: var(--wl-muted); }
+.wl-progress::-webkit-progress-value { background: var(--wl-primary); }
+.wl-progress::-moz-progress-bar { background: var(--wl-primary); }
+
+/* ---------- switch, checkbox, radio ----------------------------------- */
+
+/* Real inputs, restyled. A div with role="switch" has to reimplement the space
+   key, the label association and the form value, and usually reimplements two
+   of the three. */
+.wl-switch {
+  appearance: none;
+  position: relative;
+  width: calc(var(--wl-space-6) + var(--wl-space-2));
+  height: var(--wl-space-5);
+  border-radius: var(--wl-radius-full);
+  corner-shape: var(--wl-corner-shape);
+  background: var(--wl-input);
+  cursor: pointer;
+  transition: background-color var(--wl-duration-fast) var(--wl-ease-out);
+}
+.wl-switch::after {
+  content: '';
+  position: absolute;
+  inset-block: var(--wl-space-0);
+  inset-inline-start: var(--wl-space-0);
+  aspect-ratio: 1;
+  border-radius: var(--wl-radius-full);
+  background: var(--wl-card);
+  transition: translate var(--wl-duration-fast) var(--wl-ease-out);
+}
+.wl-switch:checked { background: var(--wl-primary); }
+.wl-switch:checked::after { translate: calc(var(--wl-space-5) - var(--wl-space-1)) 0; }
+
+.wl-check,
+.wl-radio {
+  appearance: none;
+  width: var(--wl-space-4);
+  height: var(--wl-space-4);
+  border: 1px solid var(--wl-input);
+  background: var(--wl-card);
+  cursor: pointer;
+  display: inline-grid;
+  place-content: center;
+}
+.wl-check { border-radius: var(--wl-radius-control); corner-shape: var(--wl-corner-shape); }
+.wl-radio { border-radius: var(--wl-radius-full); }
+.wl-check:checked,
+.wl-radio:checked { background: var(--wl-primary); border-color: var(--wl-primary); }
+.wl-check:checked::after {
+  content: '';
+  width: var(--wl-space-2);
+  height: var(--wl-space-1);
+  border: 2px solid var(--wl-primary-foreground);
+  border-block-start: 0;
+  border-inline-end: 0;
+  rotate: -45deg;
+  translate: 0 -1px;
+}
+.wl-radio:checked::after {
+  content: '';
+  width: var(--wl-space-1);
+  height: var(--wl-space-1);
+  border-radius: var(--wl-radius-full);
+  background: var(--wl-primary-foreground);
+}
+
+/* The control itself is small on purpose, so the label carries the target. */
+.wl-field {
+  display: flex;
+  align-items: center;
+  gap: var(--wl-space-2);
+  min-height: 44px;
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wl-skeleton { animation: none; }
+  .wl-switch,
+  .wl-switch::after { transition: none; }
+}
+
+/* ---------- narrow ----------------------------------------------------
+ * Last in the file on purpose. These tie with the rules above on specificity,
+ * so source order is the only thing that makes them win. Container queries
+ * rather than media queries: a component narrows because its own box narrowed,
+ * which is what keeps the same card correct inside a sidebar and in a full
+ * width page. */
+
+@container (max-width: 640px) {
+  .wl-nav-links { display: none; }
+  .wl-card-body { padding: var(--wl-space-4); }
+  .wl-toolbar,
+  .wl-nav { padding: var(--wl-space-2) var(--wl-space-3); }
+  .wl-row { padding: var(--wl-space-3); }
+  .wl-tabs { gap: var(--wl-space-4); overflow-x: auto; scrollbar-width: none; }
+  .wl-sheet { width: 100vw; }
+}

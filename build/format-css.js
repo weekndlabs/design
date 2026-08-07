@@ -13,7 +13,12 @@ import { THEMES, ROLES, TERMINAL } from '../lib/tokens.js';
  * variables would advertise a query that silently never matches, so they ship
  * as JS values only.
  */
-const isScale = (token) => token.path[0] !== 'color' && token.path[0] !== 'container';
+const CORE_EXCLUDED = new Set([
+  'color', // themed, emitted above
+  'container', // see the note above
+  'archetype', // belongs to marketing.css and catalog.css, never to the core
+]);
+const isScale = (token) => !CORE_EXCLUDED.has(token.path[0]);
 
 /**
  * One block per theme. Values go out as authored, which is oklch for colours and

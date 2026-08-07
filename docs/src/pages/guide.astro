@@ -6,6 +6,12 @@ import Page from '../layouts/Page.astro';
  * already show.
  */
 import { Content } from '../../../README.md';
+/**
+ * Prose comes from the package now, not from this file. It lived here until
+ * 0.5.0, which meant any other product rendering markdown wrote it again or
+ * went without.
+ */
+import '../../../dist/prose.css';
 
 // Absolute for the same reason every link in SiteChrome.astro is: two hosts,
 // and the proxied one serves this page as /design/guide with no trailing slash,
@@ -13,7 +19,7 @@ import { Content } from '../../../README.md';
 const DOCS = 'https://weekndlabs.com/design';
 ---
 <Page title="Guide">
-  <main id="main" class="wrap prose">
+  <main id="main" class="wrap wl-prose">
     <p class="back mono"><a href={DOCS}>&larr; Tokens</a></p>
     <Content />
   </main>
@@ -23,93 +29,9 @@ const DOCS = 'https://weekndlabs.com/design';
     /* Prose here is full of unbreakable strings: package names, css variables,
        file paths. Without this they set the page's minimum width and a phone
        scrolls sideways. Code blocks and tables scroll themselves instead. */
-    .prose { overflow-wrap: break-word; }
+    .wl-prose { overflow-wrap: break-word; }
     .back { font-size: var(--wl-text-meta); margin-bottom: var(--wl-space-6); }
     .back a { text-decoration: none; }
 
-    /* Markdown arrives as bare tags, so the prose styles are selected by
-       element rather than by class. Scoped to .prose so nothing else on the
-       site inherits them. */
-    .prose :global(h1) {
-      font-size: var(--wl-text-hero);
-      letter-spacing: var(--wl-tracking-hero);
-      margin-bottom: var(--wl-space-5);
-    }
-    .prose :global(h2) {
-      font-size: var(--wl-text-section);
-      margin-top: var(--wl-space-8);
-      margin-bottom: var(--wl-space-4);
-      padding-top: var(--wl-space-5);
-      border-top: 1px solid var(--wl-border);
-    }
-    .prose :global(h3) {
-      font-size: var(--wl-text-lede);
-      margin-top: var(--wl-space-6);
-      margin-bottom: var(--wl-space-3);
-    }
-    .prose :global(p),
-    .prose :global(ul),
-    .prose :global(ol) {
-      max-width: var(--wl-measure-text);
-      margin-bottom: var(--wl-space-4);
-    }
-    .prose :global(li) { margin-bottom: var(--wl-space-2); }
-    .prose :global(ul), .prose :global(ol) { padding-left: var(--wl-space-5); }
-
-    /* Inline code is a fragment of the thing being described, so it sits in the
-       text. A block is machine output, so it gets the sunken surface. */
-    .prose :global(code) {
-      font-size: 0.9em;
-      background: var(--wl-muted);
-      border: 1px solid color-mix(in oklch, var(--wl-border) 60%, var(--wl-background));
-      border-radius: var(--wl-radius-card);
-      corner-shape: var(--wl-corner-shape);
-      padding: 1px 5px;
-    }
-    /* Same treatment the diptych gives its terminal, for the same reason: a
-       block of machine output reads the same regardless of the page around it. */
-    .prose :global(pre) {
-      background: var(--wl-terminal-ground);
-      color: var(--wl-terminal-foreground);
-      border-radius: var(--wl-radius-card);
-      corner-shape: var(--wl-corner-shape);
-      padding: var(--wl-space-4);
-      margin-bottom: var(--wl-space-5);
-      overflow-x: auto;
-      font-size: var(--wl-text-meta);
-      line-height: var(--wl-leading-mono);
-    }
-    /* The block already carries the surface; the code inside must not draw a
-       second box on top of it. */
-    .prose :global(pre code) {
-      background: none;
-      border: 0;
-      padding: 0;
-      font-size: inherit;
-    }
-
-    .prose :global(table) {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: var(--wl-text-meta);
-      margin-bottom: var(--wl-space-5);
-    }
-    .prose :global(th), .prose :global(td) {
-      text-align: left;
-      padding: var(--wl-space-2) var(--wl-space-3);
-      border-bottom: 1px solid var(--wl-border);
-      vertical-align: top;
-    }
-    .prose :global(thead th) {
-      font-size: var(--wl-text-label);
-      letter-spacing: var(--wl-tracking-label);
-      text-transform: uppercase;
-      color: var(--wl-muted-foreground);
-      font-weight: var(--wl-weight-body);
-    }
-    /* A markdown table has no fixed width and these carry token names and
-       ratios, so let the page scroll the table rather than the other way
-       round. */
-    .prose :global(table) { display: block; overflow-x: auto; }
   </style>
 </Page>

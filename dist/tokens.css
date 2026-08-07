@@ -115,6 +115,14 @@
 }
 
 :root {
+  --wl-duration-fast: 120ms;
+  --wl-duration-base: 180ms;
+  --wl-duration-slow: 260ms;
+  --wl-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --wl-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --wl-icon-sm: 16px;
+  --wl-icon-md: 20px;
+  --wl-icon-stroke: 1.5;
   --wl-space-0: 2px;
   --wl-space-1: 4px;
   --wl-space-2: 8px;

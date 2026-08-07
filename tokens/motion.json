@@ -1,0 +1,16 @@
+{
+  "duration": {
+    "fast": { "value": "120ms", "type": "duration" },
+    "base": { "value": "180ms", "type": "duration" },
+    "slow": { "value": "260ms", "type": "duration" }
+  },
+  "ease": {
+    "out": { "value": "cubic-bezier(0, 0, 0.2, 1)", "type": "cubicBezier" },
+    "in-out": { "value": "cubic-bezier(0.4, 0, 0.2, 1)", "type": "cubicBezier" }
+  },
+  "icon": {
+    "sm": { "value": "16px", "type": "sizing" },
+    "md": { "value": "20px", "type": "sizing" },
+    "stroke": { "value": "1.5", "type": "other" }
+  }
+}
