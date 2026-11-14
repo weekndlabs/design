@@ -6,7 +6,7 @@
 # is the opposite of what blocking a duplicate achieves.
 #
 # weekndlabs.com is behind Cloudflare, which injects a managed block list for AI
-# training crawlers. design.weekndlabs.com is served by Vercel directly, so none
+# training crawlers. design.weekndlabs.com was not behind the Cloudflare proxy, so none
 # of that reached it and this host answered 404 to /robots.txt, which means allow
 # everything. The main site's policy was not being applied here at all.
 #

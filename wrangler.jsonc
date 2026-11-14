@@ -1,0 +1,12 @@
+{
+  // Static assets only. Build first: npm run build && npm run docs:build
+  "name": "weekndlabs-design",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "docs/dist"
+  },
+  // weekndlabs.com/design reaches this Worker through a service binding, so
+  // this route only matters for the subdomain, and only once its DNS record
+  // is proxied.
+  "routes": [{ "pattern": "design.weekndlabs.com/*", "zone_name": "weekndlabs.com" }]
+}
